@@ -1,6 +1,9 @@
 import { Response } from "express";
 import mongoose from "mongoose";
-const User = mongoose.model("User");
+import { hashPassword, isMatch } from "../helpers/passwords";
+import { UserDocument } from "../Models/User";
+
+const User = mongoose.model<UserDocument>("User");
 
 export const editUserInfo = async (req: any, res: Response) => {
   let { email } = req.body;
@@ -21,7 +24,7 @@ export const editUserInfo = async (req: any, res: Response) => {
         // The email is used in a different account
         return res
           .status(400)
-          .json({ status: false, msg: "Email already in use" });
+          .json({ status: false, msg: "Email already used in other account" });
       }
     }
 
@@ -34,18 +37,27 @@ export const editUserInfo = async (req: any, res: Response) => {
 };
 
 export const editUserPassword = async (req: any, res: Response) => {
-  // const { password, newPassword } = req.body;
-  // const { uid } = req;
-  // try {
-  //   const user = await User.findOne({ _id: uid });
-  //   if (!user) {
-  //     return res.status(400).json({ status: false, msg: "Cannot find user" });
-  //   }
-  //   // Old password valid
-  //   if (userCompare.password !== password) {
-  //     return res.status(400).json({ status: false, msg: "Wrong password" });
-  //   }
-  // } catch (error) {
-  //   return res.status(500).json({ status: false, msg: "Error on request" });
-  // }
+  const { password, newPassword } = req.body;
+  const { uid } = req;
+  try {
+    const user = await User.findOne({ _id: uid });
+    if (!user) {
+      return res.status(400).json({ status: false, msg: "Cannot find user" });
+    }
+
+    // Validate old password
+    const match = isMatch(password, user.password);
+
+    if (!match) {
+      return res.status(400).json({ status: false, msg: "Invalid password" });
+    }
+
+    // Hashing new password
+    const hashed = await hashPassword(password);
+    await User.findOneAndUpdate({ _id: uid }, { password: hashed });
+
+    return res.status(201).json({ status: true, msg: "Password updated" });
+  } catch (error) {
+    return res.status(500).json({ status: false, msg: "Error on request" });
+  }
 };

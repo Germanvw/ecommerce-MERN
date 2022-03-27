@@ -9,6 +9,6 @@ const router = Router();
 router.use(validJWT);
 
 router.put("/", editUserInfo);
-// router.put("/password", editUserPassword);
+router.put("/password", editUserPassword);
 
 module.exports = router;
