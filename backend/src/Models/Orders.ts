@@ -1,4 +1,4 @@
-import { Document, Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 interface IOrders {
   clientId: string;
@@ -8,7 +8,7 @@ interface IOrders {
   status: boolean;
 }
 
-interface IOrdersDocument extends Document, IOrders {
+interface OrdersDocument extends IOrders, mongoose.Document {
   createdAt: Date;
   updatedAt: Date;
 }
@@ -24,4 +24,4 @@ const OrdersSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-export default model<IOrdersDocument>("Products", OrdersSchema);
+export default model<OrdersDocument>("Products", OrdersSchema);

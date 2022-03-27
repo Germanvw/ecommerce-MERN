@@ -21,11 +21,11 @@ app.use(express.json());
 //api/auth
 app.use("/api/auth", require("./routes/auth"));
 //api/products
-// app.use("/api/products", require("./routes/products"));
-// //api/categories
-// app.use("/api/categories", require("./routes/categories"));
-// //api/users
-// app.use("/api/users", require("./routes/users"));
+app.use("/api/products", require("./routes/products"));
+//api/categories
+app.use("/api/categories", require("./routes/categories"));
+// api/users
+app.use("/api/users", require("./routes/users"));
 // //api/orders
 // app.use("/api/orders", require("./routes/orders"));
 // //

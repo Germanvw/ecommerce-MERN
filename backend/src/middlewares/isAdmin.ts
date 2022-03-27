@@ -1,8 +1,6 @@
 import { Response, NextFunction } from "express";
 
-const jwt = require("jsonwebtoken");
-
-export const validJWT = (req: any, res: Response, next: NextFunction) => {
+export const isAdmin = (req: any, res: Response, next: NextFunction) => {
   //x-token headers
   const token = req.header("x-token");
 
@@ -14,12 +12,12 @@ export const validJWT = (req: any, res: Response, next: NextFunction) => {
   }
 
   try {
-    const { uid, name, isAdmin } = jwt.verify(token, process.env.PRIVATE_KEY);
-
-    // Guardo los datos importantes
-    req.uid = uid;
-    req.username = name;
-    req.isAdmin = isAdmin;
+    if (!req.isAdmin) {
+      return res.status(401).json({
+        status: false,
+        msg: "You are not an admin",
+      });
+    }
   } catch (err) {
     return res.status(401).json({
       status: false,

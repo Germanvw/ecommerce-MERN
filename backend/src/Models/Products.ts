@@ -1,4 +1,4 @@
-import { Document, Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 interface IProducts {
   name: string;
@@ -9,7 +9,7 @@ interface IProducts {
   inStock: number;
 }
 
-interface IProductDocument extends Document, IProducts {
+export interface ProductDocument extends IProducts, mongoose.Document {
   createdAt: Date;
   updatedAt: Date;
 }
@@ -30,4 +30,4 @@ const ProductsSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-export default model<IProductDocument>("Products", ProductsSchema);
+export default model<ProductDocument>("Products", ProductsSchema);

@@ -1,3 +1,14 @@
 import { Router } from "express";
+import {
+  editUserInfo,
+  editUserPassword,
+} from "../controllers/usersControllers";
+import { validJWT } from "../middlewares/validJWT";
 
-export const router = Router();
+const router = Router();
+router.use(validJWT);
+
+router.put("/", editUserInfo);
+// router.put("/password", editUserPassword);
+
+module.exports = router;
