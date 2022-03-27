@@ -1,10 +1,17 @@
 const jwt = require("jsonwebtoken");
 
-export const createJWT = (uid: string, username: string, isAdmin: boolean) => {
-  console.log("createJWT");
+interface userData {
+  uid: string;
+  username: string;
+  email: string;
+  gender: string;
+  picture: string;
+  isAdmin: boolean;
+}
+
+export const createJWT = (user: userData) => {
   return new Promise((resolve, reject) => {
-    const payload = { uid, username, isAdmin };
-    console.log(payload);
+    const payload = { user };
     jwt.sign(
       payload,
       process.env.PRIVATE_KEY,

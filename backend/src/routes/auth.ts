@@ -10,6 +10,6 @@ const router = Router();
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
-router.post("/renew", validJWT, renewToken);
+router.get("/refresh", validJWT, renewToken);
 
 module.exports = router;

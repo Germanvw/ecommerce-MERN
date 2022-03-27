@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 export const validJWT = (req: any, res: Response, next: NextFunction) => {
   //x-token headers
   const token = req.header("x-token");
-
   if (!token) {
     return res.status(401).json({
       status: false,
@@ -14,12 +13,9 @@ export const validJWT = (req: any, res: Response, next: NextFunction) => {
   }
 
   try {
-    const { uid, name, isAdmin } = jwt.verify(token, process.env.PRIVATE_KEY);
-
+    const { user } = jwt.verify(token, process.env.PRIVATE_KEY);
     // Guardo los datos importantes
-    req.uid = uid;
-    req.username = name;
-    req.isAdmin = isAdmin;
+    req.user = user;
   } catch (err) {
     return res.status(401).json({
       status: false,

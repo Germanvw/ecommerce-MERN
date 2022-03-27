@@ -52,23 +52,31 @@ export const loginUser = async (req: Request, res: Response) => {
     if (!match) {
       return res.status(400).json({ status: false, msg: "Invalid password" });
     }
+    const userData = {
+      uid: user._id.toString(),
+      username: user.username,
+      email: user.email,
+      gender: user.gender,
+      picture: user.picture,
+      isAdmin: user.isAdmin,
+    };
 
     //jwt
-    const { _id, username, isAdmin } = user;
-    const token = await createJWT(_id, username, isAdmin);
+    const token = await createJWT(userData);
 
     //success
-    return res.json({ status: true, uid: _id, username, token });
+    return res.json({ status: true, user: userData, token });
   } catch (err) {
     return res.status(500).json({ status: false, msg: "Error on request" });
   }
 };
 
 export const renewToken = async (req: any, res: any) => {
-  const { uid, username, isAdmin } = req;
+  const { user } = req;
   try {
-    const token = await createJWT(uid, username, isAdmin);
-    return res.json({ status: true, token, uid, username });
+    const token = await createJWT(user);
+
+    return res.json({ status: true, user, token });
   } catch (err) {
     return res.status(500).json({ status: false, msg: "Error on request" });
   }

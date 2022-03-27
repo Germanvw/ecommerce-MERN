@@ -92,7 +92,6 @@ export const fetchProduct = async (req: any, res: Response) => {
 export const fetchProducts = async (req: any, res: Response) => {
   try {
     const products = await Products.find();
-    console.log("peticion :", products);
     if (products.length === 0) {
       return res.status(400).json({
         status: false,
