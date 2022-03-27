@@ -39,6 +39,23 @@ export const startAuthLogin = ({ form }: any) => {
   };
 };
 
+export const startAuthRegister = ({ form }: any) => {
+  console.log("Reducer: ", form);
+  return async (dispatch: any) => {
+    try {
+      const req = await fetchNoToken("auth/register", form, "POST");
+      const answ = await req.json();
+      if (answ.status) {
+        Swal.fire("Success", answ.msg, "success");
+      } else {
+        Swal.fire("Error", answ.msg, "error");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 export const startAuthCheck = () => {
   return async (dispatch: any) => {
     const req = await fetchToken("auth/refresh", {});

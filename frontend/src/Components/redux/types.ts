@@ -15,4 +15,10 @@ export const types = {
   catRemove: "[Category] Remove",
   catUpdate: "[Category] Update",
   catFetchAll: "[Category] Fetch All",
+
+  //Product
+  prodAdd: "[Product] Add",
+  prodRemove: "[Product] Remove",
+  prodUpdate: "[Product] Update",
+  prodFetchAll: "[Product] Fetch All",
 };

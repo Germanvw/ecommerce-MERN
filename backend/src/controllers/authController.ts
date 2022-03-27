@@ -13,9 +13,7 @@ export const registerUser = async (req: Request, res: Response) => {
         .status(400)
         .json({ status: false, msg: "User already registered" });
     }
-
     //Hashing
-
     const hashed = await hashPassword(password);
 
     const picture =
@@ -31,9 +29,9 @@ export const registerUser = async (req: Request, res: Response) => {
     });
     //Save user c
     newUser.save();
-
     return res.status(201).json({ status: true, msg: "User registered" });
   } catch (err) {
+    console.log(err);
     return res.status(500).json({ status: false, msg: "Error on request" });
   }
 };
@@ -47,8 +45,8 @@ export const loginUser = async (req: Request, res: Response) => {
       return res.status(400).json({ status: false, msg: "User not found" });
     }
     //compare password
-    const match = isMatch(password, user.password);
-
+    const match = await isMatch(password, user.password);
+    console.log("Answer: ", match);
     if (!match) {
       return res.status(400).json({ status: false, msg: "Invalid password" });
     }

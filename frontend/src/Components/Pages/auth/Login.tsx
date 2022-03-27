@@ -3,8 +3,8 @@ import { LoginButton } from "../../Buttons/LoginButton";
 
 export const Login = () => {
   const [value, setValues] = useState({
-    email: "email1@mail.com",
-    password: "asdasd",
+    email: "email4@mail.com",
+    password: "123456",
   });
   return (
     <div>
