@@ -1,6 +1,8 @@
 import Swal from "sweetalert2";
 import { fetchNoToken, fetchToken } from "../../hooks/useFetch";
+import { fireModal } from "../../hooks/useModal";
 import { types } from "../types";
+import { uiEndLoad, uiStartLoad } from "./uiActions";
 
 interface UserObject {
   uid: string;
@@ -35,18 +37,22 @@ export const startAuthLogin = (form: any) => {
   };
 };
 
-export const startAuthRegister = async (form: any) => {
-  try {
-    const req = await fetchNoToken("auth/register", form, "POST");
-    const answ = await req.json();
-    if (answ.status) {
-      Swal.fire("Success", answ.msg, "success");
-    } else {
-      Swal.fire("Error", answ.msg, "error");
+export const startAuthRegister = (form: any) => {
+  return async (dispatch: any) => {
+    try {
+      await dispatch(uiStartLoad());
+      const req = await fetchNoToken("auth/register", form, "POST");
+      const answ = await req.json();
+      await dispatch(uiEndLoad());
+      if (answ.status) {
+        fireModal("Success", answ.msg, "success", dispatch);
+      } else {
+        Swal.fire("Error", answ.msg, "error");
+      }
+    } catch (err) {
+      console.log("err");
     }
-  } catch (err) {
-    console.log(err);
-  }
+  };
 };
 
 export const startAuthCheck = () => {

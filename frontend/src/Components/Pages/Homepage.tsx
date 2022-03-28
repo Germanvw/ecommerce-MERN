@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { LogoutButton } from "../Buttons/LogoutButton";
+import { LogoutButton } from "../Items/Buttons/LogoutButton";
 import { RootState } from "../redux/reducer/rootReducer";
 
 export const Homepage = () => {

@@ -29,6 +29,13 @@
       }
       .auth-form {
         width: 100%;
+        .dropdown-gender {
+          align-items: center;
+          height: 40px;
+          margin: 15px 0px;
+          display: grid;
+          grid-template-columns: 1fr 3fr;
+        }
       }
       .bottom {
         width: 100%;
@@ -42,9 +49,6 @@
           padding: 6px 12px;
           border-radius: 5px;
           font-size: 18px;
-        }
-        &:focus {
-          border: none;
         }
         p {
           margin-top: 25px;

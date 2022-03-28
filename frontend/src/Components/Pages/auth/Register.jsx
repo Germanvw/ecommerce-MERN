@@ -1,25 +1,31 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { FormInput } from "../../Forms/FormInput";
-import useForm from "../../hooks/useForm";
+import { FormInput } from "../../Items/Forms/FormInput";
+import { Dropdown } from "../../Items/Forms/Dropdown";
 import { startAuthRegister } from "../../redux/actions/authActions";
-
+import useForm from "../../hooks/useForm";
 import "./index.scss";
 
 export const Register = () => {
   const dispatch = useDispatch();
 
-  const [value, handleChange, reset] = useForm({
+  const { errorMsg } = useSelector((state: any) => state.auth);
+
+  const genderOptions = [
+    { name: "Male", value: "male" },
+    { name: "Female", value: "female" },
+  ];
+
+  const [value, handleChange, clear] = useForm({
     username: "",
     email: "",
-    gender: "",
+    gender: genderOptions[0].value,
     password: "",
     confirmPassword: "",
   });
   const registerInputs = [
     { placeholder: "Username", type: "text", name: "username" },
     { placeholder: "Email", type: "email", name: "email" },
-    { placeholder: "Gender", type: "text", name: "gender" },
     { placeholder: "Password", type: "password", name: "password" },
     {
       placeholder: "Confirm password",
@@ -30,8 +36,13 @@ export const Register = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    // Validating empty/no-valid fields
 
     dispatch(startAuthRegister(value));
+
+    if (!errorMsg) {
+      clear();
+    }
   };
 
   return (
@@ -50,6 +61,14 @@ export const Register = () => {
                 {...input}
               />
             ))}
+            <div className="dropdown-gender">
+              <label>Gender: </label>
+              <Dropdown
+                options={genderOptions}
+                handleChange={handleChange}
+                dwName="gender"
+              />
+            </div>
           </div>
           <div className="bottom">
             <button type="submit" onClick={handleRegister}>

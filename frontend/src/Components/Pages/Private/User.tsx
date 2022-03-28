@@ -1,5 +1,5 @@
-import { LogoutButton } from "../../Buttons/LogoutButton";
 import { useSelector } from "react-redux";
+import { LogoutButton } from "../../Items/Buttons/LogoutButton";
 import { RootState } from "../../redux/reducer/rootReducer";
 
 export const User = () => {

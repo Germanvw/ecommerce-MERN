@@ -65,9 +65,23 @@ button {
   font-weight: 600;
   border: none;
   outline: none;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+    border: none;
+  }
 }
 
 input {
   background-color: var(--input-background);
   color: var(--input-color);
+}
+
+select {
+  background-color: var(--input-background);
+  color: var(--input-color);
+  border: none;
+  &:focus {
+    outline: none;
+  }
 }

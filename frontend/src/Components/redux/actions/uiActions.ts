@@ -12,3 +12,11 @@ export const uiClearError = () => ({
 export const uiSwapTheme = () => ({
   type: types.uiSwapTheme,
 });
+
+export const uiStartLoad = () => ({
+  type: types.uiStartLoad,
+});
+
+export const uiEndLoad = () => ({
+  type: types.uiEndLoad,
+});

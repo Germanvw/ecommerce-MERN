@@ -3,6 +3,9 @@ export const types = {
   uiSetError: "[UI] Set  Error",
   uiClearError: "[UI] Clear  Error",
 
+  uiStartLoad: "[UI] Start Load",
+  uiEndLoad: "[UI] End Load",
+
   uiSwapTheme: "[UI] Swap Theme",
 
   //Auth

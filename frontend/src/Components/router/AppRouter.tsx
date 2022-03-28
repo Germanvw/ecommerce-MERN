@@ -10,16 +10,24 @@ import { useEffect } from "react";
 import { startAuthCheck } from "../redux/actions/authActions";
 
 import "../../styles/index.scss";
+import { fireModal } from "../hooks/useModal";
+import Swal from "sweetalert2";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
 
   const { isAuth } = useSelector((state: RootState) => state.auth);
 
-  const { darkMode } = useSelector((state: RootState) => state.ui);
+  const { darkMode, errorMsg } = useSelector((state: RootState) => state.ui);
   useEffect(() => {
     dispatch(startAuthCheck());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (errorMsg) {
+      Swal.fire("Error", errorMsg, "error");
+    }
+  }, [errorMsg]);
   return (
     <BrowserRouter>
       <div className="app" theme-color={darkMode ? "dark" : "light"}>

@@ -7,7 +7,7 @@ interface uiProps {
   errorMsg: string | null;
 }
 
-const initialState = {
+const initialState: uiProps = {
   loading: false,
   darkMode: true,
   errorMsg: null,
@@ -15,6 +15,16 @@ const initialState = {
 
 export const uiReducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
+    case types.uiStartLoad:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.uiEndLoad:
+      return {
+        ...state,
+        loading: false,
+      };
     case types.uiSetError:
       return {
         ...state,
