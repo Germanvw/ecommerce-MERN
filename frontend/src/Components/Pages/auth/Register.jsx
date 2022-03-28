@@ -9,7 +9,7 @@ import "./index.scss";
 export const Register = () => {
   const dispatch = useDispatch();
 
-  const { errorMsg } = useSelector((state: any) => state.auth);
+  const { errorMsg } = useSelector((state) => state.auth);
 
   const genderOptions = [
     { name: "Male", value: "male" },
@@ -44,7 +44,6 @@ export const Register = () => {
       clear();
     }
   };
-
   return (
     <div className="auth-app">
       <div className="login-container register-container">

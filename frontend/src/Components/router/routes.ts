@@ -3,6 +3,7 @@ import { User } from "../Pages/Private/User";
 
 import { Login } from "../Pages/auth/Login";
 import { Register } from "../Pages/auth/Register";
+import { Categories } from "../Pages/admin/Categories";
 
 interface Route {
   path: string;
@@ -11,7 +12,8 @@ interface Route {
 }
 
 export interface uidProps {
-  isAuth: boolean;
+  isAuth?: boolean;
+  isAdmin?: boolean;
 }
 
 export const publicRoutes: Route[] = [
@@ -40,5 +42,13 @@ export const unAuthRoutes: Route[] = [
     name: "Register",
     path: "/register",
     Component: Register,
+  },
+];
+
+export const adminRoutes: Route[] = [
+  {
+    name: "Categories",
+    path: "admin/categories",
+    Component: Categories,
   },
 ];

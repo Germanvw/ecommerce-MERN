@@ -1,0 +1,107 @@
+.cat-bg {
+  background-color: var(--background-1);
+  color: var(--text-primary);
+  height: 100vh;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .cat-body {
+    display: grid;
+    grid-template-rows: 65px auto 65px;
+    height: 700px;
+    width: 1000px;
+    background-color: var(--background-2);
+    padding: 10px 15px;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px;
+      background-color: var(--background-1);
+      .input-body {
+        margin-bottom: 0px;
+        input {
+          width: 300px;
+        }
+      }
+      button {
+        height: 40px;
+        padding: 0px 30px;
+      }
+    }
+    .table {
+      margin-top: 20px;
+      background-color: var(--background-1);
+      height: calc(100% - 40px);
+      padding: 15px;
+      table {
+        width: 100%;
+        thead {
+          tr {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr) 2fr repeat(3, 1fr);
+          }
+        }
+        tbody {
+          tr {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr) 2fr repeat(3, 1fr);
+            border-bottom: 1px solid var(--background-2);
+            padding: 10px;
+            td {
+              margin-top: 10px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              img {
+                height: 50px;
+                width: 50px;
+              }
+              button {
+                padding: 10px 5px;
+                border-radius: 5px;
+                font-weight: bold;
+              }
+              .more {
+                background-color: rgb(63, 182, 255);
+              }
+              .update {
+                background-color: rgb(32, 160, 32);
+              }
+              .delete {
+                background-color: rgb(216, 90, 90);
+              }
+            }
+          }
+        }
+      }
+    }
+    .bottom {
+      padding: 15px;
+      background-color: var(--background-1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .total {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+      }
+      .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 3;
+      }
+      .show-amount {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+      }
+    }
+  }
+}

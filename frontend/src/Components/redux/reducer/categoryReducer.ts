@@ -16,24 +16,24 @@ const initialState: stateProps = {
 
 export const categoryReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case types.catAdd:
-      return {
-        categories: [...state.categories, action.payload],
-      };
-    case types.catRemove:
-      return {
-        categories: state.categories.filter(
-          (category: categoryProps) => category.name !== action.payload
-        ),
-      };
-    case types.catUpdate:
-      return {
-        categories: state.categories.map((category: categoryProps) => {
-          category.name === action.payload.name
-            ? (category = action.payload)
-            : category;
-        }),
-      };
+    // case types.catAdd:
+    //   return {
+    //     categories: [...state.categories, action.payload],
+    //   };
+    // case types.catRemove:
+    //   return {
+    //     categories: state.categories.filter(
+    //       (category: categoryProps) => category.name !== action.payload
+    //     ),
+    //   };
+    // case types.catUpdate:
+    //   return {
+    //     categories: state.categories.map((category: categoryProps) => {
+    //       category.name === action.payload.name
+    //         ? (category = action.payload)
+    //         : category;
+    //     }),
+    //   };
     case types.catFetchAll:
       return {
         categories: action.payload,

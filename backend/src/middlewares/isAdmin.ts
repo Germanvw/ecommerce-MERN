@@ -10,9 +10,8 @@ export const isAdmin = (req: any, res: Response, next: NextFunction) => {
       msg: "Authentication token doesnt exist",
     });
   }
-
   try {
-    if (!req.isAdmin) {
+    if (!req.user.isAdmin) {
       return res.status(401).json({
         status: false,
         msg: "You are not an admin",

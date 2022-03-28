@@ -1,24 +1,26 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// Publicas
-import { PrivateRoutes } from "./PrivateRoutes";
-import { PublicRoutes } from "./PublicRoutes";
-// Rutas dinamicas
-import { publicRoutes, authRoutes, unAuthRoutes } from "./routes";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/reducer/rootReducer";
 import { useEffect } from "react";
+// Tipos de rutas
+import { PrivateRoutes } from "./PrivateRoutes";
+import { PublicRoutes } from "./PublicRoutes";
+import { AdminRoutes } from "./AdminRoutes";
+// Rutas dinamicas
+import { publicRoutes, authRoutes, unAuthRoutes, adminRoutes } from "./routes";
 import { startAuthCheck } from "../redux/actions/authActions";
 
-import "../../styles/index.scss";
-import { fireModal } from "../hooks/useModal";
 import Swal from "sweetalert2";
+import "../../styles/index.scss";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
 
-  const { isAuth } = useSelector((state: RootState) => state.auth);
-
+  const { isAuth, isAdmin, checking } = useSelector(
+    (state: RootState) => state.auth
+  );
   const { darkMode, errorMsg } = useSelector((state: RootState) => state.ui);
+
   useEffect(() => {
     dispatch(startAuthCheck());
   }, [dispatch]);
@@ -28,6 +30,10 @@ export const AppRouter = () => {
       Swal.fire("Error", errorMsg, "error");
     }
   }, [errorMsg]);
+
+  if (checking) {
+    return <div className="loader">Loading...</div>;
+  }
   return (
     <BrowserRouter>
       <div className="app" theme-color={darkMode ? "dark" : "light"}>
@@ -39,6 +45,11 @@ export const AppRouter = () => {
           </Route>
           <Route element={<PublicRoutes isAuth={isAuth} />}>
             {unAuthRoutes.map(({ Component, path }) => (
+              <Route key={path} path={path} element={<Component />} />
+            ))}
+          </Route>
+          <Route element={<AdminRoutes isAdmin={isAdmin} />}>
+            {adminRoutes.map(({ Component, path }: any) => (
               <Route key={path} path={path} element={<Component />} />
             ))}
           </Route>

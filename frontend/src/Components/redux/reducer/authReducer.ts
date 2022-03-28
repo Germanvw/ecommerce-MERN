@@ -24,6 +24,7 @@ export const authReducer = (state = initialState, action: AnyAction) => {
         ...action.payload,
         checking: false,
         isAuth: true,
+        isAdmin: action.payload.user.isAdmin,
       };
     case types.authLogout:
       return {

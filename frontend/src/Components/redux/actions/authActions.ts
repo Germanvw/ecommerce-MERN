@@ -1,8 +1,7 @@
-import Swal from "sweetalert2";
+import { types } from "../types";
 import { fetchNoToken, fetchToken } from "../../hooks/useFetch";
 import { fireModal } from "../../hooks/useModal";
-import { types } from "../types";
-import { uiEndLoad, uiStartLoad } from "./uiActions";
+import { uiEndLoad, uiSetError, uiStartLoad } from "./uiActions";
 
 interface UserObject {
   uid: string;
@@ -16,6 +15,7 @@ interface UserObject {
 export const startAuthLogin = (form: any) => {
   return async (dispatch: any) => {
     try {
+      await dispatch(uiStartLoad());
       const req = await fetchNoToken("auth/login", form, "POST");
       const answ = await req.json();
 
@@ -26,10 +26,11 @@ export const startAuthLogin = (form: any) => {
         const user: UserObject = answ.user;
         // Dispatch
         dispatch(authLogin({ user }));
+        await dispatch(uiEndLoad());
       } else {
         // Remove token localStorage
         localStorage.removeItem("x-token");
-        Swal.fire("Error", answ.msg, "error");
+        dispatch(uiSetError(answ.msg));
       }
     } catch (err) {
       console.log("error");
@@ -47,7 +48,7 @@ export const startAuthRegister = (form: any) => {
       if (answ.status) {
         fireModal("Success", answ.msg, "success", dispatch);
       } else {
-        Swal.fire("Error", answ.msg, "error");
+        dispatch(uiSetError(answ.msg));
       }
     } catch (err) {
       console.log("err");
