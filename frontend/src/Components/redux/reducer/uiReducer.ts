@@ -9,7 +9,7 @@ interface uiProps {
 
 const initialState = {
   loading: false,
-  darkMode: false,
+  darkMode: true,
   errorMsg: null,
 };
 

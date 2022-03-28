@@ -9,32 +9,36 @@ import { RootState } from "../redux/reducer/rootReducer";
 import { useEffect } from "react";
 import { startAuthCheck } from "../redux/actions/authActions";
 
+import "../../styles/index.scss";
+
 export const AppRouter = () => {
   const dispatch = useDispatch();
 
-  const { isAuth, darkMode } = useSelector((state: RootState) => state.auth);
+  const { isAuth } = useSelector((state: RootState) => state.auth);
 
+  const { darkMode } = useSelector((state: RootState) => state.ui);
   useEffect(() => {
     dispatch(startAuthCheck());
   }, [dispatch]);
   return (
     <BrowserRouter>
-      <div className={`${darkMode && "darkmode"}`}></div>
-      <Routes>
-        <Route element={<PrivateRoutes isAuth={isAuth} />}>
-          {authRoutes.map(({ Component, path }) => (
+      <div className="app" theme-color={darkMode ? "dark" : "light"}>
+        <Routes>
+          <Route element={<PrivateRoutes isAuth={isAuth} />}>
+            {authRoutes.map(({ Component, path }) => (
+              <Route key={path} path={path} element={<Component />} />
+            ))}
+          </Route>
+          <Route element={<PublicRoutes isAuth={isAuth} />}>
+            {unAuthRoutes.map(({ Component, path }) => (
+              <Route key={path} path={path} element={<Component />} />
+            ))}
+          </Route>
+          {publicRoutes.map(({ Component, path }) => (
             <Route key={path} path={path} element={<Component />} />
           ))}
-        </Route>
-        <Route element={<PublicRoutes isAuth={isAuth} />}>
-          {unAuthRoutes.map(({ Component, path }) => (
-            <Route key={path} path={path} element={<Component />} />
-          ))}
-        </Route>
-        {publicRoutes.map(({ Component, path }) => (
-          <Route key={path} path={path} element={<Component />} />
-        ))}
-      </Routes>
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 };

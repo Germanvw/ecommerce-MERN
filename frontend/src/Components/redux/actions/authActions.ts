@@ -10,12 +10,8 @@ interface UserObject {
   picture: string;
   isAdmin: boolean;
 }
-const data = {
-  email: "email1@mail.com",
-  password: "asdasd",
-};
 
-export const startAuthLogin = ({ form }: any) => {
+export const startAuthLogin = (form: any) => {
   return async (dispatch: any) => {
     try {
       const req = await fetchNoToken("auth/login", form, "POST");
@@ -39,21 +35,18 @@ export const startAuthLogin = ({ form }: any) => {
   };
 };
 
-export const startAuthRegister = ({ form }: any) => {
-  console.log("Reducer: ", form);
-  return async (dispatch: any) => {
-    try {
-      const req = await fetchNoToken("auth/register", form, "POST");
-      const answ = await req.json();
-      if (answ.status) {
-        Swal.fire("Success", answ.msg, "success");
-      } else {
-        Swal.fire("Error", answ.msg, "error");
-      }
-    } catch (err) {
-      console.log(err);
+export const startAuthRegister = async (form: any) => {
+  try {
+    const req = await fetchNoToken("auth/register", form, "POST");
+    const answ = await req.json();
+    if (answ.status) {
+      Swal.fire("Success", answ.msg, "success");
+    } else {
+      Swal.fire("Error", answ.msg, "error");
     }
-  };
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const startAuthCheck = () => {
