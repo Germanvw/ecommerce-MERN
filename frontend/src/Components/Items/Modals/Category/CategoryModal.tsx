@@ -19,12 +19,11 @@ import "./../index.scss";
 
 export const CategoryModal = () => {
   const { modal, darkMode } = useSelector((state: RootState) => state.ui);
-
   const { active } = useSelector((state: RootState) => state.cat);
+
   const dispatch = useDispatch();
 
   // States
-
   const [category, setCategory] = useState(initialCategoryState);
 
   const handleFormChange = ({ target }: any) => {

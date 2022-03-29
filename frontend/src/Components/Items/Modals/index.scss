@@ -32,13 +32,11 @@
   background-color: var(--background-2);
   border-radius: 20px;
   color: var(--text-primary);
-  height: 400px;
   width: 500px;
   outline: none;
   .modal-bg {
     background-color: var(--background-2);
     color: var(--text-primary);
-    height: 100%;
     padding: 30px 20px;
     border-radius: 10px;
     display: flex;
@@ -46,6 +44,20 @@
     flex-direction: column;
     form {
       margin-top: 40px;
+      .dropdown-category {
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        label {
+          display: flex;
+          align-items: center;
+          width: 90px;
+          margin-right: 20px;
+          margin-bottom: 15px;
+        }
+        select {
+          width: 100%;
+        }
+      }
     }
     button {
       margin-top: 20px;
@@ -53,4 +65,8 @@
       height: 40px;
     }
   }
+}
+
+.modal-product {
+  height: 470px;
 }

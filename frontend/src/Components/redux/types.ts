@@ -31,4 +31,6 @@ export const types = {
   prodRemove: "[Product] Remove",
   prodUpdate: "[Product] Update",
   prodFetchAll: "[Product] Fetch All",
+  prodSetActive: "[Product] Set Active",
+  prodClearActive: "[Product] Clear Active",
 };

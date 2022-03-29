@@ -3,31 +3,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { FormInput } from "../../Items/Forms/FormInput";
 import { startCatFetchAll } from "../../redux/actions/categoryActions";
 import { CategoryTable } from "../../Items/Tables/CategoryTable";
-import { RootState } from "../../redux/reducer/rootReducer";
 import { uiOpenModalCategory } from "../../redux/actions/uiActions";
 import { CategoryModal } from "../../Items/Modals/Category/CategoryModal";
+import {
+  categoryPropsDocument,
+  inputProps,
+} from "../../Items/Modals/Category/imports";
+import { RootState } from "../../redux/reducer/rootReducer";
 
 import "./index.scss";
-
 export const Categories = () => {
   const dispatch = useDispatch();
 
-  const { categoryList } = useSelector((state) => state.cat);
+  const { categoryList }: any = useSelector((state: RootState) => state.cat);
 
   // States
   const [filter, setFilter] = useState("");
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<categoryPropsDocument[]>([]);
 
-  const handleChange = ({ target }) => {
-    setFilter(target.value);
-  };
-
-  const inputProps = {
-    placeholder: "Filter by name...",
-    type: "text",
-    name: "filter",
-  };
-
+  //Effects
   useEffect(() => {
     dispatch(startCatFetchAll());
   }, []);
@@ -40,7 +34,9 @@ export const Categories = () => {
     if (filter === "") {
       setCategories(categoryList);
     } else {
-      const filtered = categoryList.filter((cat) => cat.name.includes(filter));
+      const filtered: categoryPropsDocument[] = categoryList.filter(
+        (cat: any) => cat.name.includes(filter)
+      );
       setCategories(filtered);
     }
   }, [filter]);
@@ -50,9 +46,13 @@ export const Categories = () => {
     dispatch(uiOpenModalCategory());
   };
 
+  const handleChange = ({ target }: any) => {
+    setFilter(target.value);
+  };
+
   return (
-    <div className="cat-bg">
-      <div className="cat-body">
+    <div className="table-bg">
+      <div className="table-body">
         <div className="header">
           <FormInput
             value={filter}

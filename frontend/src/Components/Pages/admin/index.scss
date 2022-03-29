@@ -1,4 +1,4 @@
-.cat-bg {
+.table-bg {
   background-color: var(--background-1);
   color: var(--text-primary);
   height: 100vh;
@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
 
-  .cat-body {
+  .table-body {
     display: grid;
     grid-template-rows: 65px auto 65px;
     height: 700px;
@@ -32,53 +32,7 @@
         padding: 0px 30px;
       }
     }
-    .table {
-      margin-top: 20px;
-      background-color: var(--background-1);
-      height: calc(100% - 40px);
-      padding: 15px;
-      table {
-        width: 100%;
-        thead {
-          tr {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr) 2fr repeat(3, 1fr);
-          }
-        }
-        tbody {
-          tr {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr) 2fr repeat(3, 1fr);
-            border-bottom: 1px solid var(--background-2);
-            padding: 10px;
-            td {
-              margin-top: 10px;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              img {
-                height: 50px;
-                width: 50px;
-              }
-              button {
-                padding: 10px 5px;
-                border-radius: 5px;
-                font-weight: bold;
-              }
-              .more {
-                background-color: rgb(63, 182, 255);
-              }
-              .update {
-                background-color: rgb(32, 160, 32);
-              }
-              .delete {
-                background-color: rgb(216, 90, 90);
-              }
-            }
-          }
-        }
-      }
-    }
+
     .bottom {
       padding: 15px;
       background-color: var(--background-1);

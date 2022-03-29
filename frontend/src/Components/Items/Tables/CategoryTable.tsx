@@ -3,6 +3,8 @@ import { confirmDeleteCategory } from "../../hooks/useConfirmModal";
 import { catSetActive } from "../../redux/actions/categoryActions";
 import { uiOpenModalCategory } from "../../redux/actions/uiActions";
 
+import "./index.scss";
+
 export const CategoryTable = ({ categories }: any) => {
   const dispatch = useDispatch();
   const header = [
@@ -22,10 +24,10 @@ export const CategoryTable = ({ categories }: any) => {
     dispatch(catSetActive(category));
     dispatch(uiOpenModalCategory());
   };
-  // const handleDisplay = (category: {}) => {
-  //   dispatch(catSetActive(category));
-  //   dispatch(uiOpenModalCategory());
-  // };
+  const handleDisplay = (category: {}) => {
+    dispatch(catSetActive(category));
+    dispatch(uiOpenModalCategory());
+  };
 
   return (
     <table>
@@ -49,7 +51,7 @@ export const CategoryTable = ({ categories }: any) => {
               <td>
                 <button
                   className="more"
-                  // onClick={() => handleDisplay(category)}
+                  onClick={() => handleDisplay(category)}
                 >
                   Show More
                 </button>

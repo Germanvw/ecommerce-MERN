@@ -1,8 +1,13 @@
-export interface categoryPropsDocument {
+import { categoryProps } from "../Category/imports";
+
+export interface productPropsDocument {
   _id: string;
   name: string;
   description: string;
   image: string;
+  price: number;
+  inStock: number;
+  category: categoryProps;
   createdAt?: string;
   updatedAt?: string;
   __v?: number;
@@ -14,20 +19,7 @@ export const inputProps = {
   name: "filter",
 };
 
-export interface categoryProps {
-  _id?: string;
-  name: string;
-  image: string;
-  description: string;
-}
-
-export const initialCategoryState: { [index: string]: any } = {
-  name: "",
-  image: "",
-  description: "",
-};
-
-export const customCategoryStyles = {
+export const customProductStyles = {
   content: {
     top: "50%",
     left: "50%",
@@ -36,13 +28,16 @@ export const customCategoryStyles = {
   },
 };
 
-interface formCategoryProps {
-  label: string;
-  name: string;
-  type: string;
-}
+export const initialProductState: { [index: string]: any } = {
+  name: "",
+  description: "",
+  image: "",
+  price: "",
+  inStock: "",
+  category: {},
+};
 
-export const formCategoryImputs = [
+export const formProductsImputs = [
   { label: "Name", name: "name", type: "text", placeholder: "Name..." },
   {
     label: "Description",
@@ -51,4 +46,6 @@ export const formCategoryImputs = [
     placeholder: "Description...",
   },
   { label: "Image", name: "image", type: "text", placeholder: "Image..." },
+  { label: "Price", name: "price", type: "number", placeholder: "Price..." },
+  { label: "Stock", name: "stock", type: "number", placeholder: "Stock..." },
 ];

@@ -12,8 +12,7 @@ interface categoryProps {
 export const startCatUpdate = (category: any) => {
   return async (dispatch: any) => {
     try {
-      await dispatch(uiStartLoad());
-
+      dispatch(uiStartLoad());
       const req = await fetchToken(
         `categories/${category._id}`,
         category,
@@ -37,16 +36,16 @@ export const startCatUpdate = (category: any) => {
 export const startCatAdd = (category: any) => {
   return async (dispatch: any) => {
     try {
-      await dispatch(uiStartLoad());
+      dispatch(uiStartLoad());
       const req = await fetchToken("categories", category, "post");
       const answ = await req.json();
       if (answ.status) {
         dispatch(catAdd(answ.category));
         dispatch(uiCloseModal());
       } else {
-        await dispatch(uiSetError(answ.msg));
+        dispatch(uiSetError(answ.msg));
       }
-      await dispatch(uiEndLoad());
+      dispatch(uiEndLoad());
     } catch (err) {
       console.log(err);
     }
@@ -56,16 +55,16 @@ export const startCatAdd = (category: any) => {
 export const startCatRemove = (_id: string) => {
   return async (dispatch: any) => {
     try {
-      await dispatch(uiStartLoad());
+      dispatch(uiStartLoad());
       const req = await fetchToken(`categories/${_id}`, {}, "DELETE");
       const answ = await req.json();
 
       if (answ.status) {
         dispatch(catRemove(_id));
       } else {
-        await dispatch(uiSetError(answ.msg));
+        dispatch(uiSetError(answ.msg));
       }
-      await dispatch(uiEndLoad());
+      dispatch(uiEndLoad());
     } catch (err) {
       console.log(err);
     }
@@ -77,11 +76,10 @@ export const startCatFetchAll = () => {
     try {
       const req = await fetchToken("categories", {});
       const answ = await req.json();
-
       if (answ.status) {
-        await dispatch(catFetchAll(answ.categories));
+        dispatch(catFetchAll(answ.categories));
       } else {
-        await dispatch(uiSetError(answ.msg));
+        dispatch(uiSetError(answ.msg));
       }
     } catch (err) {
       console.log(err);
