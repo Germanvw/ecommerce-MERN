@@ -12,12 +12,13 @@ import "./index.scss";
 export const Categories = () => {
   const dispatch = useDispatch();
 
-  const { categoryList } = useSelector((state: RootState) => state.cat);
+  const { categoryList } = useSelector((state) => state.cat);
+
   // States
   const [filter, setFilter] = useState("");
-  const [categories] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-  const handleChange = ({ target }: any) => {
+  const handleChange = ({ target }) => {
     setFilter(target.value);
   };
 
@@ -30,6 +31,19 @@ export const Categories = () => {
   useEffect(() => {
     dispatch(startCatFetchAll());
   }, []);
+
+  useEffect(() => {
+    setCategories(categoryList);
+  }, [categoryList]);
+
+  useEffect(() => {
+    if (filter === "") {
+      setCategories(categoryList);
+    } else {
+      const filtered = categoryList.filter((cat) => cat.name.includes(filter));
+      setCategories(filtered);
+    }
+  }, [filter]);
 
   // Functions
   const handleCreate = () => {
@@ -48,10 +62,12 @@ export const Categories = () => {
           <button onClick={handleCreate}>Create new</button>
         </div>
         <div className="table">
-          <CategoryTable categories={categoryList} />
+          <CategoryTable categories={categories} />
         </div>
         <div className="bottom">
-          <div className="total">{`Categories found: ${categories.length}`}</div>
+          <div className="total">{`Categories found: ${
+            categories && categories?.length
+          }`}</div>
           <div className="pagination">1</div>
           <div className="show-amount">1</div>
         </div>
