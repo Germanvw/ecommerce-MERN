@@ -20,11 +20,12 @@ export const createCategory = async (req: any, res: Response) => {
       image,
     });
 
-    await newCategory.save();
+    const saved = await newCategory.save();
 
     return res.status(201).json({
       status: true,
       msg: "Category created successfully",
+      category: saved,
     });
   } catch (err) {
     console.log(err);
@@ -87,7 +88,10 @@ export const deleteCategory = async (req: any, res: Response) => {
 };
 export const fetchCategory = async (req: any, res: Response) => {
   try {
-    const category = await Categories.findById(req.params.id);
+    const category = await Categories.findById(req.params.id)
+      .select("-createdAt")
+      .select("-__v")
+      .select("-updatedAt");
 
     if (!category) {
       return res.status(400).json({
@@ -106,7 +110,10 @@ export const fetchCategory = async (req: any, res: Response) => {
 };
 export const fetchCategories = async (req: any, res: Response) => {
   try {
-    const categories = await Categories.find();
+    const categories = await Categories.find()
+      .select("-createdAt")
+      .select("-__v")
+      .select("-updatedAt");
 
     if (categories.length === 0) {
       return res.status(400).json({

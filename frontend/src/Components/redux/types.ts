@@ -6,6 +6,11 @@ export const types = {
   uiStartLoad: "[UI] Start Load",
   uiEndLoad: "[UI] End Load",
 
+  uiOpenModalCategory: "[UI] Open Modal Category",
+  uiOpenModalProduct: "[UI] Open Modal Product",
+  uiOpenModalOrder: "[UI] Open Modal Order",
+  uiCloseModal: "[UI] Close Modal",
+
   uiSwapTheme: "[UI] Swap Theme",
 
   //Auth
@@ -18,6 +23,8 @@ export const types = {
   catRemove: "[Category] Remove",
   catUpdate: "[Category] Update",
   catFetchAll: "[Category] Fetch All",
+  catSetActive: "[Category] Set Active",
+  catClearActive: "[Category] Clear Active",
 
   //Product
   prodAdd: "[Product] Add",

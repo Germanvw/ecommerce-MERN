@@ -1,3 +1,19 @@
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-wrapper-label {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 5fr;
+  label {
+    margin-bottom: 15px;
+    margin-right: 20px;
+    min-width: 90px;
+  }
+}
 .input-body {
   display: flex;
   align-items: center;
@@ -5,11 +21,12 @@
   height: 40px;
   border-radius: 5px;
   background-color: var(--input-background);
-
+  width: 100%;
   &:focus {
     border: 1px solid var(--button-color);
   }
   i {
+    width: 50px;
     padding: 15px;
     color: var(--text-primary);
   }

@@ -25,13 +25,13 @@ export const startAuthLogin = (form: any) => {
 
         const user: UserObject = answ.user;
         // Dispatch
-        dispatch(authLogin({ user }));
-        await dispatch(uiEndLoad());
+        await dispatch(authLogin({ user }));
       } else {
         // Remove token localStorage
         localStorage.removeItem("x-token");
-        dispatch(uiSetError(answ.msg));
+        await dispatch(uiSetError(answ.msg));
       }
+      await dispatch(uiEndLoad());
     } catch (err) {
       console.log("error");
     }
@@ -44,12 +44,12 @@ export const startAuthRegister = (form: any) => {
       await dispatch(uiStartLoad());
       const req = await fetchNoToken("auth/register", form, "POST");
       const answ = await req.json();
-      await dispatch(uiEndLoad());
       if (answ.status) {
         fireModal("Success", answ.msg, "success", dispatch);
       } else {
-        dispatch(uiSetError(answ.msg));
+        await dispatch(uiSetError(answ.msg));
       }
+      await dispatch(uiEndLoad());
     } catch (err) {
       console.log("err");
     }
@@ -65,11 +65,12 @@ export const startAuthCheck = () => {
       localStorage.setItem("x-token", answ.token);
 
       const user: UserObject = answ.user;
-      dispatch(authLogin({ user }));
+      await dispatch(authLogin({ user }));
     } else {
       localStorage.removeItem("x-token");
-      dispatch(authEndCheck());
+      await dispatch(authEndCheck());
     }
+    await dispatch(uiEndLoad());
   };
 };
 

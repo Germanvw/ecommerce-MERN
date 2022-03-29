@@ -16,7 +16,7 @@ import "../../styles/index.scss";
 export const AppRouter = () => {
   const dispatch = useDispatch();
 
-  const { isAuth, isAdmin, checking } = useSelector(
+  const { isAuth, isAdmin, checking, loading } = useSelector(
     (state: RootState) => state.auth
   );
   const { darkMode, errorMsg } = useSelector((state: RootState) => state.ui);
@@ -31,9 +31,10 @@ export const AppRouter = () => {
     }
   }, [errorMsg]);
 
-  if (checking) {
+  if (checking | loading) {
     return <div className="loader">Loading...</div>;
   }
+
   return (
     <BrowserRouter>
       <div className="app" theme-color={darkMode ? "dark" : "light"}>
