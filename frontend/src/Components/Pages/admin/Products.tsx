@@ -43,7 +43,6 @@ export const Products = () => {
   const handleChange = ({ target }: any) => {
     setFilter(target.value);
   };
-  console.log(products);
   return (
     <div className="table-bg">
       <div className="table-body">

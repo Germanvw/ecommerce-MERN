@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { confirmDeleteProduct } from "../../hooks/useConfirmModal";
 import { prodSetActive } from "../../redux/actions/productActions";
 import { uiOpenModalProduct } from "../../redux/actions/uiActions";
 
@@ -17,7 +18,7 @@ export const ProductTable = ({ products }: any) => {
     "Delete",
   ];
   const handleDelete = (_id: string) => {
-    // confirmDeleteCategory(_id, dispatch);
+    confirmDeleteProduct(_id, dispatch);
   };
 
   const handleUpdate = (category: {}) => {

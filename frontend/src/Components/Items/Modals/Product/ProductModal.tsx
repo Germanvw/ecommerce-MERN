@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { prodClearActive } from "../../../redux/actions/productActions";
+import {
+  prodClearActive,
+  startProdAdd,
+  startProdUpdate,
+} from "../../../redux/actions/productActions";
 import { uiCloseModal } from "../../../redux/actions/uiActions";
 import { RootState } from "../../../redux/reducer/rootReducer";
 import {
@@ -8,11 +12,12 @@ import {
   formProductsImputs,
   initialProductState,
 } from "./imports";
+import { FormInput } from "../../Forms/FormInput";
+import { DropdownCategory } from "../../Forms/Dropdown";
+import { startCatFetchAll } from "../../../redux/actions/categoryActions";
+import { categoryPropsDocument } from "../Category/imports";
 
 import Modal from "react-modal";
-import { FormInput } from "../../Forms/FormInput";
-import { Dropdown } from "../../Forms/Dropdown";
-import { startCatFetchAll } from "../../../redux/actions/categoryActions";
 
 export const ProductModal = () => {
   const { modal, darkMode } = useSelector((state: RootState) => state.ui);
@@ -23,7 +28,9 @@ export const ProductModal = () => {
 
   // States
   const [product, setProduct] = useState(initialProductState);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<categoryPropsDocument[]>([]);
+
+  // Effects
   const handleFormChange = ({ target }: any) => {
     setProduct({
       ...product,
@@ -36,9 +43,9 @@ export const ProductModal = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (active) {
-      // dispatch(startProdUpdate(product));
+      dispatch(startProdUpdate(product));
     } else {
-      // dispatch(startProdAdd(product));
+      dispatch(startProdAdd(product));
     }
   };
 
@@ -57,8 +64,16 @@ export const ProductModal = () => {
   }, [active]);
 
   useEffect(() => {
+    // Fetch
     dispatch(startCatFetchAll());
   }, []);
+
+  useEffect(() => {
+    if (categories[0]) {
+      console.log(categories[0]);
+      setProduct({ ...initialProductState, category: categories[0]._id });
+    }
+  }, [categories]);
 
   useEffect(() => {
     setCategories(categoryList);
@@ -74,7 +89,7 @@ export const ProductModal = () => {
       ariaHideApp={false}
     >
       <div className="modal-bg" theme-color={darkMode ? "dark" : "light"}>
-        <h1>{active === null ? "Create category." : "Edit category."}</h1>
+        <h1>{active === null ? "Create product." : "Edit product."}</h1>
 
         <form onSubmit={handleSubmit}>
           {formProductsImputs.map((input: any) => (
@@ -87,7 +102,7 @@ export const ProductModal = () => {
           ))}
           <div className="dropdown-category">
             <label>Category </label>
-            <Dropdown
+            <DropdownCategory
               options={categories}
               dwName="category"
               handleChange={handleFormChange}

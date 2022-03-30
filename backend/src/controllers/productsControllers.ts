@@ -14,11 +14,12 @@ export const createProduct = async (req: any, res: Response) => {
       category,
     });
 
-    await newProduct.save();
+    const saved = await newProduct.save();
 
     return res.status(201).json({
       status: true,
       msg: "Product created successfully",
+      product: saved,
     });
   } catch (err) {
     console.log(err);

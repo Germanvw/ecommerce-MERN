@@ -34,7 +34,7 @@ export const initialProductState: { [index: string]: any } = {
   image: "",
   price: "",
   inStock: "",
-  category: {},
+  category: "",
 };
 
 export const formProductsImputs = [
@@ -47,5 +47,5 @@ export const formProductsImputs = [
   },
   { label: "Image", name: "image", type: "text", placeholder: "Image..." },
   { label: "Price", name: "price", type: "number", placeholder: "Price..." },
-  { label: "Stock", name: "stock", type: "number", placeholder: "Stock..." },
+  { label: "Stock", name: "inStock", type: "number", placeholder: "Stock..." },
 ];
