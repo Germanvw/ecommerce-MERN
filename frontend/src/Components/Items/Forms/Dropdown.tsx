@@ -38,3 +38,23 @@ export const DropdownCategory = ({
     </select>
   );
 };
+
+export const DropdownPagination = ({
+  options,
+  dwName,
+  handleChange,
+}: {
+  options: number[];
+  dwName: string;
+  handleChange: ({ target }: any) => void;
+}) => {
+  return (
+    <select name={dwName} onChange={handleChange}>
+      {options.map((value: number) => (
+        <option key={value} value={value}>
+          {value}
+        </option>
+      ))}
+    </select>
+  );
+};

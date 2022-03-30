@@ -24,7 +24,6 @@ export const categoryReducer = (state = initialState, action: any) => {
         categoryList: [...state.categoryList, action.payload],
       };
     case types.catUpdate:
-      console.log(action.payload);
       return {
         categoryList: state.categoryList.map((category: any) =>
           category._id === action.payload._id ? action.payload : category

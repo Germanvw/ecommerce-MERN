@@ -55,6 +55,8 @@ export const CategoryModal = () => {
   useEffect(() => {
     if (active) {
       setCategory(active);
+    } else {
+      setCategory(initialCategoryState);
     }
   }, [active]);
   return (

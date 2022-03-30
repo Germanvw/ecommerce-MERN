@@ -31,7 +31,7 @@ export const startProdAdd = (product: any) => {
       //get Category
       const reqCat = await fetchToken(`categories/${product.category}`, {});
       const answCat = await reqCat.json();
-      console.log(reqCat);
+
       if (answCat.status) {
         product.category = answCat.category;
 
@@ -39,7 +39,6 @@ export const startProdAdd = (product: any) => {
         const answ = await req.json();
 
         if (answ.status) {
-          console.log(answ);
           dispatch(prodAdd(answ.product));
           dispatch(uiCloseModal());
         } else {
@@ -55,14 +54,31 @@ export const startProdAdd = (product: any) => {
   };
 };
 
-export const startProdUpdate = (product: {}) => {
+export const startProdUpdate = (product: any) => {
   return async (dispatch: any) => {
     try {
       dispatch(uiStartLoad());
 
-      // get category
+      //get Category
+      const reqCat = await fetchToken(`categories/${product.category}`, {});
+      const answCat = await reqCat.json();
 
-      const req = await fetchToken("products", product, "put");
+      if (answCat.status) {
+        product.category = answCat.category;
+
+        const req = await fetchToken(`products/${product._id}`, product, "PUT");
+        const answ = await req.json();
+
+        if (answ.status) {
+          dispatch(prodUpdate(answ.product));
+          dispatch(uiCloseModal());
+        } else {
+          dispatch(uiSetError(answ.msg));
+        }
+      } else {
+        dispatch(uiSetError(answCat.msg));
+      }
+      dispatch(uiEndLoad());
     } catch (err) {
       console.log(err);
     }

@@ -60,6 +60,8 @@ export const ProductModal = () => {
   useEffect(() => {
     if (active) {
       setProduct(active);
+    } else {
+      setProduct(initialProductState);
     }
   }, [active]);
 
@@ -70,7 +72,6 @@ export const ProductModal = () => {
 
   useEffect(() => {
     if (categories[0]) {
-      console.log(categories[0]);
       setProduct({ ...initialProductState, category: categories[0]._id });
     }
   }, [categories]);

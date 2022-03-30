@@ -23,6 +23,7 @@ export const startCatUpdate = (category: any) => {
       dispatch(uiEndLoad());
       if (answ.status) {
         dispatch(catUpdate(category));
+        dispatch(uiCloseModal());
       } else {
         dispatch(uiSetError(answ.msg));
       }

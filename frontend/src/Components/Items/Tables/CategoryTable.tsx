@@ -19,7 +19,6 @@ export const CategoryTable = ({ categories }: any) => {
   const handleDelete = (_id: string) => {
     confirmDeleteCategory(_id, dispatch);
   };
-
   const handleUpdate = (category: {}) => {
     dispatch(catSetActive(category));
     dispatch(uiOpenModalCategory());

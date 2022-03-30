@@ -1,17 +1,16 @@
 .table-bg {
   background-color: var(--background-1);
   color: var(--text-primary);
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
-
   .table-body {
     display: grid;
     grid-template-rows: 65px auto 65px;
-    height: 700px;
+    min-height: 636px;
     width: 1000px;
     background-color: var(--background-2);
     padding: 10px 15px;
@@ -37,8 +36,9 @@
       padding: 15px;
       background-color: var(--background-1);
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: row;
+      justify-content: space-between;
+      // grid-template-columns: repeat(3, 1fr);
       .total {
         display: flex;
         align-items: center;
@@ -49,9 +49,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        flex: 3;
+        flex: 1;
       }
       .show-amount {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+      }
+      .perPage {
         display: flex;
         align-items: center;
         justify-content: center;
