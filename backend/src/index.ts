@@ -26,8 +26,8 @@ app.use("/api/products", require("./routes/products"));
 app.use("/api/categories", require("./routes/categories"));
 // api/users
 app.use("/api/users", require("./routes/users"));
-// //api/orders
-// app.use("/api/orders", require("./routes/orders"));
+//api/orders
+app.use("/api/orders", require("./routes/orders"));
 // //
 
 //Listen

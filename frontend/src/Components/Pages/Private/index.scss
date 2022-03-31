@@ -1,0 +1,8 @@
+.cart-body {
+  min-height: calc(100vh - 50px);
+  background-color: var(--background-1);
+  .cart-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+}

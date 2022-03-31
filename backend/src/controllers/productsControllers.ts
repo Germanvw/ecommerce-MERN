@@ -43,12 +43,13 @@ export const editProduct = async (req: any, res: Response) => {
 
     res.status(201).json({
       status: true,
-      msg: "Category updated successfully",
+      msg: "Product updated successfully",
     });
   } catch (err) {
     return res.status(500).json({ status: false, msg: "Error on request" });
   }
 };
+
 export const deleteProduct = async (req: any, res: Response) => {
   const { id } = req.params;
   try {

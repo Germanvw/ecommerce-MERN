@@ -7,6 +7,7 @@ import { Register } from "../Pages/auth/Register";
 import { Categories as AdminCategories } from "../Pages/admin/Categories";
 import { Products as AdminProducts } from "../Pages/admin/Products";
 import { Products } from "../Pages/Products";
+import { Cart } from "../Pages/Private/Cart";
 
 interface Route {
   path: string;
@@ -37,6 +38,11 @@ export const authRoutes: Route[] = [
     name: "User",
     path: "/user",
     Component: User,
+  },
+  {
+    name: "Cart",
+    path: "/cart",
+    Component: Cart,
   },
 ];
 

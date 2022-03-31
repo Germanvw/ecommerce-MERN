@@ -1,15 +1,20 @@
 import { Router } from "express";
-import {} from "../controllers/categoriesController";
+import {
+  createOrder,
+  editOrderDelivered,
+  editOrderStatus,
+  fetchOrder,
+} from "../controllers/ordersControllers";
+// import { isAdmin } from "../middlewares/isAdmin";
 import { validJWT } from "../middlewares/validJWT";
 
 const router = Router();
 router.use(validJWT);
-// router.use(isAdmin);
 
-// router.post("/", createCategory);
-// router.put("/:id", editCategory);
-// router.delete("/:id", deleteCategory);
-// router.get("/", fetchCategories);
-// router.get("/:id", fetchCategory);
+router.post("/", createOrder);
+router.put("/:id", editOrderStatus);
+router.put("/:id", editOrderDelivered);
+router.get("/", fetchOrder);
+// router.get("/", isAdmin, fetchOrderAll);
 
 module.exports = router;
