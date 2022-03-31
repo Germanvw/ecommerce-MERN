@@ -23,6 +23,7 @@ export const Products = () => {
     pagination,
     handlePerPage,
     setPagination,
+    setPerPage,
   }: any = usePagination();
 
   const { filterInput, handleChange, paginatedArray, array }: any =
@@ -67,6 +68,7 @@ export const Products = () => {
               dwName="perPage"
               handleChange={handlePerPage}
               options={[5, 10, 15, 20]}
+              setPerPage={setPerPage}
             />
           </div>
         </div>

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 interface optionProps {
   _id?: string;
   value?: string;
@@ -43,11 +45,17 @@ export const DropdownPagination = ({
   options,
   dwName,
   handleChange,
+  setPerPage,
 }: {
   options: number[];
   dwName: string;
   handleChange: ({ target }: any) => void;
+  setPerPage: any;
 }) => {
+  useEffect(() => {
+    setPerPage(options[0]);
+  }, [options[0]]);
+
   return (
     <select name={dwName} onChange={handleChange}>
       {options.map((value: number) => (

@@ -1,5 +1,5 @@
 import "./index.scss";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 export const Pagination = ({
   perPage,

@@ -4,8 +4,9 @@ import { User } from "../Pages/Private/User";
 import { Login } from "../Pages/auth/Login";
 import { Register } from "../Pages/auth/Register";
 //Admin
-import { Categories } from "../Pages/admin/Categories";
-import { Products } from "../Pages/admin/Products";
+import { Categories as AdminCategories } from "../Pages/admin/Categories";
+import { Products as AdminProducts } from "../Pages/admin/Products";
+import { Products } from "../Pages/Products";
 
 interface Route {
   path: string;
@@ -23,6 +24,11 @@ export const publicRoutes: Route[] = [
     name: "Homepage",
     path: "/",
     Component: Homepage,
+  },
+  {
+    name: "Products",
+    path: "/products",
+    Component: Products,
   },
 ];
 
@@ -51,11 +57,11 @@ export const adminRoutes: Route[] = [
   {
     name: "Categories",
     path: "admin/categories",
-    Component: Categories,
+    Component: AdminCategories,
   },
   {
     name: "Products",
     path: "admin/products",
-    Component: Products,
+    Component: AdminProducts,
   },
 ];

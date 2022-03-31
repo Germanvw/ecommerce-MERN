@@ -15,7 +15,6 @@ import { RootState } from "../../redux/reducer/rootReducer";
 import "./index.scss";
 export const Categories = () => {
   const { categoryList }: any = useSelector((state: RootState) => state.cat);
-
   const dispatch = useDispatch();
 
   // Hooks
@@ -25,6 +24,7 @@ export const Categories = () => {
     pagination,
     handlePerPage,
     setPagination,
+    setPerPage,
   }: any = usePagination();
 
   const { filterInput, handleChange, paginatedArray, array }: any =
@@ -70,6 +70,7 @@ export const Categories = () => {
               dwName="perPage"
               handleChange={handlePerPage}
               options={[5, 10, 15, 20]}
+              setPerPage={setPerPage}
             />
           </div>
         </div>

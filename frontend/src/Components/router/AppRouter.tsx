@@ -12,6 +12,7 @@ import { startAuthCheck } from "../redux/actions/authActions";
 
 import Swal from "sweetalert2";
 import "../../styles/index.scss";
+import { Navbar } from "../Items/Nav/Navbar";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ export const AppRouter = () => {
   return (
     <BrowserRouter>
       <div className="app" theme-color={darkMode ? "dark" : "light"}>
+        <Navbar isAuth={isAuth} />
         <Routes>
           <Route element={<PrivateRoutes isAuth={isAuth} />}>
             {authRoutes.map(({ Component, path }) => (

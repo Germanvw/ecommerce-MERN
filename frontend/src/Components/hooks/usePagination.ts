@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const usePagination = () => {
   const [perPage, setPerPage] = useState(5);
@@ -29,5 +29,6 @@ export const usePagination = () => {
     setPagination,
     handlePagination,
     handlePerPage,
+    setPerPage,
   };
 };
