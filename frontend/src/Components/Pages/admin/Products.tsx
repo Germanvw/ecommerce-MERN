@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { inputProps } from "../../Items/Modals/Product/imports";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { startProdFetchAll } from "../../redux/actions/productActions";
 import { ProductModal } from "../../Items/Modals/Product/ProductModal";
 import { ProductTable } from "../../Items/Tables/ProductTable";
@@ -9,9 +9,11 @@ import { FormInput } from "../../Items/Forms/FormInput";
 import { usePagination } from "../../hooks/usePagination";
 import { Pagination } from "../../Items/Buttons/Pagination";
 import { DropdownPagination } from "../../Items/Forms/Dropdown";
-import { useFilterProduct } from "../../hooks/useFilterProduct";
+import { useFilterSearch } from "../../hooks/useFilterSearch";
+import { RootState } from "../../redux/reducer/rootReducer";
 
 export const Products = () => {
+  const { productList } = useSelector((state: RootState) => state.prod);
   const dispatch = useDispatch();
 
   // Hooks
@@ -24,7 +26,7 @@ export const Products = () => {
   }: any = usePagination();
 
   const { filterInput, handleChange, paginatedArray, array }: any =
-    useFilterProduct(pagination, perPage);
+    useFilterSearch(pagination, perPage, productList);
 
   //Effects
   useEffect(() => {

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FormInput } from "../../Items/Forms/FormInput";
 import { startCatFetchAll } from "../../redux/actions/categoryActions";
 import { CategoryTable } from "../../Items/Tables/CategoryTable";
@@ -9,10 +9,13 @@ import { inputProps } from "../../Items/Modals/Category/imports";
 import { Pagination } from "../../Items/Buttons/Pagination";
 import { DropdownPagination } from "../../Items/Forms/Dropdown";
 import { usePagination } from "../../hooks/usePagination";
-import { useFilterCategory } from "../../hooks/useFilterCategory";
-import "./index.scss";
+import { useFilterSearch } from "../../hooks/useFilterSearch";
+import { RootState } from "../../redux/reducer/rootReducer";
 
+import "./index.scss";
 export const Categories = () => {
+  const { categoryList }: any = useSelector((state: RootState) => state.cat);
+
   const dispatch = useDispatch();
 
   // Hooks
@@ -25,7 +28,7 @@ export const Categories = () => {
   }: any = usePagination();
 
   const { filterInput, handleChange, paginatedArray, array }: any =
-    useFilterCategory(pagination, perPage);
+    useFilterSearch(pagination, perPage, categoryList);
 
   //Effects
   useEffect(() => {
