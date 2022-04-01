@@ -33,4 +33,11 @@ export const types = {
   prodFetchAll: "[Product] Fetch All",
   prodSetActive: "[Product] Set Active",
   prodClearActive: "[Product] Clear Active",
+
+  //Cart
+  cartAdd: "[Cart] Add",
+  cartRemove: "[Cart] Remove",
+  cartUpdate: "[Cart] Update",
+  cartFetchAll: "[Cart] Fetch All",
+  cartEndCheck: "[Cart] End Check",
 };

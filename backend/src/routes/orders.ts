@@ -1,8 +1,7 @@
 import { Router } from "express";
 import {
   createOrder,
-  editOrderDelivered,
-  editOrderStatus,
+  editOrder,
   fetchOrder,
 } from "../controllers/ordersControllers";
 // import { isAdmin } from "../middlewares/isAdmin";
@@ -12,8 +11,7 @@ const router = Router();
 router.use(validJWT);
 
 router.post("/", createOrder);
-router.put("/:id", editOrderStatus);
-router.put("/:id", editOrderDelivered);
+router.put("/:id", editOrder);
 router.get("/", fetchOrder);
 // router.get("/", isAdmin, fetchOrderAll);
 

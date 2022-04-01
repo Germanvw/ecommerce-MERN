@@ -41,12 +41,28 @@ export const createOrder = async (req: any, res: Response) => {
   }
 };
 
-export const editOrderStatus = async (req: any, res: Response) => {
-  return true;
-};
+export const editOrder = async (req: any, res: Response) => {
+  const { id } = req.params;
+  try {
+    let order = await Orders.findById(id);
 
-export const editOrderDelivered = async (req: any, res: Response) => {
-  return true;
+    if (!order) {
+      return res.status(400).json({
+        status: false,
+        msg: "Order doesnt exist",
+      });
+    }
+
+    // Validate that the name is unique
+    await Orders.findOneAndUpdate({ _id: id }, req.body);
+
+    res.status(201).json({
+      status: true,
+      msg: "Order updated successfully",
+    });
+  } catch (err) {
+    return res.status(500).json({ status: false, msg: "Error on request" });
+  }
 };
 
 export const fetchOrder = async (req: any, res: Response) => {

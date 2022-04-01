@@ -1,3 +1,6 @@
+import { AddCartButton } from "../Buttons/AddCartButton";
+import { CartProductProps } from "../../redux/reducer/cartReducer";
+
 import "./index.scss";
 
 export const ProductCard = ({ product }: any) => {
@@ -18,7 +21,7 @@ export const ProductCard = ({ product }: any) => {
       </div>
       <div className="product-buttons">
         <button>See Details</button>
-        <button>Add to Card</button>
+        <AddCartButton product={product} text="Add to Cart" />
       </div>
     </div>
   );

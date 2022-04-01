@@ -13,6 +13,7 @@ import { startAuthCheck } from "../redux/actions/authActions";
 import Swal from "sweetalert2";
 import "../../styles/index.scss";
 import { Navbar } from "../Items/Nav/Navbar";
+import { startCartFetchAll } from "../redux/actions/cartActions";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
@@ -22,9 +23,19 @@ export const AppRouter = () => {
   );
   const { darkMode, errorMsg } = useSelector((state: RootState) => state.ui);
 
+  const { cart } = useSelector((state: RootState) => state.cart);
+
   useEffect(() => {
     dispatch(startAuthCheck());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(startCartFetchAll());
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   useEffect(() => {
     if (errorMsg) {
