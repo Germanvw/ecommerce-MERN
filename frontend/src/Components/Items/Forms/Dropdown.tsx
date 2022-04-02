@@ -10,6 +10,7 @@ interface dropdownProps {
   options: optionProps[];
   dwName: string;
   handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  selected?: string;
 }
 
 export const Dropdown = ({ options, dwName, handleChange }: dropdownProps) => {
@@ -28,14 +29,25 @@ export const DropdownCategory = ({
   options,
   dwName,
   handleChange,
+  selected,
 }: dropdownProps) => {
   return (
     <select name={dwName} onChange={handleChange}>
-      {options.map(({ _id, name }: any) => (
-        <option key={_id} value={_id}>
-          {name}
-        </option>
-      ))}
+      {options.map(({ _id, name }: any) => {
+        if (selected === _id) {
+          return (
+            <option key={_id} value={_id} selected>
+              {name}
+            </option>
+          );
+        } else {
+          return (
+            <option key={_id} value={_id}>
+              {name}
+            </option>
+          );
+        }
+      })}
     </select>
   );
 };

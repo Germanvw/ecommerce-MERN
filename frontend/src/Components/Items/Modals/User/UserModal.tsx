@@ -42,7 +42,6 @@ export const UserModal = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     dispatch(startAuthUserUpdate(value));
-    console.log(value);
   };
 
   //Modal handling

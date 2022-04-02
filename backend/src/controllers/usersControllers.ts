@@ -64,20 +64,24 @@ export const editUserPassword = async (req: any, res: Response) => {
 };
 
 export const userRenewToken = async (req: any, res: Response) => {
-  try {
-    const user = await User.findOne(req.body);
+  const { user } = req;
 
-    if (!user) {
+  try {
+    const userObj = await User.findOne({ email: user.email }).select(
+      "-password"
+    );
+
+    if (!userObj) {
       return res.status(400).json({ status: false, msg: "User not found" });
     }
 
     const userData = {
-      uid: user._id.toString(),
-      username: user.username,
-      email: user.email,
-      gender: user.gender,
-      picture: user.picture,
-      isAdmin: user.isAdmin,
+      uid: userObj._id.toString(),
+      username: userObj.username,
+      email: userObj.email,
+      gender: userObj.gender,
+      picture: userObj.picture,
+      isAdmin: userObj.isAdmin,
     };
 
     //jwt

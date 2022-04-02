@@ -21,12 +21,12 @@ export const ProductTable = ({ products }: any) => {
     confirmDeleteProduct(_id, dispatch);
   };
 
-  const handleUpdate = (category: {}) => {
-    dispatch(prodSetActive(category));
+  const handleUpdate = (product: {}) => {
+    dispatch(prodSetActive(product));
     dispatch(uiOpenModalProduct());
   };
-  const handleDisplay = (category: {}) => {
-    dispatch(prodSetActive(category));
+  const handleDisplay = (product: {}) => {
+    dispatch(prodSetActive(product));
     dispatch(uiOpenModalProduct());
   };
   return (

@@ -10,11 +10,10 @@ import { isAdmin } from "../middlewares/isAdmin";
 import { validJWT } from "../middlewares/validJWT";
 
 const router = Router();
-router.use(validJWT);
 
-router.post("/", isAdmin, createProduct);
-router.put("/:id", isAdmin, editProduct);
-router.delete("/:id", isAdmin, deleteProduct);
+router.post("/", validJWT, isAdmin, createProduct);
+router.put("/:id", validJWT, isAdmin, editProduct);
+router.delete("/:id", validJWT, isAdmin, deleteProduct);
 router.get("/", fetchProducts);
 router.get("/:id", fetchProduct);
 

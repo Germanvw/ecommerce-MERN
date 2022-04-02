@@ -38,12 +38,14 @@ export const editProduct = async (req: any, res: Response) => {
         msg: "Product doesnt exist",
       });
     }
-
-    await Products.findOneAndUpdate({ _id: id }, req.body);
+    const newProduct = await Products.findOneAndUpdate({ _id: id }, req.body, {
+      returnOriginal: false,
+    }).populate("category");
 
     res.status(201).json({
       status: true,
       msg: "Product updated successfully",
+      product: newProduct,
     });
   } catch (err) {
     return res.status(500).json({ status: false, msg: "Error on request" });

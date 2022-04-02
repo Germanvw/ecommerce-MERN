@@ -23,13 +23,22 @@ export const startProdFetchAll = () => {
 };
 
 export const startProdAdd = (product: any) => {
+  const { category } = product;
   return async (dispatch: any) => {
     try {
       dispatch(uiStartLoad());
 
       //get Category
-      const reqCat = await fetchToken(`categories/${product.category}`, {});
-      const answCat = await reqCat.json();
+      let reqCat;
+      let answCat;
+
+      if (!category._id) {
+        reqCat = await fetchToken(`categories/${category}`, {});
+        answCat = await reqCat.json();
+      } else {
+        reqCat = await fetchToken(`categories/${category._id}`, {});
+        answCat = await reqCat.json();
+      }
 
       if (answCat.status) {
         product.category = answCat.category;
@@ -54,20 +63,27 @@ export const startProdAdd = (product: any) => {
 };
 
 export const startProdUpdate = (product: any) => {
+  const { _id, category } = product;
   return async (dispatch: any) => {
     try {
       dispatch(uiStartLoad());
-
       //get Category
-      const reqCat = await fetchToken(`categories/${product.category}`, {});
-      const answCat = await reqCat.json();
+
+      let reqCat;
+      let answCat;
+
+      if (!category._id) {
+        reqCat = await fetchToken(`categories/${category}`, {});
+        answCat = await reqCat.json();
+      } else {
+        reqCat = await fetchToken(`categories/${category._id}`, {});
+        answCat = await reqCat.json();
+      }
 
       if (answCat.status) {
         product.category = answCat.category;
-
-        const req = await fetchToken(`products/${product._id}`, product, "PUT");
+        const req = await fetchToken(`products/${_id}`, product, "PUT");
         const answ = await req.json();
-
         if (answ.status) {
           dispatch(prodUpdate(answ.product));
           dispatch(uiCloseModal());
@@ -118,10 +134,9 @@ const prodAdd = (product: {}) => ({
   payload: product,
 });
 
-const prodUpdate = (product: {}) => ({
-  type: types.prodUpdate,
-  payload: product,
-});
+const prodUpdate = (product: {}) => {
+  return { type: types.prodUpdate, payload: product };
+};
 
 const prodRemove = (_id: string) => ({
   type: types.prodRemove,

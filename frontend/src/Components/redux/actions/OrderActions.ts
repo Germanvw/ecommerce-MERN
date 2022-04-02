@@ -22,7 +22,7 @@ export const startOrderUpdate = (order: any) => {
   };
 };
 
-export const startOrdertAdd = (order: any) => {
+export const startOrderAdd = (order: any) => {
   return async (dispatch: any) => {
     try {
       dispatch(uiStartLoad());

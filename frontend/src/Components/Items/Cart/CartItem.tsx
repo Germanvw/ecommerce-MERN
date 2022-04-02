@@ -1,19 +1,36 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { fetchNoToken } from "../../hooks/useFetch";
 import { startCartUpdate } from "../../redux/actions/cartActions";
 
 import "./index.scss";
+import { useEffect, useState } from "react";
 export const CartItem = ({ product }: any) => {
   const dispatch = useDispatch();
+  const { _id, name, price, quantity } = product;
 
-  const { _id, name, price, quantity, inStock } = product;
+  const [stock, setStock] = useState(0);
+
+  const handleStock = async () => {
+    const req = await fetchNoToken(`products/${_id}`, {});
+    const answ = await req.json();
+    if (answ.status) {
+      return answ.product.inStock;
+    }
+  };
 
   const handleQuantity = (q: number) => {
-    const newQuantity = Math.max(1, Math.min(quantity + q, inStock));
+    const newQuantity = Math.max(1, Math.min(quantity + q, stock));
     product.quantity = newQuantity;
     dispatch(startCartUpdate(product));
   };
 
+  useEffect(() => {
+    const inStock = handleStock().then((amount: number) => {
+      setStock(amount);
+    });
+    // setStock(inStock);
+  }, [product]);
   return (
     <div className="cart-item">
       <div className="left">
@@ -29,22 +46,20 @@ export const CartItem = ({ product }: any) => {
           <div className="quantity">
             <button
               onClick={() => handleQuantity(-1)}
-              className={`${quantity === 0 || (inStock === 0 && "disabled")}`}
+              className={`${quantity === 0 || (stock === 0 && "disabled")}`}
             >
               -
             </button>
             <p>{product.quantity}</p>
             <button
               onClick={() => handleQuantity(1)}
-              className={`${
-                quantity === inStock || (inStock === 0 && "disabled")
-              }`}
+              className={`${quantity === stock || (stock === 0 && "disabled")}`}
             >
               +
             </button>
           </div>
           <div className="in-stock">
-            <p>In Stock: {inStock}</p>
+            <p>In Stock: {stock}</p>
           </div>
         </div>
         <div className="price">$ {price}</div>

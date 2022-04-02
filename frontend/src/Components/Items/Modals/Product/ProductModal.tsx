@@ -71,8 +71,10 @@ export const ProductModal = () => {
   }, []);
 
   useEffect(() => {
-    if (categories[0]) {
-      setProduct({ ...initialProductState, category: categories[0]._id });
+    if (!active) {
+      if (categories[0]) {
+        setProduct({ ...initialProductState, category: categories[0]._id });
+      }
     }
   }, [categories]);
 
@@ -81,7 +83,7 @@ export const ProductModal = () => {
   }, [categoryList]);
   return (
     <Modal
-      isOpen={modal.category}
+      isOpen={modal.product}
       onRequestClose={closeModal}
       closeTimeoutMS={200}
       className="modal modal-product"
@@ -107,6 +109,7 @@ export const ProductModal = () => {
               options={categories}
               dwName="category"
               handleChange={handleFormChange}
+              selected={product.category._id}
             />
           </div>
           <button>{active ? "Editar" : "Crear"}</button>

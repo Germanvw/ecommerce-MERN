@@ -94,7 +94,7 @@ export const startAuthUserUpdate = (form: any) => {
       if (answ.status) {
         dispatch(uiCloseModal());
         // updatear el token
-        dispatch(userRefreshToken(form.email));
+        dispatch(userRefreshToken());
         fireModal("Success", answ.msg, "success", dispatch);
       } else {
         dispatch(uiSetError(answ.msg));
@@ -106,12 +106,13 @@ export const startAuthUserUpdate = (form: any) => {
   };
 };
 
-const userRefreshToken = (email: string) => {
+const userRefreshToken = () => {
   return async (dispatch: any) => {
     try {
       dispatch(uiStartLoad());
-      const req = await fetchToken("users/refresh", email);
+      const req = await fetchToken("users/refresh", {});
       const answ = await req.json();
+
       if (answ.status) {
         // Token localStorage
         localStorage.setItem("x-token", answ.token);

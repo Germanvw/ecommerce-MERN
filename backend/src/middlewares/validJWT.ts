@@ -5,7 +5,9 @@ const jwt = require("jsonwebtoken");
 export const validJWT = (req: any, res: Response, next: NextFunction) => {
   //x-token headers
   const token = req.header("x-token");
+  console.log(token);
   if (!token) {
+    console.log("no token");
     return res.status(401).json({
       status: false,
       msg: "Authentication token doesnt exist",
@@ -17,6 +19,7 @@ export const validJWT = (req: any, res: Response, next: NextFunction) => {
     // Guardo los datos importantes
     req.user = user;
   } catch (err) {
+    console.log(err);
     return res.status(401).json({
       status: false,
       msg: "Invalid token",
