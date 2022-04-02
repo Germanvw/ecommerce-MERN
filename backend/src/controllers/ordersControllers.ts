@@ -5,14 +5,13 @@ import Orders, { OrdersDocument } from "../Models/Orders";
 
 export const createOrder = async (req: any, res: Response) => {
   const { user } = req;
-  const { cart } = req.body;
   try {
     const newOrder: OrdersDocument = new Orders({
       uid: user.uid,
-      ...req.body,
-      total: cartTotal(cart),
+      cart: req.body,
+      paymentMethod: "cash",
+      total: cartTotal(req.body),
     });
-
     // Validate avalability of products
     const avalability = await validateProducts(newOrder);
 

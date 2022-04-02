@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { CartItem } from "../../Items/Cart/CartItem";
-import { useSelector } from "react-redux";
+import { startOrdertAdd } from "../../redux/actions/OrderActions";
 import { RootState } from "../../redux/reducer/rootReducer";
 import "./index.scss";
 
 export const Cart = () => {
   const { cart } = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch();
 
   const [total, setTotal] = useState(0);
 
@@ -16,6 +18,13 @@ export const Cart = () => {
     });
     setTotal(total);
   }, [cart]);
+
+  const handleOrder = () => {
+    if (cart !== []) {
+      dispatch(startOrdertAdd(cart));
+    }
+  };
+
   return (
     <div className="cart-body">
       <div className="cart-container">
@@ -28,7 +37,7 @@ export const Cart = () => {
         </div>
         <div className="total">
           <p>Total: ${total}</p>
-          <button>Complete Order</button>
+          <button onClick={handleOrder}>Complete Order</button>
         </div>
       </div>
     </div>

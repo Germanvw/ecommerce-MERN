@@ -29,14 +29,16 @@ export const CartItem = ({ product }: any) => {
           <div className="quantity">
             <button
               onClick={() => handleQuantity(-1)}
-              className={`${quantity === 0 && "disabled"}`}
+              className={`${quantity === 0 || (inStock === 0 && "disabled")}`}
             >
               -
             </button>
             <p>{product.quantity}</p>
             <button
               onClick={() => handleQuantity(1)}
-              className={`${quantity === inStock && "disabled"}`}
+              className={`${
+                quantity === inStock || (inStock === 0 && "disabled")
+              }`}
             >
               +
             </button>

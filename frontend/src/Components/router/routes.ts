@@ -1,12 +1,14 @@
+// ALL
 import { Homepage } from "../Pages/Homepage";
-import { User } from "../Pages/Private/User";
+import { Products } from "../Pages/Products";
 //No Auth
 import { Login } from "../Pages/auth/Login";
 import { Register } from "../Pages/auth/Register";
 //Admin
 import { Categories as AdminCategories } from "../Pages/admin/Categories";
 import { Products as AdminProducts } from "../Pages/admin/Products";
-import { Products } from "../Pages/Products";
+//User
+import { User } from "../Pages/Private/User";
 import { Cart } from "../Pages/Private/Cart";
 
 interface Route {

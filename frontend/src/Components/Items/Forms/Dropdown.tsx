@@ -13,7 +13,6 @@ interface dropdownProps {
 }
 
 export const Dropdown = ({ options, dwName, handleChange }: dropdownProps) => {
-  console.log(options);
   return (
     <select name={dwName} onChange={handleChange}>
       {options.map(({ value, name }: optionProps) => (

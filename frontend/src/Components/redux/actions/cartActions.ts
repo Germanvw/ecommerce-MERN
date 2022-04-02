@@ -61,6 +61,10 @@ export const startCartFetchAll = () => {
   };
 };
 
+export const cartClear = () => ({
+  type: types.cartClear,
+});
+
 const cartAdd = (product: CartProductProps) => ({
   type: types.cartAdd,
   payload: product,

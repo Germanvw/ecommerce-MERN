@@ -33,7 +33,7 @@ export const startAuthLogin = (form: any) => {
       }
       await dispatch(uiEndLoad());
     } catch (err) {
-      console.log("error");
+      console.log("err");
     }
   };
 };

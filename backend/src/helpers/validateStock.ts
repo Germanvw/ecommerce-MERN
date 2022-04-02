@@ -3,7 +3,6 @@ import Products, { ProductDocument } from "../Models/Products";
 
 export const validateProducts = async (newOrder: OrdersDocument) => {
   const { cart } = newOrder;
-  console.log(cart);
   // Validate avalability of products
   try {
     for (let i = 0; i < cart.length; i++) {
@@ -43,7 +42,6 @@ export const handleStock = async (
   reqType: "create" | "cancel"
 ) => {
   const { cart } = newOrder;
-
   cart.forEach(async (item: any) => {
     const productFetched = await Products.findById(item._id);
     if (productFetched) {
@@ -61,7 +59,6 @@ export const handleStock = async (
       }
     }
   });
-  // Validate avalability of products
   try {
     return { status: true };
   } catch (err) {

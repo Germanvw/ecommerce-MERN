@@ -11,11 +11,10 @@ import { validJWT } from "../middlewares/validJWT";
 
 const router = Router();
 router.use(validJWT);
-router.use(isAdmin);
 
-router.post("/", createProduct);
-router.put("/:id", editProduct);
-router.delete("/:id", deleteProduct);
+router.post("/", isAdmin, createProduct);
+router.put("/:id", isAdmin, editProduct);
+router.delete("/:id", isAdmin, deleteProduct);
 router.get("/", fetchProducts);
 router.get("/:id", fetchProduct);
 

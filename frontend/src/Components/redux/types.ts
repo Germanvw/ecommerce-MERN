@@ -40,4 +40,11 @@ export const types = {
   cartUpdate: "[Cart] Update",
   cartFetchAll: "[Cart] Fetch All",
   cartEndCheck: "[Cart] End Check",
+  cartClear: "[Cart] Clear",
+
+  //Order
+  orderAdd: "[Product] Add",
+  orderRemove: "[Product] Remove",
+  orderUpdate: "[Product] Update",
+  orderFetchAll: "[Product] Fetch All",
 };

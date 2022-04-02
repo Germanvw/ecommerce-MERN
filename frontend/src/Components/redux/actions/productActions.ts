@@ -23,7 +23,6 @@ export const startProdFetchAll = () => {
 };
 
 export const startProdAdd = (product: any) => {
-  console.log(product);
   return async (dispatch: any) => {
     try {
       dispatch(uiStartLoad());
