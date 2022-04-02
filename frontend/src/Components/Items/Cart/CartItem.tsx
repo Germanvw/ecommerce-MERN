@@ -18,7 +18,8 @@ export const CartItem = ({ product }: any) => {
       return answ.product.inStock;
     }
   };
-
+  console.log("stock: ", stock);
+  console.log("quantity: ", quantity);
   const handleQuantity = (q: number) => {
     const newQuantity = Math.max(1, Math.min(quantity + q, stock));
     product.quantity = newQuantity;
@@ -26,10 +27,9 @@ export const CartItem = ({ product }: any) => {
   };
 
   useEffect(() => {
-    const inStock = handleStock().then((amount: number) => {
+    handleStock().then((amount: number) => {
       setStock(amount);
     });
-    // setStock(inStock);
   }, [product]);
   return (
     <div className="cart-item">
@@ -46,14 +46,14 @@ export const CartItem = ({ product }: any) => {
           <div className="quantity">
             <button
               onClick={() => handleQuantity(-1)}
-              className={`${quantity === 0 || (stock === 0 && "disabled")}`}
+              className={`${(quantity === 1 || stock === 0) && "disabled"}`}
             >
               -
             </button>
             <p>{product.quantity}</p>
             <button
               onClick={() => handleQuantity(1)}
-              className={`${quantity === stock || (stock === 0 && "disabled")}`}
+              className={`${(quantity === stock || stock === 0) && "disabled"}`}
             >
               +
             </button>
