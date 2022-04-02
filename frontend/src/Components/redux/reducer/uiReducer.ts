@@ -5,6 +5,8 @@ interface modalProps {
   category: boolean;
   product: boolean;
   order: boolean;
+  user: boolean;
+  password: boolean;
 }
 
 interface uiProps {
@@ -18,6 +20,8 @@ const initialModal: modalProps = {
   category: false,
   product: false,
   order: false,
+  user: false,
+  password: false,
 };
 
 const initialState: uiProps = {
@@ -70,7 +74,16 @@ export const uiReducer = (state = initialState, action: AnyAction) => {
         ...state,
         modal: { ...state.modal, order: true },
       };
-
+    case types.uiOpenModalUser:
+      return {
+        ...state,
+        modal: { ...state.modal, user: true },
+      };
+    case types.uiOpenModalPassword:
+      return {
+        ...state,
+        modal: { ...state.modal, password: true },
+      };
     case types.uiCloseModal:
       return {
         ...state,

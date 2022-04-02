@@ -25,3 +25,50 @@
     }
   }
 }
+
+.user-body {
+  min-height: calc(100vh - 50px);
+  background-color: var(--background-1);
+  color: var(--text-primary);
+  .user-container {
+    width: 70%;
+    margin: 0 auto;
+    padding-top: 50px;
+    display: flex;
+    .user-info {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 15px;
+      img {
+        max-width: 300px;
+      }
+      .welcome {
+        margin-top: 15px;
+        color: rgb(197, 197, 197);
+        font-size: 30px;
+      }
+      h2 {
+        margin-top: 5px;
+        color: rgb(121, 121, 121);
+      }
+      .change-info {
+        margin-top: 10px;
+        button {
+          margin-right: 30px;
+          margin-left: 30px;
+          padding: 5px 10px;
+        }
+      }
+    }
+    .user-details {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      margin: 15px;
+    }
+  }
+}

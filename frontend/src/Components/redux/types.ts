@@ -9,6 +9,8 @@ export const types = {
   uiOpenModalCategory: "[UI] Open Modal Category",
   uiOpenModalProduct: "[UI] Open Modal Product",
   uiOpenModalOrder: "[UI] Open Modal Order",
+  uiOpenModalUser: "[UI] Open Modal User",
+  uiOpenModalPassword: "[UI] Open Modal Password",
   uiCloseModal: "[UI] Close Modal",
 
   uiSwapTheme: "[UI] Swap Theme",
@@ -17,6 +19,7 @@ export const types = {
   authLogin: "[Auth] Login",
   authLogout: "[Auth] Logout",
   authEndCheck: "[Auth] Check State",
+  authUserUpdate: "[Auth] User Update Details",
 
   //Category
   catAdd: "[Category] Add",

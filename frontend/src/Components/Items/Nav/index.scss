@@ -1,34 +1,46 @@
-.nav-wrapper {
+.navbar {
   height: 50px;
   width: 100%;
   background-color: var(--input-background);
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  color: var(--text-primary);
-  .logo {
-    width: 100%;
-  }
-  .options {
+  .navbar-container {
+    width: 85%;
+    margin: 0 auto;
+    padding: 10px;
     display: flex;
-    align-items: center;
-    .user-options {
-      display: flex;
-      justify-content: space-between;
-      .user {
-        margin-right: 25px;
+    justify-content: space-between;
+    color: var(--text-primary);
+    .logo {
+      flex: 3;
+      a {
+        color: var(--text-primary);
+        font-size: 22px;
       }
     }
-    button {
-      margin-left: 25px;
-      padding: 5px 10px;
-      a {
-        color: black;
+    .options {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      width: 100%;
+      .user-options {
+        display: flex;
+        justify-items: space-between;
+        .user {
+          margin-right: 30px;
+        }
+        .cart {
+          width: 30px;
+          margin-right: 30px;
+        }
+      }
+      button {
+        padding: 5px 10px;
+        a {
+          color: black;
+        }
       }
     }
   }
 }
-
 .sidebar-body {
   background-color: var(--background-1);
   border-right: 1px solid var(--background-2);

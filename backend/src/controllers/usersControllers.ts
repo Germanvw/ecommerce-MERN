@@ -1,5 +1,6 @@
 import { Response } from "express";
 import mongoose from "mongoose";
+import { createJWT } from "../helpers/createJWT";
 import { hashPassword, isMatch } from "../helpers/passwords";
 import { UserDocument } from "../Models/User";
 
@@ -7,20 +8,19 @@ const User = mongoose.model<UserDocument>("User");
 
 export const editUserInfo = async (req: any, res: Response) => {
   let { email } = req.body;
-  const { uid } = req;
+  const { user } = req;
   try {
     // Get user information
-    const user = await User.findOne({ _id: uid }).select("-password");
-    if (!user) {
+    const userFound = await User.findOne({ _id: user.uid }).select("-password");
+    if (!userFound) {
       return res.status(400).json({ status: false, msg: "Cannot find user" });
     }
-
     // Check if user wants to change email and if its avaliable
     if (email) {
       // User submit an email change
       const emailUnique = await User.findOne({ email }).select("-password");
 
-      if (emailUnique && emailUnique._id.toString() !== uid) {
+      if (emailUnique && emailUnique._id.toString() !== user.uid) {
         // The email is used in a different account
         return res
           .status(400)
@@ -28,36 +28,64 @@ export const editUserInfo = async (req: any, res: Response) => {
       }
     }
 
-    await User.findOneAndUpdate({ _id: uid }, req.body);
+    await User.findOneAndUpdate({ _id: user.uid }, req.body);
 
     return res.status(201).json({ status: true, msg: "User updated" });
   } catch (err) {
+    console.log(err);
     return res.status(500).json({ status: false, msg: "Error on request" });
   }
 };
 
 export const editUserPassword = async (req: any, res: Response) => {
   const { password, newPassword } = req.body;
-  const { uid } = req;
+  const { user } = req;
   try {
-    const user = await User.findOne({ _id: uid });
-    if (!user) {
-      return res.status(400).json({ status: false, msg: "Cannot find user" });
-    }
+    const userFound = await User.findOne({ _id: user.uid });
 
+    if (!userFound) {
+      return res.status(400).json({ status: false, msg: "User not found" });
+    }
     // Validate old password
-    const match = isMatch(password, user.password);
+    const match = await isMatch(password, userFound.password);
 
     if (!match) {
       return res.status(400).json({ status: false, msg: "Invalid password" });
     }
 
     // Hashing new password
-    const hashed = await hashPassword(password);
-    await User.findOneAndUpdate({ _id: uid }, { password: hashed });
+    const hashed = await hashPassword(newPassword);
+    await User.findOneAndUpdate({ _id: user.uid }, { password: hashed });
 
     return res.status(201).json({ status: true, msg: "Password updated" });
   } catch (error) {
+    return res.status(500).json({ status: false, msg: "Error on request" });
+  }
+};
+
+export const userRenewToken = async (req: any, res: Response) => {
+  try {
+    const user = await User.findOne(req.body);
+
+    if (!user) {
+      return res.status(400).json({ status: false, msg: "User not found" });
+    }
+
+    const userData = {
+      uid: user._id.toString(),
+      username: user.username,
+      email: user.email,
+      gender: user.gender,
+      picture: user.picture,
+      isAdmin: user.isAdmin,
+    };
+
+    //jwt
+    const token = await createJWT(userData);
+
+    //success
+    return res.json({ status: true, user: userData, token });
+  } catch (err) {
     return res.status(500).json({ status: false, msg: "Error on request" });
   }
 };

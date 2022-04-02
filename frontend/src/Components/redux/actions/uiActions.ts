@@ -21,6 +21,14 @@ export const uiOpenModalOrder = () => ({
   type: types.uiOpenModalCategory,
 });
 
+export const uiOpenModalUser = () => ({
+  type: types.uiOpenModalUser,
+});
+
+export const uiOpenModalPassword = () => ({
+  type: types.uiOpenModalPassword,
+});
+
 export const uiCloseModal = () => ({
   type: types.uiCloseModal,
 });
