@@ -7,7 +7,7 @@ import "./index.scss";
 import { useEffect, useState } from "react";
 export const CartItem = ({ product }: any) => {
   const dispatch = useDispatch();
-  const { _id, name, price, quantity } = product;
+  const { _id, name, image, price, quantity } = product;
 
   const [stock, setStock] = useState(0);
 
@@ -32,11 +32,16 @@ export const CartItem = ({ product }: any) => {
   return (
     <div className="cart-item">
       <div className="left">
-        <Link className="item-name" to={`products/${_id}`}>
-          {name}
-        </Link>
-        <div className="free-shipping">
-          <p>Free Shiping!</p>
+        <div className="left-wrapper">
+          <img src={image} alt={image}></img>
+          <div className="left-info">
+            <Link className="item-name" to={`products/${_id}`}>
+              {name}
+            </Link>
+            <div className="free-shipping">
+              <p>Free Shiping!</p>
+            </div>
+          </div>
         </div>
       </div>
       <div className="right">

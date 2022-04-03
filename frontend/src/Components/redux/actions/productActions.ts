@@ -1,6 +1,7 @@
 import { types } from "../types";
 import { uiCloseModal, uiEndLoad, uiSetError, uiStartLoad } from "./uiActions";
 import { fetchToken } from "../../hooks/useFetch";
+import { fireModal } from "../../hooks/useModal";
 
 export const startProdFetchAll = () => {
   return async (dispatch: any) => {
@@ -49,6 +50,7 @@ export const startProdAdd = (product: any) => {
         if (answ.status) {
           dispatch(prodAdd(answ.product));
           dispatch(uiCloseModal());
+          fireModal("Success", answ.msg, "success", dispatch);
         } else {
           dispatch(uiSetError(answ.msg));
         }
@@ -87,6 +89,7 @@ export const startProdUpdate = (product: any) => {
         if (answ.status) {
           dispatch(prodUpdate(answ.product));
           dispatch(uiCloseModal());
+          fireModal("Success", answ.msg, "success", dispatch);
         } else {
           dispatch(uiSetError(answ.msg));
         }
@@ -110,6 +113,7 @@ export const startProdRemove = (_id: string) => {
 
       if (answ.status) {
         dispatch(prodRemove(_id));
+        fireModal("Success", answ.msg, "success", dispatch);
       } else {
         dispatch(uiSetError(answ.msg));
       }

@@ -1,5 +1,6 @@
 import { types } from "../types";
 import { CartProductProps } from "../reducer/cartReducer";
+import { fireModal } from "../../hooks/useModal";
 
 export const startCartAdd = (product: CartProductProps) => {
   return async (dispatch: any) => {
@@ -7,11 +8,18 @@ export const startCartAdd = (product: CartProductProps) => {
       const newProduct: CartProductProps = {
         _id: product._id,
         name: product.name,
+        image: product.image,
         price: product.price,
         quantity: product.quantity ? product.quantity : 1,
         inStock: product.inStock,
       };
       dispatch(cartAdd(newProduct));
+      fireModal(
+        "Added",
+        `${product.name} added to the cart list!`,
+        "success",
+        dispatch
+      );
     } catch (err) {
       console.log(err);
     }
@@ -24,6 +32,7 @@ export const startCartUpdate = (product: CartProductProps) => {
       const updatedProduct: CartProductProps = {
         _id: product._id,
         name: product.name,
+        image: product.image,
         price: product.price,
         quantity: product.quantity ? product.quantity : 1,
         inStock: product.inStock,

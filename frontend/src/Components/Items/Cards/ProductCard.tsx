@@ -1,11 +1,9 @@
 import { AddCartButton } from "../Buttons/AddCartButton";
-import { CartProductProps } from "../../redux/reducer/cartReducer";
 
 import "./index.scss";
 
 export const ProductCard = ({ product }: any) => {
   const { name, image } = product;
-
   return (
     <div className="product-card">
       <div className="product-img">

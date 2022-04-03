@@ -31,7 +31,6 @@ export const User = () => {
   };
 
   useEffect(() => {
-    console.log("entro");
     dispatch(startOrderFetchAll());
   }, []);
 

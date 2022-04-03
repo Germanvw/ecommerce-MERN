@@ -5,7 +5,7 @@ import Orders, { OrdersDocument } from "../Models/Orders";
 
 export const createOrder = async (req: any, res: Response) => {
   const { user } = req;
-  console.log(req.body);
+
   try {
     const newOrder: OrdersDocument = new Orders({
       uid: user.uid,
@@ -28,8 +28,6 @@ export const createOrder = async (req: any, res: Response) => {
     // Save order
     const saved = await newOrder.save();
 
-    //
-
     return res.status(201).json({
       status: true,
       msg: "Order created successfully",
@@ -43,6 +41,7 @@ export const createOrder = async (req: any, res: Response) => {
 
 export const editOrder = async (req: any, res: Response) => {
   const { id } = req.params;
+  const { user } = req;
   try {
     let order = await Orders.findById(id);
 
@@ -50,6 +49,14 @@ export const editOrder = async (req: any, res: Response) => {
       return res.status(400).json({
         status: false,
         msg: "Order doesnt exist",
+      });
+    }
+
+    // Validate authorization
+    if (order.uid !== user.uid && user.isAdmin !== true) {
+      return res.status(401).json({
+        status: false,
+        msg: "Unauthorized",
       });
     }
 
@@ -70,6 +77,7 @@ export const editOrder = async (req: any, res: Response) => {
 
 export const cancelOrder = async (req: any, res: Response) => {
   const { id } = req.params;
+  const { user } = req;
   try {
     let order = await Orders.findById(id);
 
@@ -77,6 +85,14 @@ export const cancelOrder = async (req: any, res: Response) => {
       return res.status(400).json({
         status: false,
         msg: "Order doesnt exist",
+      });
+    }
+
+    // Validate authorization
+    if (order.uid !== user.uid && user.isAdmin !== true) {
+      return res.status(401).json({
+        status: false,
+        msg: "Unauthorized",
       });
     }
 
@@ -104,8 +120,10 @@ export const cancelOrder = async (req: any, res: Response) => {
 };
 
 export const fetchOrderUser = async (req: any, res: Response) => {
+  const { user } = req;
+
   try {
-    const orders = await Orders.find()
+    const orders = await Orders.find({ uid: user.uid })
       .select("-createdAt")
       .select("-__v")
       .select("-updatedAt");

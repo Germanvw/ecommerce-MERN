@@ -1,6 +1,7 @@
 import { types } from "../types";
 import { fetchToken } from "../../hooks/useFetch";
 import { uiCloseModal, uiEndLoad, uiSetError, uiStartLoad } from "./uiActions";
+import { fireModal } from "../../hooks/useModal";
 
 interface categoryProps {
   _id: string;
@@ -24,6 +25,7 @@ export const startCatUpdate = (category: any) => {
       if (answ.status) {
         dispatch(catUpdate(category));
         dispatch(uiCloseModal());
+        fireModal("Updated", answ.msg, "success", dispatch);
       } else {
         dispatch(uiSetError(answ.msg));
       }
@@ -43,6 +45,7 @@ export const startCatAdd = (category: any) => {
       if (answ.status) {
         dispatch(catAdd(answ.category));
         dispatch(uiCloseModal());
+        fireModal("Created", answ.msg, "success", dispatch);
       } else {
         dispatch(uiSetError(answ.msg));
       }
@@ -62,6 +65,7 @@ export const startCatRemove = (_id: string) => {
 
       if (answ.status) {
         dispatch(catRemove(_id));
+        fireModal("Removed", answ.msg, "success", dispatch);
       } else {
         dispatch(uiSetError(answ.msg));
       }

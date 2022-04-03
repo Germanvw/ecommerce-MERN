@@ -1,7 +1,13 @@
 import { types } from "../types";
 import { fetchNoToken, fetchToken } from "../../hooks/useFetch";
 import { fireModal } from "../../hooks/useModal";
-import { uiCloseModal, uiEndLoad, uiSetError, uiStartLoad } from "./uiActions";
+import {
+  uiClearError,
+  uiCloseModal,
+  uiEndLoad,
+  uiSetError,
+  uiStartLoad,
+} from "./uiActions";
 
 interface UserObject {
   uid: string;
@@ -89,15 +95,16 @@ export const startAuthUserUpdate = (form: any) => {
   return async (dispatch: any) => {
     try {
       dispatch(uiStartLoad());
-      const req = await fetchToken("users/", form, "PUT");
+      const req = await fetchToken("users", form, "PUT");
       const answ = await req.json();
       if (answ.status) {
         dispatch(uiCloseModal());
         // updatear el token
-        dispatch(userRefreshToken());
+        dispatch(userRefreshToken(answ.user._id));
         fireModal("Success", answ.msg, "success", dispatch);
       } else {
         dispatch(uiSetError(answ.msg));
+        dispatch(uiClearError());
       }
       dispatch(uiEndLoad());
     } catch (err) {
@@ -106,13 +113,12 @@ export const startAuthUserUpdate = (form: any) => {
   };
 };
 
-const userRefreshToken = () => {
+const userRefreshToken = (uid: string) => {
   return async (dispatch: any) => {
     try {
       dispatch(uiStartLoad());
-      const req = await fetchToken("users/refresh", {});
+      const req = await fetchToken(`users/refresh/${uid}`, {});
       const answ = await req.json();
-
       if (answ.status) {
         // Token localStorage
         localStorage.setItem("x-token", answ.token);

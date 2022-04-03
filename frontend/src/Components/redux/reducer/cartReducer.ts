@@ -4,6 +4,7 @@ import { types } from "../types";
 export interface CartProductProps {
   _id: string;
   name: string;
+  image: string;
   price: number;
   quantity: number;
   inStock: number;

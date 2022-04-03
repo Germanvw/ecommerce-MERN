@@ -16,7 +16,9 @@ export const Navbar = ({ isAuth }: any) => {
                 <Link to="/user">Profile</Link>
               </div>
               <div className="cart">
-                <i className="fa-solid fa-cart-shopping"></i>
+                <Link to="/cart">
+                  <i className="fa-solid fa-cart-shopping"></i>
+                </Link>
               </div>
             </div>
           )}

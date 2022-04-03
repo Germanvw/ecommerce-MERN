@@ -5,6 +5,7 @@ import { startOrderAdd } from "../../redux/actions/OrderActions";
 import { RootState } from "../../redux/reducer/rootReducer";
 
 import "./index.scss";
+import { startProdFetchAll } from "../../redux/actions/productActions";
 
 export const Cart = () => {
   const { cart } = useSelector((state: RootState) => state.cart);
@@ -26,6 +27,12 @@ export const Cart = () => {
       dispatch(startOrderAdd(cart));
     }
   };
+
+  useEffect(() => {
+    if (cart.length > 0) {
+      dispatch(startProdFetchAll());
+    }
+  }, []);
 
   return (
     <div className="cart-body">

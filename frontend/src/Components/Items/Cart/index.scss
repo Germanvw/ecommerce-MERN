@@ -10,11 +10,23 @@
   }
   .left {
     flex: 2;
-    .free-shipping {
-      margin-top: 25px;
-      color: green;
-      a {
-        font-size: 24px;
+    .left-wrapper {
+      display: flex;
+      img {
+        width: 100px;
+      }
+      .left-info {
+        margin-left: 30px;
+        .item-name {
+          font-size: 26px;
+        }
+        .free-shipping {
+          margin-top: 25px;
+          color: green;
+          a {
+            font-size: 24px;
+          }
+        }
       }
     }
   }

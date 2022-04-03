@@ -17,8 +17,8 @@ export const UserModal = () => {
   const dispatch = useDispatch();
 
   // States
-  const [value, setValue] = useState(initialUserState);
-
+  const [value, setValue] = useState({ ...user });
+  console.log(user);
   // Effects
   useEffect(() => {
     if (user) {
@@ -29,7 +29,7 @@ export const UserModal = () => {
         picture: user.picture,
       });
     }
-  }, []);
+  }, [modal]);
   // Functions
 
   const handleChange = ({ target }: any) => {

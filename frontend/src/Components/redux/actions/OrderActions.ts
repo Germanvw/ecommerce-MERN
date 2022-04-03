@@ -2,6 +2,7 @@ import { types } from "../types";
 import { fetchToken } from "../../hooks/useFetch";
 import { uiEndLoad, uiSetError, uiStartLoad } from "./uiActions";
 import { cartClear } from "./cartActions";
+import { fireModal } from "../../hooks/useModal";
 
 export const startOrderUpdate = (order: any) => {
   return async (dispatch: any) => {
@@ -12,6 +13,7 @@ export const startOrderUpdate = (order: any) => {
 
       if (answ.status) {
         dispatch(orderUpdate(order));
+        fireModal("Success", answ.msg, "success", dispatch);
       } else {
         dispatch(uiSetError(answ.msg));
       }
@@ -28,9 +30,11 @@ export const startOrderAdd = (order: any) => {
       dispatch(uiStartLoad());
       const req = await fetchToken("orders", order, "post");
       const answ = await req.json();
+
       if (answ.status) {
         dispatch(orderAdd(answ.order));
         dispatch(cartClear());
+        fireModal("Success", answ.msg, "success", dispatch);
       } else {
         dispatch(uiSetError(answ.msg));
       }
@@ -70,9 +74,9 @@ export const startOrderCancel = (_id: string) => {
         "PUT"
       );
       const answ = await req.json();
-      console.log(answ);
       if (answ.status) {
         dispatch(orderUpdate(answ.order));
+        fireModal("Cancelled", answ.msg, "success", dispatch);
       }
       dispatch(uiEndLoad());
     } catch (err) {

@@ -43,8 +43,8 @@ export const OrderTableUser = ({ orders }: any) => {
         {orders.length > 0 &&
           orders.map((order: any) => (
             <tr key={order._id}>
-              <td>{`${order._id.slice(0, 10)}...`}</td>
-              <td>{order.paymentMethod}</td>
+              <td>{`${order._id.slice(0, 7)}...`}</td>
+              <td>{order.paymentMethod ? order.paymentMethod : "None"}</td>
               <td>{order.cart.length}</td>
               <td>{`$ ${order.total}`}</td>
               <td>{order.delivered ? "Yes" : "No"}</td>

@@ -5,7 +5,6 @@ import { RootState } from "../../redux/reducer/rootReducer";
 export const AddCartButton = ({ product, text }: any) => {
   const { cart } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
-
   const handleAddCart = async (amount: number) => {
     const productCart = await cart.find(
       (item: any) => item._id === product._id

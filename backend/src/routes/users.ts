@@ -11,6 +11,6 @@ router.use(validJWT);
 
 router.put("/", editUserInfo);
 router.put("/password", editUserPassword);
-router.get("/refresh", validJWT, userRenewToken);
+router.get("/refresh/:id", validJWT, userRenewToken);
 
 module.exports = router;

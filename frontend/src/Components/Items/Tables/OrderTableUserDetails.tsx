@@ -7,7 +7,6 @@ import "./index.scss";
 
 export const OrderTableUserDetails = ({ order }: any) => {
   const header = ["Id", "Img", "Name", "Price", "Quantity", "Total"];
-  console.log(order);
   return (
     <table className="table-order-user-details">
       <thead>
