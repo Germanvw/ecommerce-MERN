@@ -162,11 +162,6 @@ export const startAuthLogout = () => {
   };
 };
 
-const authUserUpdate = (user: any) => ({
-  type: types.authUserUpdate,
-  payload: user,
-});
-
 const authLogin = (user: any) => ({
   type: types.authLogin,
   payload: user,

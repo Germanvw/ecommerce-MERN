@@ -10,7 +10,7 @@ import { OrderTableUserDetails } from "../../Tables/OrderTableUserDetails";
 export const OrderModalUser = () => {
   const { modal, darkMode } = useSelector((state: RootState) => state.ui);
   const { active } = useSelector((state: RootState) => state.order);
-
+  console.log(active);
   const dispatch = useDispatch();
 
   // States
@@ -24,9 +24,8 @@ export const OrderModalUser = () => {
     dispatch(uiCloseModal());
     dispatch(orderClearActive());
   };
-
   // Effects
-  if (!active) return <p>Loading</p>;
+  if (!active) return <></>;
   return (
     <Modal
       isOpen={modal.order}
@@ -41,7 +40,32 @@ export const OrderModalUser = () => {
         <h1>Order Details.</h1>
         <h3>ID: {active._id}</h3>
         <OrderTableUserDetails order={active} />
-        <div className="dropdown-category"></div>
+        <div className="extra-info">
+          <div
+            className={`payment-method ${
+              active.paymentMethod === "None" && "cancelled"
+            }`}
+          >
+            Payment: <p>{active.paymentMethod}</p>
+          </div>
+          <div
+            className={`status ${
+              active.status === "Cancelled"
+                ? "cancelled"
+                : active.status === "Paid"
+                ? "paid"
+                : "pending"
+            }`}
+          >
+            Status: <p>{active.status}</p>
+          </div>
+          <div
+            className={`delivered ${active.delivered ? "paid" : "cancelled"}`}
+          >
+            Delivered: <p>{active.delivered ? "Yes" : "No"}</p>
+          </div>
+          <div className="total">Total: ${active.total}</div>
+        </div>
         <button onClick={closeModal}>Cerrar</button>
       </div>
     </Modal>

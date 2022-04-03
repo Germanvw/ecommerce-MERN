@@ -1,7 +1,7 @@
 import mongoose, { Schema, model } from "mongoose";
 
 interface PaymentMethods {
-  string: "Cash" | "Credit Card" | "Paypal" | "Bitcoin";
+  string: "None" | "Cash" | "Credit Card" | "Paypal" | "Bitcoin";
 }
 
 interface Status {
@@ -32,7 +32,7 @@ export interface OrdersDocument extends IOrders, mongoose.Document {
 const OrdersSchema: Schema = new Schema(
   {
     uid: { type: String, required: true },
-    paymentMethod: { type: String, required: true },
+    paymentMethod: { type: String, required: true, default: "None" },
     cart: { type: Array, default: [] },
     total: { type: Number, required: true, min: 0 },
     delivered: { type: Boolean, default: false },

@@ -3,13 +3,6 @@ import { fetchToken } from "../../hooks/useFetch";
 import { uiCloseModal, uiEndLoad, uiSetError, uiStartLoad } from "./uiActions";
 import { fireModal } from "../../hooks/useModal";
 
-interface categoryProps {
-  _id: string;
-  name: string;
-  description: string;
-  image: string;
-}
-
 export const startCatUpdate = (category: any) => {
   return async (dispatch: any) => {
     try {

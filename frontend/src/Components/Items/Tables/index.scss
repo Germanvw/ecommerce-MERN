@@ -9,14 +9,19 @@
       tr {
         display: grid;
         grid-template-columns: repeat(3, 1fr) 2fr repeat(3, 1fr);
+        grid-gap: 40px;
       }
     }
     tbody {
       tr {
         display: grid;
         grid-template-columns: repeat(3, 1fr) 2fr repeat(3, 1fr);
+        grid-gap: 40px;
         border-bottom: 1px solid var(--background-2);
         padding: 10px;
+        &:last-child {
+          border-bottom: none;
+        }
         td {
           margin-top: 10px;
           display: flex;
@@ -66,8 +71,28 @@
     }
   }
   .table-order-user-details {
-    tr {
-      grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+    thead {
+      tr {
+        display: grid;
+        grid-template-columns: 2fr repeat(5, 1fr);
+      }
+    }
+    tbody {
+      tr {
+        display: grid;
+        grid-template-columns: 2fr repeat(5, 1fr);
+        td {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 15px;
+        }
+      }
+    }
+    img {
+      height: 50px;
+      width: 50px;
     }
   }
 }

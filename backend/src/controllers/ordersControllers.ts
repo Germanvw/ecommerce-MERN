@@ -10,7 +10,6 @@ export const createOrder = async (req: any, res: Response) => {
     const newOrder: OrdersDocument = new Orders({
       uid: user.uid,
       cart: req.body,
-      paymentMethod: "Cash",
       total: cartTotal(req.body),
     });
     // Validate avalability of products

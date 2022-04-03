@@ -18,7 +18,6 @@ export const UserModal = () => {
 
   // States
   const [value, setValue] = useState({ ...user });
-  console.log(user);
   // Effects
   useEffect(() => {
     if (user) {

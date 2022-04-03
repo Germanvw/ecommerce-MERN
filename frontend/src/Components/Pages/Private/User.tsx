@@ -6,12 +6,12 @@ import {
 } from "../../redux/actions/uiActions";
 import { PasswordModal } from "../../Items/Modals/User/PasswordModal";
 import { UserModal } from "../../Items/Modals/User/UserModal";
-
-import "./index.scss";
 import { OrderTableUser } from "../../Items/Tables/OrderTableUser";
 import { useEffect } from "react";
 import { startOrderFetchAll } from "../../redux/actions/OrderActions";
 import { OrderModalUser } from "../../Items/Modals/Order/OrderModalUser";
+
+import "./index.scss";
 
 export const User = () => {
   const { user } = useSelector((state: RootState) => state.auth);
@@ -32,7 +32,7 @@ export const User = () => {
 
   useEffect(() => {
     dispatch(startOrderFetchAll());
-  }, []);
+  }, [dispatch]);
 
   if (!user) return <div>Loading...</div>;
   return (
