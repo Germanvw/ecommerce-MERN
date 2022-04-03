@@ -45,6 +45,7 @@ export const startOrderAdd = (order: any) => {
 export const startOrderFetchAll = () => {
   return async (dispatch: any) => {
     try {
+      dispatch(uiStartLoad());
       const req = await fetchToken("orders", {});
       const answ = await req.json();
       if (answ.status) {
@@ -52,11 +53,43 @@ export const startOrderFetchAll = () => {
       } else {
         dispatch(uiSetError(answ.msg));
       }
+      dispatch(uiEndLoad());
     } catch (err) {
       console.log(err);
     }
   };
 };
+
+export const startOrderCancel = (_id: string) => {
+  return async (dispatch: any) => {
+    try {
+      dispatch(uiStartLoad());
+      const req = await fetchToken(
+        `orders/cancel/${_id}`,
+        { status: "Cancelled" },
+        "PUT"
+      );
+      const answ = await req.json();
+      console.log(answ);
+      if (answ.status) {
+        dispatch(orderUpdate(answ.order));
+      }
+      dispatch(uiEndLoad());
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const orderSetActive = (order: {}) => ({
+  type: types.orderSetActive,
+  payload: order,
+});
+
+export const orderClearActive = () => ({
+  type: types.orderClearActive,
+});
+
 const orderAdd = (order: {}) => ({
   type: types.orderAdd,
   payload: order,

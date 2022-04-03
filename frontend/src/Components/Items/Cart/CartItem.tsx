@@ -18,8 +18,6 @@ export const CartItem = ({ product }: any) => {
       return answ.product.inStock;
     }
   };
-  console.log("stock: ", stock);
-  console.log("quantity: ", quantity);
   const handleQuantity = (q: number) => {
     const newQuantity = Math.max(1, Math.min(quantity + q, stock));
     product.quantity = newQuantity;

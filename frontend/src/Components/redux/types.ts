@@ -46,8 +46,10 @@ export const types = {
   cartClear: "[Cart] Clear",
 
   //Order
-  orderAdd: "[Product] Add",
-  orderRemove: "[Product] Remove",
-  orderUpdate: "[Product] Update",
-  orderFetchAll: "[Product] Fetch All",
+  orderAdd: "[Order] Add",
+  orderRemove: "[Order] Remove",
+  orderUpdate: "[Order] Update",
+  orderFetchAll: "[Order] Fetch All",
+  orderSetActive: "[Order] Set Active",
+  orderClearActive: "[Order] Clear Active",
 };

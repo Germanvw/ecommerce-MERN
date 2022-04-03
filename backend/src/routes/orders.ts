@@ -1,8 +1,9 @@
 import { Router } from "express";
 import {
+  cancelOrder,
   createOrder,
   editOrder,
-  fetchOrder,
+  fetchOrderUser,
 } from "../controllers/ordersControllers";
 // import { isAdmin } from "../middlewares/isAdmin";
 import { validJWT } from "../middlewares/validJWT";
@@ -12,7 +13,8 @@ router.use(validJWT);
 
 router.post("/", createOrder);
 router.put("/:id", editOrder);
-router.get("/", fetchOrder);
-// router.get("/", isAdmin, fetchOrderAll);
+router.put("/cancel/:id", cancelOrder);
+// router.get("/", fetchOrder);
+router.get("/", fetchOrderUser);
 
 module.exports = router;

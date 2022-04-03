@@ -51,4 +51,23 @@
       grid-template-columns: repeat(8, 1fr);
     }
   }
+  .table-order-user {
+    tr {
+      grid-template-columns: repeat(8, 1fr);
+      .cancelled {
+        color: rgb(206, 48, 48);
+      }
+      .paid {
+        color: rgb(32, 160, 32);
+      }
+      .pending {
+        color: rgb(63, 182, 255);
+      }
+    }
+  }
+  .table-order-user-details {
+    tr {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
 }

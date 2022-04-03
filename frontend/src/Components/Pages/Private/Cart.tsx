@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchToken } from "../../hooks/useFetch";
 import { CartItem } from "../../Items/Cart/CartItem";
 import { startOrderAdd } from "../../redux/actions/OrderActions";
 import { RootState } from "../../redux/reducer/rootReducer";
@@ -23,7 +22,7 @@ export const Cart = () => {
   }, [cart]);
 
   const handleOrder = () => {
-    if (cart !== []) {
+    if (cart.length > 0) {
       dispatch(startOrderAdd(cart));
     }
   };

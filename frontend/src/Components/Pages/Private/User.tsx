@@ -8,14 +8,17 @@ import { PasswordModal } from "../../Items/Modals/User/PasswordModal";
 import { UserModal } from "../../Items/Modals/User/UserModal";
 
 import "./index.scss";
+import { OrderTableUser } from "../../Items/Tables/OrderTableUser";
+import { useEffect } from "react";
+import { startOrderFetchAll } from "../../redux/actions/OrderActions";
+import { OrderModalUser } from "../../Items/Modals/Order/OrderModalUser";
 
 export const User = () => {
   const { user } = useSelector((state: RootState) => state.auth);
+  const { orderList } = useSelector((state: RootState) => state.order);
   const dispatch = useDispatch();
 
-  const { username, email, picture } = user;
-
-  if (!user) return <div>Loading...</div>;
+  const { username, email, picture, gender, isAdmin } = user;
 
   // Functions
 
@@ -27,6 +30,12 @@ export const User = () => {
     dispatch(uiOpenModalUser());
   };
 
+  useEffect(() => {
+    console.log("entro");
+    dispatch(startOrderFetchAll());
+  }, []);
+
+  if (!user) return <div>Loading...</div>;
   return (
     <div className="user-body">
       <div className="user-container">
@@ -44,28 +53,32 @@ export const User = () => {
             <h2>User Details:</h2>
             <div className="details">
               <h3>Username: </h3>
-              <span>{user.username}</span>
+              <span>{username}</span>
             </div>
             <div className="details">
               <h3>Email: </h3>
-              <span>{user.email}</span>
+              <span>{email}</span>
             </div>
             <div className="details">
               <h3>Gender: </h3>
-              <span>{user.gender}</span>
+              <span>{gender}</span>
             </div>
             <div className="details">
               <h3>Type: </h3>
-              <span>{!user.isAdmin ? "Customer" : "Admin"}</span>
+              <span>{!isAdmin ? "Customer" : "Admin"}</span>
             </div>
           </div>
         </div>
         <div className="user-orders">
           <h2>Your Orders:</h2>
+          <div className="table">
+            <OrderTableUser orders={orderList} />
+          </div>
         </div>
       </div>
       <PasswordModal />
       <UserModal />
+      <OrderModalUser />
     </div>
   );
 };

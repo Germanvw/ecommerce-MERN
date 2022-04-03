@@ -1,11 +1,11 @@
 import mongoose, { Schema, model } from "mongoose";
 
 interface PaymentMethods {
-  string: "cash" | "creditCard" | "paypal" | "bitcoin";
+  string: "Cash" | "Credit Card" | "Paypal" | "Bitcoin";
 }
 
 interface Status {
-  string: "pending" | "paid" | "cancelled";
+  string: "Pending" | "Paid" | "Cancelled";
 }
 
 export interface ProductsOrder {
@@ -36,7 +36,7 @@ const OrdersSchema: Schema = new Schema(
     cart: { type: Array, default: [] },
     total: { type: Number, required: true, min: 0 },
     delivered: { type: Boolean, default: false },
-    status: { type: String, default: "pending" },
+    status: { type: String, default: "Pending" },
   },
   { timestamps: true }
 );
