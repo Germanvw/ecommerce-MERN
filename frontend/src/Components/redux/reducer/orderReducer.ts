@@ -16,7 +16,7 @@ export interface ProductsOrder {
   quantity: number;
 }
 
-interface orderProps {
+export interface orderProps {
   uid: string;
   paymentMethod: PaymentMethods;
   cart: ProductsOrder[] | [];

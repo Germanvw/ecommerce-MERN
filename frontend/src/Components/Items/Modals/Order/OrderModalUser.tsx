@@ -10,14 +10,7 @@ import { OrderTableUserDetails } from "../../Tables/OrderTableUserDetails";
 export const OrderModalUser = () => {
   const { modal, darkMode } = useSelector((state: RootState) => state.ui);
   const { active } = useSelector((state: RootState) => state.order);
-  console.log(active);
   const dispatch = useDispatch();
-
-  // States
-
-  // Effects
-
-  // Functions
 
   //Modal handling
   const closeModal = () => {

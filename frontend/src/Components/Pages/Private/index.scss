@@ -99,3 +99,66 @@
   cursor: not-allowed;
   color: var(--text-primary);
 }
+
+.checkout {
+  background-color: var(--background-1);
+  color: var(--text-primary);
+  padding: 5% 20%;
+  min-height: calc(100vh - 50px);
+  .checkout-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      margin-bottom: 15px;
+      color: orange;
+    }
+    h2 {
+      margin-top: 25px;
+      color: rgb(168, 168, 168);
+    }
+  }
+  table {
+    border: 1px solid var(--background-2);
+    padding: 30px 50px;
+  }
+  .extra-info {
+    padding: 30px 50px;
+    display: flex;
+    justify-content: space-between;
+    .left {
+      .payment-method,
+      .payment-adress {
+        display: flex;
+        align-items: center;
+        label {
+          margin-right: 30px;
+        }
+        select {
+          width: 150px;
+          font-size: 16px;
+        }
+        input {
+          width: 200px;
+        }
+      }
+      .payment-adress {
+        margin-top: 20px;
+      }
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .total {
+        font-size: 26px;
+        font-weight: 700;
+      }
+      button {
+        margin-top: 15px;
+        padding: 10px 20px;
+      }
+    }
+  }
+}

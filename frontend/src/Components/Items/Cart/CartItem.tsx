@@ -1,7 +1,10 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchNoToken } from "../../hooks/useFetch";
-import { startCartUpdate } from "../../redux/actions/cartActions";
+import {
+  startCartRemove,
+  startCartUpdate,
+} from "../../redux/actions/cartActions";
 
 import "./index.scss";
 import { useEffect, useState } from "react";
@@ -24,6 +27,10 @@ export const CartItem = ({ product }: any) => {
     dispatch(startCartUpdate(product));
   };
 
+  const handleDelete = (_id: string) => {
+    dispatch(startCartRemove(_id));
+  };
+
   useEffect(() => {
     handleStock().then((amount: number) => {
       setStock(amount);
@@ -40,6 +47,9 @@ export const CartItem = ({ product }: any) => {
             </Link>
             <div className="free-shipping">
               <p>Free Shiping!</p>
+              <button onClick={() => handleDelete(_id)}>
+                <i className="fa-solid fa-trash-can"></i>
+              </button>
             </div>
           </div>
         </div>

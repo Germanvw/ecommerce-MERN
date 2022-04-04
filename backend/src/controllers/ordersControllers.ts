@@ -142,3 +142,32 @@ export const fetchOrderUser = async (req: any, res: Response) => {
     return res.status(500).json({ status: false, msg: "Error on request" });
   }
 };
+
+export const fetchOrder = async (req: any, res: Response) => {
+  const { user } = req;
+
+  try {
+    const order = await Orders.findById(req.params.id);
+
+    if (!order) {
+      return res.status(400).json({
+        status: false,
+        msg: "Order doesnt exist",
+      });
+    }
+
+    if (order.uid !== user.uid && user.isAdmin !== true) {
+      return res.status(401).json({
+        status: false,
+        msg: "Unauthorized",
+      });
+    }
+
+    return res.status(201).json({
+      status: true,
+      order,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};

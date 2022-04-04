@@ -1,8 +1,23 @@
 import { Link } from "react-router-dom";
 import { LogoutButton } from "../Buttons/LogoutButton";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../redux/reducer/rootReducer";
+import { useEffect, useState } from "react";
+
 import "./index.scss";
 
 export const Navbar = ({ isAuth }: any) => {
+  const { cart } = useSelector((state: RootState) => state.cart);
+  const [itemsCart, setItemsCart] = useState(0);
+
+  useEffect(() => {
+    let total = 0;
+    cart.forEach((item: any) => {
+      total += item.quantity;
+    });
+    setItemsCart(total);
+  }, [cart]);
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -18,6 +33,9 @@ export const Navbar = ({ isAuth }: any) => {
               <div className="cart">
                 <Link to="/cart">
                   <i className="fa-solid fa-cart-shopping"></i>
+                  {itemsCart >= 0 && (
+                    <div className="cart-amount">{itemsCart}</div>
+                  )}
                 </Link>
               </div>
             </div>

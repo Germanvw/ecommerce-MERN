@@ -21,10 +21,21 @@
           font-size: 26px;
         }
         .free-shipping {
+          display: flex;
+          align-items: center;
           margin-top: 25px;
+
           color: green;
           a {
             font-size: 24px;
+          }
+          button {
+            margin-left: 40px;
+            background-color: rgb(184, 34, 34);
+            color: var(--text-primary);
+            padding: 5px 10px;
+            width: 40px;
+            border-radius: 5px;
           }
         }
       }

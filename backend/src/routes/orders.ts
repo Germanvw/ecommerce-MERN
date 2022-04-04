@@ -3,6 +3,7 @@ import {
   cancelOrder,
   createOrder,
   editOrder,
+  fetchOrder,
   fetchOrderUser,
 } from "../controllers/ordersControllers";
 // import { isAdmin } from "../middlewares/isAdmin";
@@ -14,7 +15,7 @@ router.use(validJWT);
 router.post("/", createOrder);
 router.put("/:id", editOrder);
 router.put("/cancel/:id", cancelOrder);
-// router.get("/", fetchOrder);
+router.get("/:id", fetchOrder);
 router.get("/", fetchOrderUser);
 
 module.exports = router;
