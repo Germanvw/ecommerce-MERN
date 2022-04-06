@@ -27,72 +27,91 @@
 }
 
 .user-body {
-  min-height: calc(100vh - 50px);
-  background-color: var(--background-1);
-  color: var(--text-primary);
-  .user-container {
-    width: 85%;
-    margin: 0 auto;
-    padding-top: 50px;
-    display: flex;
-    .user-info {
-      .user-info-container {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 15px;
-        img {
-          max-width: 300px;
-        }
-        .welcome {
-          margin-top: 15px;
-          color: rgb(197, 197, 197);
-          font-size: 30px;
-        }
-        h2 {
-          margin-top: 5px;
-          color: rgb(121, 121, 121);
-        }
-        .change-info {
-          margin-top: 10px;
-          button {
-            margin-right: 30px;
-            margin-left: 30px;
-            padding: 5px 10px;
-          }
-        }
-      }
-      .user-details {
-        display: flex;
-        margin: 15px;
-        flex-direction: column;
-        margin-top: 30px;
-        margin-left: 45px;
-        h2 {
-          color: rgb(197, 197, 197);
-          margin-bottom: 20px;
-        }
-        .details {
-          display: flex;
-          align-items: center;
-          margin-bottom: 15px;
-          h3 {
-            margin-right: 20px;
-          }
-        }
-      }
-    }
-    .user-orders {
+  background-color: var(--bg-primary);
+  .user-info {
+    .change-info {
       display: flex;
-      flex: 2;
-      flex-direction: column;
-      align-items: center;
-      margin: 15px;
+      justify-content: space-between;
+      .change-details {
+        margin-right: 10px;
+      }
+      span {
+        font-size: 20px;
+      }
+      button {
+        padding: 8px 16px;
+      }
     }
   }
 }
+
+// .user-body {
+//   min-height: calc(100vh - 50px);
+//   background-color: var(--bg-primary);
+//   color: var(--text);
+//   .user-container {
+//     width: 85%;
+//     margin: 0 auto;
+//     padding-top: 50px;
+//     display: flex;
+//     .user-info {
+//       .user-info-container {
+//         display: flex;
+//         flex: 1;
+//         flex-direction: column;
+//         justify-content: center;
+//         align-items: center;
+//         margin: 15px;
+//         img {
+//           max-width: 300px;
+//         }
+//         .welcome {
+//           margin-top: 15px;
+//           color: rgb(197, 197, 197);
+//           font-size: 30px;
+//         }
+//         h2 {
+//           margin-top: 5px;
+//           color: rgb(121, 121, 121);
+//         }
+//         .change-info {
+//           margin-top: 10px;
+//           button {
+//             margin-right: 30px;
+//             margin-left: 30px;
+//             padding: 5px 10px;
+//           }
+//         }
+//       }
+//       .user-details {
+//         display: flex;
+//         margin: 15px;
+//         flex-direction: column;
+//         margin-top: 30px;
+//         margin-left: 45px;
+//         h2 {
+//           color: rgb(197, 197, 197);
+//           margin-bottom: 20px;
+//         }
+//         .details {
+//           display: flex;
+//           align-items: center;
+//           margin-bottom: 15px;
+//           h3 {
+//             margin-right: 20px;
+//           }
+//         }
+//       }
+//     }
+//     .user-orders {
+//       display: flex;
+//       flex: 2;
+//       flex-direction: column;
+//       align-items: center;
+//       margin: 15px;
+//     }
+//   }
+// }
 
 .disabled {
   background-color: rgb(80, 59, 0);

@@ -12,13 +12,12 @@ import { startOrderFetchAll } from "../../redux/actions/OrderActions";
 import { OrderModalUser } from "../../Items/Modals/Order/OrderModalUser";
 
 import "./index.scss";
+import UserProfile from "../../Items/Other/UserProfile";
 
 export const User = () => {
   const { user } = useSelector((state: RootState) => state.auth);
   const { orderList } = useSelector((state: RootState) => state.order);
   const dispatch = useDispatch();
-
-  const { username, email, picture, gender, isAdmin } = user;
 
   // Functions
 
@@ -37,47 +36,26 @@ export const User = () => {
   if (!user) return <div>Loading...</div>;
   return (
     <div className="user-body">
-      <div className="user-container">
-        <div className="user-info">
-          <div className="user-info-container">
-            <img src={picture} alt={picture} />
-            <p className="welcome">Welcome</p>
-            <h2>{username}</h2>
-            <div className="change-info">
-              <button onClick={handleModalUser}>Change Details</button>
-              <button onClick={handleModalPassword}>Change Password</button>
-            </div>
+      <div className="container">
+        <div className="row">
+          <div className="row m-0 pb-5">
+            <UserProfile
+              user={user}
+              handleModalPassword={handleModalPassword}
+              handleModalUser={handleModalUser}
+            />
           </div>
-          <div className="user-details">
-            <h2>User Details:</h2>
-            <div className="details">
-              <h3>Username: </h3>
-              <span>{username}</span>
-            </div>
-            <div className="details">
-              <h3>Email: </h3>
-              <span>{email}</span>
-            </div>
-            <div className="details">
-              <h3>Gender: </h3>
-              <span>{gender}</span>
-            </div>
-            <div className="details">
-              <h3>Type: </h3>
-              <span>{!isAdmin ? "Customer" : "Admin"}</span>
+          <div className="user-orders col-xl-8 col-xs-12">
+            <h2>Your Orders:</h2>
+            <div className="table">
+              <OrderTableUser orders={orderList} />
             </div>
           </div>
         </div>
-        <div className="user-orders">
-          <h2>Your Orders:</h2>
-          <div className="table">
-            <OrderTableUser orders={orderList} />
-          </div>
-        </div>
+        <PasswordModal />
+        <UserModal />
+        <OrderModalUser />
       </div>
-      <PasswordModal />
-      <UserModal />
-      <OrderModalUser />
     </div>
   );
 };

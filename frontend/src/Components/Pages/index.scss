@@ -121,13 +121,7 @@
           align-items: center;
           justify-content: center;
           border-radius: 10px;
-          background-color: var(--primary);
-          color: var(--text);
           border-radius: 50%;
-          &:hover {
-            background-color: var(--text);
-            color: var(--primary);
-          }
         }
         .disabled {
           background-color: var(--disabled);

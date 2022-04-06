@@ -57,6 +57,13 @@ a {
 button {
   outline: none;
   border: none;
+  cursor: pointer;
+  background-color: var(--primary);
+  color: var(--text);
+  &:hover {
+    background-color: var(--text);
+    color: var(--primary);
+  }
 }
 
 .app {

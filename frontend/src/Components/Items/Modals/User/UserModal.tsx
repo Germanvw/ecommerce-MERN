@@ -9,10 +9,18 @@ import { customProductStyles } from "../Product/imports";
 import Modal from "react-modal";
 import { Dropdown } from "../../Forms/Dropdown";
 import { startAuthUserUpdate } from "../../../redux/actions/authActions";
+import { handleError } from "../../../helpers/handleErrorInput";
 
 export const UserModal = () => {
   const { modal, darkMode } = useSelector((state: RootState) => state.ui);
   const { user } = useSelector((state: RootState) => state.auth);
+
+  const errorInit = {
+    username: true,
+    email: true,
+    picture: true,
+  };
+  const [errors, setErrors] = useState(errorInit);
 
   const dispatch = useDispatch();
 
@@ -32,15 +40,21 @@ export const UserModal = () => {
   // Functions
 
   const handleChange = ({ target }: any) => {
+    console.log(target.name, target.value);
     setValue({
       ...value,
       [target.name]: target.value,
     });
+    handleError(target, errors, setErrors);
   };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    dispatch(startAuthUserUpdate(value));
+
+    if (!errors.username && !errors.email && !errors.picture) {
+      dispatch(startAuthUserUpdate(value));
+      setErrors(errorInit);
+    }
   };
 
   //Modal handling
@@ -48,12 +62,21 @@ export const UserModal = () => {
     dispatch(uiCloseModal());
     setValue(initialUserState);
   };
+  useEffect(() => {
+    if (user) {
+      setErrors({
+        username: false,
+        email: false,
+        picture: false,
+      });
+    }
+  }, [user]);
   return (
     <Modal
       isOpen={modal.user}
       onRequestClose={closeModal}
       closeTimeoutMS={200}
-      className="modal modal-product"
+      className={`${darkMode ? "modal-d" : "modal-l"} modal-product modal-x`}
       style={customProductStyles}
       overlayClassName="modal-background"
       ariaHideApp={false}
@@ -62,20 +85,21 @@ export const UserModal = () => {
         <h1>Change Details</h1>
 
         <form onSubmit={handleSubmit}>
-          {formUserImputs.map((input: any) => (
+          {formUserImputs.map((input: any, index: any) => (
             <FormInput
-              key={input.name}
+              key={index}
               value={value[input.name]}
               handleChange={handleChange}
+              error={errors![input.name]}
               {...input}
             />
           ))}
           <div className="dropdown-gender">
-            <label>Gender: </label>
             <Dropdown
               options={genderOptions}
               handleChange={handleChange}
               dwName="gender"
+              selected={user.gender}
             />
           </div>
           <button>Modificar</button>

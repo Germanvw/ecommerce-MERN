@@ -13,16 +13,32 @@ interface dropdownProps {
   selected?: string;
 }
 
-export const Dropdown = ({ options, dwName, handleChange }: dropdownProps) => {
+export const Dropdown = ({
+  options,
+  dwName,
+  selected,
+  handleChange,
+}: dropdownProps) => {
+  console.log(selected);
   return (
     <div className="simple-dropdown">
       <label>{dwName}</label>
       <select name={dwName} onChange={handleChange}>
-        {options.map(({ value, name }: optionProps) => (
-          <option key={value} value={value}>
-            {name}
-          </option>
-        ))}
+        {options.map(({ value, name }: optionProps) => {
+          if (selected && name.toUpperCase() === selected.toUpperCase()) {
+            return (
+              <option key={value} value={value} selected>
+                {name}
+              </option>
+            );
+          } else {
+            return (
+              <option key={value} value={value}>
+                {name}
+              </option>
+            );
+          }
+        })}
       </select>
     </div>
   );

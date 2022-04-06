@@ -50,7 +50,12 @@ export const formPasswordInputs = [
 ];
 
 export const formUserImputs = [
-  { placeholder: "Username", type: "text", name: "username" },
-  { placeholder: "Email", type: "email", name: "email" },
-  { placeholder: "Picture", type: "text", name: "picture" },
+  {
+    label: "Username",
+    placeholder: "Username",
+    type: "text",
+    name: "username",
+  },
+  { label: "Email", placeholder: "Email", type: "email", name: "email" },
+  { label: "Picture", placeholder: "Picture", type: "text", name: "picture" },
 ];

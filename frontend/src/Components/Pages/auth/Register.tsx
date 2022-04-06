@@ -23,15 +23,6 @@ export const Register = () => {
   });
 
   const [errors, setErrors] = useState(initRegisterErrors);
-  // const handleError = ({ target }: any) => {
-  //   let valid = false;
-  //   if (target.name !== "confirmPassword") {
-  //     valid = handleValidate(target.value, target.type);
-  //   } else {
-  //     valid = handleValidate(target.value, target.name);
-  //   }
-  //   setErrors({ ...errors, [target.name]: !valid });
-  // };
 
   const handleChange = ({ target }: any) => {
     setValue({ ...value, [target.name]: target.value });
