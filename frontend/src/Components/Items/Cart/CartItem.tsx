@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchNoToken } from "../../hooks/useFetch";
@@ -7,7 +8,6 @@ import {
 } from "../../redux/actions/cartActions";
 
 import "./index.scss";
-import { useEffect, useState } from "react";
 export const CartItem = ({ product }: any) => {
   const dispatch = useDispatch();
   const { _id, name, image, price, quantity } = product;
@@ -24,6 +24,7 @@ export const CartItem = ({ product }: any) => {
   const handleQuantity = (q: number) => {
     const newQuantity = Math.max(1, Math.min(quantity + q, stock));
     product.quantity = newQuantity;
+    console.log(product);
     dispatch(startCartUpdate(product));
   };
 
@@ -36,6 +37,7 @@ export const CartItem = ({ product }: any) => {
       setStock(amount);
     });
   }, [product]);
+
   return (
     <div className="cart-item">
       <div className="left">

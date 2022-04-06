@@ -38,9 +38,11 @@ export const Products = () => {
 
   return (
     <div className="wrapper">
-      <Sidebar />
+      <div className="col-3">
+        <Sidebar />
+      </div>
       <div className="body">
-        <div className="filter">
+        <div className="filter mb-3">
           <FormInput
             value={filterInput}
             handleChange={handleChange}
@@ -48,8 +50,8 @@ export const Products = () => {
           />
         </div>
         <div className="product-display">
-          {paginatedArray.map((product: any) => (
-            <ProductCard product={product} key={product._id} />
+          {paginatedArray.map((product: any, index: any) => (
+            <ProductCard product={product} key={product._id} index={index} />
           ))}
         </div>
         <div className="pagination-body">

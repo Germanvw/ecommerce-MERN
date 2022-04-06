@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { startCartAdd, startCartUpdate } from "../../redux/actions/cartActions";
 import { RootState } from "../../redux/reducer/rootReducer";
 
-export const AddCartButton = ({ product, text }: any) => {
+export const AddCartButton = ({ product }: any) => {
   const { cart } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
   const handleAddCart = async (amount: number) => {
@@ -18,5 +18,9 @@ export const AddCartButton = ({ product, text }: any) => {
     }
   };
 
-  return <button onClick={() => handleAddCart(1)}>{text}</button>;
+  return (
+    <button onClick={() => handleAddCart(1)}>
+      <i className="fa-solid fa-bag-shopping"></i>
+    </button>
+  );
 };

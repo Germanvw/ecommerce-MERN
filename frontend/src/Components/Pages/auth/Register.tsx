@@ -5,10 +5,11 @@ import { Dropdown } from "../../Items/Forms/Dropdown";
 import { startAuthRegister } from "../../redux/actions/authActions";
 import { MainButton } from "../../Items/Buttons/MainButton";
 import { genderOptions, initRegisterErrors, registerInputs } from "./data";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { handleValidate } from "../../helpers/handleFormValidation";
 
 import "./styles.scss";
+import { handleError } from "../../helpers/handleErrorInput";
 
 export const Register = () => {
   const dispatch = useDispatch();
@@ -16,30 +17,25 @@ export const Register = () => {
   const [value, setValue] = useState({
     username: "",
     email: "",
-    Gender: genderOptions[0]!.value,
+    gender: genderOptions[0]!.value,
     password: "",
     confirmPassword: "",
   });
-  const [errors, setErrors] = useState(initRegisterErrors);
 
-  const handleError = ({ target }: any) => {
-    let valid = false;
-    if (target.name !== "confirmPassword") {
-      valid = handleValidate(target.value, "", target.type, handleError);
-    } else {
-      valid = handleValidate(
-        target.value,
-        value.password,
-        target.name,
-        handleError
-      );
-    }
-    setErrors({ ...errors, [target.name]: !valid });
-  };
+  const [errors, setErrors] = useState(initRegisterErrors);
+  // const handleError = ({ target }: any) => {
+  //   let valid = false;
+  //   if (target.name !== "confirmPassword") {
+  //     valid = handleValidate(target.value, target.type);
+  //   } else {
+  //     valid = handleValidate(target.value, target.name);
+  //   }
+  //   setErrors({ ...errors, [target.name]: !valid });
+  // };
 
   const handleChange = ({ target }: any) => {
     setValue({ ...value, [target.name]: target.value });
-    handleError({ target });
+    handleError(target, errors, setErrors);
   };
 
   const handleRegister = () => {
@@ -50,9 +46,22 @@ export const Register = () => {
       !errors.password &&
       !errors.confirmPassword
     ) {
-      dispatch(startAuthRegister(value));
+      if (value.password === value.confirmPassword) {
+        dispatch(startAuthRegister(value));
+      } else {
+        setErrors({ ...errors, confirmPassword: true });
+      }
     }
   };
+
+  useEffect(() => {
+    if (
+      value.password === value.confirmPassword &&
+      value.confirmPassword.length > 5
+    ) {
+      setErrors({ ...errors, confirmPassword: false });
+    }
+  }, [value.password]);
 
   return (
     <div className="auth_form d-flex justify-content-center align-items-center">
@@ -75,7 +84,7 @@ export const Register = () => {
               <Dropdown
                 options={genderOptions}
                 handleChange={handleChange}
-                dwName="Gender"
+                dwName="gender"
               />
             </div>
           </div>
@@ -86,7 +95,7 @@ export const Register = () => {
               </Link>
               <i className="fa-solid fa-arrow-right-long"></i>
             </div>
-            <MainButton handleClick={handleRegister} />
+            <MainButton handleClick={handleRegister} title="Register" />
           </div>
         </div>
       </div>

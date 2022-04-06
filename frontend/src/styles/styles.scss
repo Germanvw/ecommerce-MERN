@@ -1,17 +1,18 @@
 :root {
   // Background
   --primary: #ef3651;
+  --disabled: #852130;
   --error: #ff2424;
   --success: #55d85a;
   --grey: #abb4bd;
-  --text: #2a2c36;
+  --text: #222222;
 
   --bg-body: #ffffff;
-  --bg-primary: #f8f8f8;
+  --bg-primary: #f9f9f9;
 
   // label - input
-  --input-bg: #2a2c36;
-  --label-color: #abb4bd;
+  --input-bg: #ffffff;
+  --label-color: #9b9b9b;
 }
 
 :root [data-theme="dark"] {
@@ -29,7 +30,7 @@
 input:-webkit-autofill,
 textarea:-webkit-autofill,
 select:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px var(--input-background) inset !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--input-bg) inset !important;
   -webkit-text-fill-color: var(--input-color) !important;
 }
 
@@ -53,9 +54,14 @@ a {
   }
 }
 
+button {
+  outline: none;
+  border: none;
+}
+
 .app {
   min-height: 100vh;
-  min-width: 100vw;
+  max-width: 100vw;
   background-color: var(--bg-body);
   color: var(--text);
 }

@@ -15,13 +15,7 @@ export const handleRegisterValidation = ({
   errors,
 }: RegisterValidation) => {};
 
-export const handleValidate = (
-  value: string,
-  password: string,
-  type: string,
-  handleError: ({ target }: any) => void
-) => {
-  console.log(value, password);
+export const handleValidate = (value: string, type: string) => {
   switch (type) {
     case "text":
       return value.length > 3 ? true : false;
@@ -34,6 +28,6 @@ export const handleValidate = (
     case "confirmPassword":
       return value.length > 5 ? true : false;
     default:
-      return false;
+      return value.length > 3 ? true : false;
   }
 };

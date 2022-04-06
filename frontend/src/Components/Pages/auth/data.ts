@@ -16,6 +16,11 @@ export const loginInputs = [
   },
 ];
 
+export const genderOptions = [
+  { name: "Male", value: "male" },
+  { name: "Female", value: "female" },
+];
+
 export const initLoginErrors = {
   email: false,
   password: false,
@@ -26,6 +31,14 @@ export const initRegisterErrors = {
   email: true,
   password: true,
   confirmPassword: true,
+};
+
+export const initRegisterForm = {
+  username: "",
+  email: "",
+  Gender: genderOptions[0]!.value,
+  password: "",
+  confirmPassword: "",
 };
 
 export const registerInputs = [
@@ -48,9 +61,4 @@ export const registerInputs = [
     type: "password",
     name: "confirmPassword",
   },
-];
-
-export const genderOptions = [
-  { name: "Male", value: "male" },
-  { name: "Female", value: "female" },
 ];

@@ -3,6 +3,7 @@ import { CartProductProps } from "../reducer/cartReducer";
 import { fireModal } from "../../hooks/useModal";
 
 export const startCartAdd = (product: CartProductProps) => {
+  console.log(product);
   return async (dispatch: any) => {
     try {
       const newProduct: CartProductProps = {

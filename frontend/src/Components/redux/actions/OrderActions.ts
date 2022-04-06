@@ -6,7 +6,6 @@ import { fireModal } from "../../hooks/useModal";
 
 export const startOrderUpdate = (order: any) => {
   return async (dispatch: any) => {
-    console.log(order);
     try {
       dispatch(uiStartLoad());
       const req = await fetchToken(`orders/${order._id}`, order, "PUT");

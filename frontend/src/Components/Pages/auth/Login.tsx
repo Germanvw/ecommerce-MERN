@@ -30,14 +30,9 @@ export const Login = () => {
   const handleError = ({ target }: any) => {
     let valid = false;
     if (target.name !== "confirmPassword") {
-      valid = handleValidate(target.value, "", target.type, handleError);
+      valid = handleValidate(target.value, target.type);
     } else {
-      valid = handleValidate(
-        target.value,
-        value.password,
-        target.name,
-        handleError
-      );
+      valid = handleValidate(target.value, target.name);
     }
     setErrors({ ...errors, [target.name]: !valid });
   };
@@ -65,7 +60,7 @@ export const Login = () => {
               </Link>
               <i className="fa-solid fa-arrow-right-long"></i>
             </div>
-            <MainButton handleClick={handleLogin} />
+            <MainButton handleClick={handleLogin} title="Login" />
           </div>
         </div>
       </div>

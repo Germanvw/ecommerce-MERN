@@ -2,6 +2,7 @@ import "./form.scss";
 
 export const FormInput = ({
   label,
+  index,
   error,
   handleChange,
   handleClick,

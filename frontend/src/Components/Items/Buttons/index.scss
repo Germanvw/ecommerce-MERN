@@ -4,13 +4,29 @@
   align-items: center;
   height: 100%;
   button {
-    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
+    color: var(--text);
+    height: 30px;
     width: 30px;
+    border-radius: 50%;
+    padding: 20px;
+    &:hover {
+      background-color: var(--text);
+      color: var(--primary);
+    }
   }
 
   .disabled {
-    background-color: rgb(80, 59, 0);
+    background-color: var(--disabled);
+    color: var(--grey);
     cursor: not-allowed;
+    &:hover {
+      background-color: var(--disabled);
+      color: var(--grey);
+    }
   }
   .current {
     padding: 15px;

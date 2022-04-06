@@ -5,7 +5,7 @@ import Orders, { OrdersDocument } from "../Models/Orders";
 
 export const createOrder = async (req: any, res: Response) => {
   const { user } = req;
-
+  console.log(req.body);
   try {
     const newOrder: OrdersDocument = new Orders({
       uid: user.uid,

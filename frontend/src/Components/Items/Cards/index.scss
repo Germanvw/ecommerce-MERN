@@ -1,37 +1,32 @@
 .product-card {
-  background-color: var(--background-2);
-  margin: 15px;
-  padding: 20px;
-  min-height: 350px;
-  width: 300px;
-  border-radius: 10px;
-  .product-img {
+  height: 390px;
+  background-color: var(--bg-body);
+  border-radius: 12px;
+  .image-wrapper {
     display: flex;
-    justify-content: center;
-    img {
-      height: 200px;
-    }
-  }
-  .product-info {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    color: var(--text-primary);
-    .info-title {
-      font-size: 18px;
-      margin-top: 10px;
-    }
-    .info-price {
-      margin-top: 10px;
-      margin-bottom: 10px;
+    justify-content: center;
+    height: 230px;
+    img {
+      width: 100%;
+      height: auto;
+      background-size: contain;
+      border-radius: 8px;
+      padding: 10px 20px 0px 20px;
     }
   }
-  .product-buttons {
-    display: flex;
-    justify-content: space-between;
-    button {
-      padding: 5px 10px;
+
+  button {
+    border: none;
+    border-radius: 25px;
+    background-color: var(--primary);
+    font-size: 14px;
+    color: var(--text);
+    padding: 15px 20px;
+    box-shadow: 1px 5px 3px 0px rgba(0, 0, 0, 0.24);
+    &:hover {
+      background-color: var(--text);
+      color: var(--primary);
     }
   }
 }

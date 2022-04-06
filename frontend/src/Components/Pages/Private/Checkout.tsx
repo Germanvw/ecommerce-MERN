@@ -22,8 +22,8 @@ const paymentAdressInfo = {
 };
 
 export const Checkout = () => {
-  const dispatch = useDispatch();
   const { id } = useParams();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   //state
   const [order, setOrder] = useState<any>("");
@@ -53,6 +53,7 @@ export const Checkout = () => {
         ...order,
         paymentMethod: payInfo.payMethod,
         paymentAdress: payInfo.payAdress,
+        rated: null,
       };
       dispatch(startOrderUpdate(newOrder));
       navigate("/user");

@@ -11,6 +11,7 @@ import { Products as AdminProducts } from "../Pages/admin/Products";
 import { User } from "../Pages/Private/User";
 import { Cart } from "../Pages/Private/Cart";
 import { Checkout } from "../Pages/Private/Checkout";
+import { Product } from "../Pages/Product";
 
 interface Route {
   path: string;
@@ -33,6 +34,11 @@ export const publicRoutes: Route[] = [
     name: "Products",
     path: "/products",
     Component: Products,
+  },
+  {
+    name: "Product",
+    path: "/products/:id",
+    Component: Product,
   },
 ];
 
