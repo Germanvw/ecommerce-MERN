@@ -1,0 +1,61 @@
+:root {
+  // Background
+  --primary: #ef3651;
+  --error: #ff2424;
+  --success: #55d85a;
+  --grey: #abb4bd;
+  --text: #2a2c36;
+
+  --bg-body: #ffffff;
+  --bg-primary: #f8f8f8;
+
+  // label - input
+  --input-bg: #2a2c36;
+  --label-color: #abb4bd;
+}
+
+:root [data-theme="dark"] {
+  --text: #f5f5f5;
+
+  // backgrounds
+  --bg-body: #2f313f;
+  --bg-primary: #1e1f28;
+
+  // label - input
+  --input-bg: #2a2c36;
+  --label-color: #abb4bd;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--input-background) inset !important;
+  -webkit-text-fill-color: var(--input-color) !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+a {
+  color: var(--text);
+  text-decoration: none;
+  &:hover {
+    color: var(--primary);
+  }
+}
+
+.app {
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: var(--bg-body);
+  color: var(--text);
+}

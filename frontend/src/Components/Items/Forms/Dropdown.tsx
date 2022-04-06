@@ -15,13 +15,16 @@ interface dropdownProps {
 
 export const Dropdown = ({ options, dwName, handleChange }: dropdownProps) => {
   return (
-    <select name={dwName} onChange={handleChange}>
-      {options.map(({ value, name }: optionProps) => (
-        <option key={value} value={value}>
-          {name}
-        </option>
-      ))}
-    </select>
+    <div className="simple-dropdown">
+      <label>{dwName}</label>
+      <select name={dwName} onChange={handleChange}>
+        {options.map(({ value, name }: optionProps) => (
+          <option key={value} value={value}>
+            {name}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 };
 

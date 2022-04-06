@@ -1,31 +1,24 @@
 import "./form.scss";
 
 export const FormInput = ({
-  handleChange,
-  type,
   label,
+  error,
+  handleChange,
+  handleClick,
   ...inputProps
 }: any) => {
   return (
-    <div className={label ? "input-wrapper-label" : "input-wrapper"}>
-      {label && <label>{label}</label>}
-      <div className="input-body">
-        <i
-          className={`fa-solid ${
-            type === "password"
-              ? "fa-lock"
-              : type === "text"
-              ? "fa-user"
-              : "fa-envelope"
-          }`}
-        ></i>
+    <div className="input-body">
+      <div className="input-container">
+        <label>{label}</label>
         <input
           className="form-input"
           onChange={handleChange}
-          type={type}
+          onClick={handleClick}
           {...inputProps}
         ></input>
       </div>
+      <i className={`fa solid ${!error ? "fa-check success" : "fa-xmark"}`}></i>
     </div>
   );
 };

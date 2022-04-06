@@ -11,7 +11,7 @@ import { publicRoutes, authRoutes, unAuthRoutes, adminRoutes } from "./routes";
 import { startAuthCheck } from "../redux/actions/authActions";
 
 import Swal from "sweetalert2";
-import "../../styles/index.scss";
+import "../../styles/styles.scss";
 import { Navbar } from "../Items/Nav/Navbar";
 import { startCartFetchAll } from "../redux/actions/cartActions";
 
@@ -49,7 +49,7 @@ export const AppRouter = () => {
 
   return (
     <BrowserRouter>
-      <div className="app" theme-color={darkMode ? "dark" : "light"}>
+      <div className="app" data-theme={darkMode ? "dark" : "light"}>
         <Navbar isAuth={isAuth} />
         <Routes>
           <Route element={<PrivateRoutes isAuth={isAuth} />}>
