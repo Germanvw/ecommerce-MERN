@@ -39,6 +39,18 @@ export const initialUserState: { [index: string]: any } = {
   picture: "",
 };
 
+export const errorUserProfileInit = {
+  username: true,
+  email: true,
+  picture: true,
+};
+
+export const errorPasswordInit = {
+  oldPassword: true,
+  password: true,
+  confirmPassword: true,
+};
+
 export const formPasswordInputs = [
   { placeholder: "Current Password", type: "password", name: "oldPassword" },
   { placeholder: "New Password", type: "password", name: "password" },

@@ -1,4 +1,4 @@
-.wrapper {
+.products-body {
   display: grid;
   grid-template-columns: 1fr 4fr;
   min-height: calc(100vh - 52px);
@@ -93,10 +93,7 @@
     }
     .content {
       padding-top: 20px;
-      img {
-        width: 100%;
-        height: auto;
-      }
+
       .right {
         .category-link {
           font-size: 12px;
@@ -126,6 +123,7 @@
         .disabled {
           background-color: var(--disabled);
           color: var(--grey);
+          cursor: not-allowed;
           &:hover {
             background-color: var(--disabled);
             color: var(--grey);

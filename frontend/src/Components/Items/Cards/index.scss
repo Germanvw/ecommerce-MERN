@@ -2,18 +2,13 @@
   height: 390px;
   background-color: var(--bg-body);
   border-radius: 12px;
-  .image-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 230px;
-    img {
-      width: 100%;
-      height: auto;
-      background-size: contain;
-      border-radius: 8px;
-      padding: 10px 20px 0px 20px;
-    }
+
+  img {
+    height: 180px;
+    width: auto;
+    background-size: contain;
+    border-radius: 8px;
+    padding: 10px 20px 0px 20px;
   }
 
   button {

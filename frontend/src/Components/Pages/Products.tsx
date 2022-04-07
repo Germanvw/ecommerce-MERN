@@ -37,7 +37,7 @@ export const Products = () => {
   }, []);
 
   return (
-    <div className="wrapper">
+    <div className="products-body">
       <div className="col-3">
         <Sidebar />
       </div>

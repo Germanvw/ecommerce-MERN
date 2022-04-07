@@ -39,45 +39,73 @@ export const CartItem = ({ product }: any) => {
   }, [product]);
 
   return (
-    <div className="cart-item">
-      <div className="left">
-        <div className="left-wrapper">
-          <img src={image} alt={image}></img>
-          <div className="left-info">
-            <Link className="item-name" to={`products/${_id}`}>
-              {name}
-            </Link>
-            <div className="free-shipping">
-              <p>Free Shiping!</p>
-              <button onClick={() => handleDelete(_id)}>
-                <i className="fa-solid fa-trash-can"></i>
-              </button>
+    <div className="cart-item-body py-4 px-4 mb-3 ">
+      <div className="row m-0 d-flex justify-content-between  align-items-center">
+        <div className="col-md-4 d-flex justify-content-center">
+          <div className="img-container">
+            <img src={image} alt={image}></img>
+          </div>
+        </div>
+        <div className="col-md-8">
+          <div className="row m-0">
+            <div className="col-md-3 d-flex justify-content-center align-items-center">
+              <div className="cart-item-title">
+                <Link className="item-name" to={`products/${_id}`}>
+                  {name}
+                </Link>
+              </div>
+            </div>
+            <div className="col-md-9 my-3">
+              <div className="row m-0">
+                <div className="col-md-6">
+                  <div className="handler ">
+                    <div className="quantity d-flex justify-content-center align-items-center">
+                      <button
+                        onClick={() => handleQuantity(-1)}
+                        className={`${
+                          (quantity === 1 || stock === 0) && "disabled"
+                        }`}
+                      >
+                        -
+                      </button>
+                      <p className="m-0 mx-3">{product.quantity}</p>
+                      <button
+                        onClick={() => handleQuantity(1)}
+                        className={`${
+                          (quantity === stock || stock === 0) && "disabled"
+                        }`}
+                      >
+                        +
+                      </button>
+                    </div>
+                    <p className="d-flex justify-content-center mt-2">
+                      In Stock: {stock}
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-6 ">
+                  <div className="row m-0">
+                    <div className="col-lg-6">
+                      <div className="price d-flex justify-content-center align-items-center">
+                        ${price}
+                      </div>
+                    </div>
+                    <div className="col-lg-6 ">
+                      <div className="mt-2 d-flex justify-content-center align-items-center">
+                        <button
+                          className="delete-button"
+                          onClick={() => handleDelete(_id)}
+                        >
+                          <i className="fa-solid fa-trash-can"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="right">
-        <div className="handler">
-          <div className="quantity">
-            <button
-              onClick={() => handleQuantity(-1)}
-              className={`${(quantity === 1 || stock === 0) && "disabled"}`}
-            >
-              -
-            </button>
-            <p>{product.quantity}</p>
-            <button
-              onClick={() => handleQuantity(1)}
-              className={`${(quantity === stock || stock === 0) && "disabled"}`}
-            >
-              +
-            </button>
-          </div>
-          <div className="in-stock">
-            <p>In Stock: {stock}</p>
-          </div>
-        </div>
-        <div className="price">$ {price}</div>
       </div>
     </div>
   );

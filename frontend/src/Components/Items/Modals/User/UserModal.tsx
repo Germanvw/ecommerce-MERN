@@ -2,45 +2,34 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uiCloseModal } from "../../../redux/actions/uiActions";
 import { RootState } from "../../../redux/reducer/rootReducer";
-import { formUserImputs, genderOptions, initialUserState } from "./imports";
+import {
+  errorUserProfileInit,
+  formUserImputs,
+  genderOptions,
+  initialUserState,
+} from "./imports";
 import { FormInput } from "../../Forms/FormInput";
 import { customProductStyles } from "../Product/imports";
-
-import Modal from "react-modal";
 import { Dropdown } from "../../Forms/Dropdown";
 import { startAuthUserUpdate } from "../../../redux/actions/authActions";
 import { handleError } from "../../../helpers/handleErrorInput";
+
+import Modal from "react-modal";
 
 export const UserModal = () => {
   const { modal, darkMode } = useSelector((state: RootState) => state.ui);
   const { user } = useSelector((state: RootState) => state.auth);
 
-  const errorInit = {
-    username: true,
-    email: true,
-    picture: true,
-  };
-  const [errors, setErrors] = useState(errorInit);
-
   const dispatch = useDispatch();
+
+  const [errors, setErrors] = useState(errorUserProfileInit);
 
   // States
   const [value, setValue] = useState({ ...user });
-  // Effects
-  useEffect(() => {
-    if (user) {
-      setValue({
-        username: user.username,
-        email: user.email,
-        gender: user.gender,
-        picture: user.picture,
-      });
-    }
-  }, [modal]);
+
   // Functions
 
   const handleChange = ({ target }: any) => {
-    console.log(target.name, target.value);
     setValue({
       ...value,
       [target.name]: target.value,
@@ -53,7 +42,7 @@ export const UserModal = () => {
 
     if (!errors.username && !errors.email && !errors.picture) {
       dispatch(startAuthUserUpdate(value));
-      setErrors(errorInit);
+      setErrors(errorUserProfileInit);
     }
   };
 
@@ -62,6 +51,19 @@ export const UserModal = () => {
     dispatch(uiCloseModal());
     setValue(initialUserState);
   };
+
+  // Effects
+  useEffect(() => {
+    if (user) {
+      setValue({
+        username: user.username,
+        email: user.email,
+        gender: user.gender,
+        picture: user.picture,
+      });
+    }
+  }, [modal]);
+
   useEffect(() => {
     if (user) {
       setErrors({

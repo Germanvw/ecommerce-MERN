@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   uiClearError,
@@ -6,12 +6,17 @@ import {
   uiSetError,
 } from "../../../redux/actions/uiActions";
 import { RootState } from "../../../redux/reducer/rootReducer";
-import { formPasswordInputs, initPasswordState } from "./imports";
+import {
+  errorPasswordInit,
+  formPasswordInputs,
+  initPasswordState,
+} from "./imports";
 import { FormInput } from "../../Forms/FormInput";
 import { customProductStyles } from "../Product/imports";
+import { startAuthChangePassword } from "../../../redux/actions/authActions";
+import { handleError } from "../../../helpers/handleErrorInput";
 
 import Modal from "react-modal";
-import { startAuthChangePassword } from "../../../redux/actions/authActions";
 
 export const PasswordModal = () => {
   const { modal, darkMode } = useSelector((state: RootState) => state.ui);
@@ -20,6 +25,7 @@ export const PasswordModal = () => {
 
   // States
   const [value, setValue] = useState(initPasswordState);
+  const [errors, setErrors] = useState(errorPasswordInit);
 
   // Functions
 
@@ -28,21 +34,24 @@ export const PasswordModal = () => {
       ...value,
       [target.name]: target.value,
     });
+    handleError(target, errors, setErrors);
   };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
     dispatch(uiClearError());
-    if (value.password === value.confirmPassword) {
-      dispatch(
-        startAuthChangePassword({
-          password: value.oldPassword,
-          newPassword: value.password,
-        })
-      );
-      setValue(initPasswordState);
-    } else {
-      dispatch(uiSetError("Passwords must match"));
+    if (!errors.password && !errors.confirmPassword && !errors.oldPassword) {
+      if (value.password === value.confirmPassword) {
+        dispatch(
+          startAuthChangePassword({
+            password: value.oldPassword,
+            newPassword: value.password,
+          })
+        );
+        setValue(initPasswordState);
+      } else {
+        dispatch(uiSetError("Passwords must match"));
+      }
     }
   };
 
@@ -57,7 +66,7 @@ export const PasswordModal = () => {
       isOpen={modal.password}
       onRequestClose={closeModal}
       closeTimeoutMS={200}
-      className="modal modal-product"
+      className={`${darkMode ? "modal-d" : "modal-l"} modal-password modal-x`}
       style={customProductStyles}
       overlayClassName="modal-background"
       ariaHideApp={false}
@@ -71,6 +80,7 @@ export const PasswordModal = () => {
               key={input.name}
               value={value[input.name]}
               handleChange={handleChange}
+              error={errors![input.name]}
               {...input}
             />
           ))}

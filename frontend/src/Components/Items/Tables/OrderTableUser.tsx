@@ -1,22 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { confirmCancelOrder } from "../../hooks/useConfirmModal";
 import { orderSetActive } from "../../redux/actions/OrderActions";
 import { uiOpenModalOrder } from "../../redux/actions/uiActions";
+import { headerTableUser } from "./imports";
 
 import "./index.scss";
 
 export const OrderTableUser = ({ orders }: any) => {
   const dispatch = useDispatch();
-  const header = [
-    "Id",
-    "Method",
-    "Products",
-    "Total",
-    "Delivered",
-    "Status",
-    "See Details",
-    "Cancel",
-  ];
+
   const handleCancel = (_id: string) => {
     confirmCancelOrder(_id, dispatch);
   };
@@ -25,25 +17,49 @@ export const OrderTableUser = ({ orders }: any) => {
     dispatch(orderSetActive(order));
     dispatch(uiOpenModalOrder());
   };
+
   return (
     <>
-      <table className="table-order-user">
+      <table className="table custom-table">
         <thead>
-          <tr>
-            {header.map((item: string) => (
-              <th key={item}>{item}</th>
-            ))}
+          <tr className="">
+            {headerTableUser.map((item: string) => {
+              console.log(item);
+              if (item === "Products") {
+                return (
+                  <th
+                    scope="col"
+                    className="d-sm-none d-md-block d-none d-sm-block"
+                  >
+                    {item}
+                  </th>
+                );
+              } else if (item === "Delivered") {
+                return (
+                  <th
+                    scope="col"
+                    className="d-sm-none d-md-block d-none d-sm-block"
+                  >
+                    {item}
+                  </th>
+                );
+              } else {
+                return <th scope="col">{item}</th>;
+              }
+            })}
           </tr>
         </thead>
         <tbody>
           {orders.length > 0 &&
             orders.map((order: any) => (
-              <tr key={order._id}>
-                <td>{`${order._id.slice(0, 7)}...`}</td>
-                <td>{order.paymentMethod ? order.paymentMethod : "None"}</td>
-                <td>{order.cart.length}</td>
-                <td>{`$ ${order.total}`}</td>
-                <td>{order.delivered ? "Yes" : "No"}</td>
+              <tr key={order._id} className="">
+                <td className="d-sm-none d-md-block d-none d-sm-block">
+                  {order.cart.length}
+                </td>
+                <td>{`$${order.total}`}</td>
+                <td className="d-sm-none d-md-block d-none d-sm-block">
+                  {order.delivered ? "Yes" : "No"}
+                </td>
                 <td
                   className={
                     order.status === "Cancelled"
@@ -57,7 +73,7 @@ export const OrderTableUser = ({ orders }: any) => {
                 </td>
                 <td>
                   <button className="more" onClick={() => handleDisplay(order)}>
-                    Show More
+                    Details
                   </button>
                 </td>
                 <td>
@@ -75,36 +91,6 @@ export const OrderTableUser = ({ orders }: any) => {
             ))}
         </tbody>
       </table>
-      {/* <table className="table table-dark">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </table> */}
     </>
   );
 };

@@ -1,83 +1,119 @@
-.cart-item {
-  border-top: 1px solid var(--background-1);
-  padding: 25px 40px;
-  background-color: var(--input-background);
-  color: var(--text-primary);
-  display: flex;
-  justify-content: space-between;
+.cart-item-body {
+  background-color: var(--input-bg);
+  color: var(--text);
   &:last-of-type {
     border-bottom: 1px solid var(--background-1);
   }
-  .left {
-    flex: 2;
-    .left-wrapper {
-      display: flex;
-      img {
-        width: 100px;
+  img {
+    height: 150px;
+    width: auto;
+  }
+  .cart-item-title {
+    a {
+      font-size: 22px;
+      font-weight: 600;
+    }
+  }
+  .handler {
+    display: flex;
+    flex-direction: column;
+    .quantity {
+      button {
+        display: flex;
+        height: 40px;
+        width: 40px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        border-radius: 50%;
       }
-      .left-info {
-        margin-left: 30px;
-        .item-name {
-          font-size: 26px;
-        }
-        .free-shipping {
-          display: flex;
-          align-items: center;
-          margin-top: 25px;
-
-          color: green;
-          a {
-            font-size: 24px;
-          }
-          button {
-            margin-left: 40px;
-            background-color: rgb(184, 34, 34);
-            color: var(--text-primary);
-            padding: 5px 10px;
-            width: 40px;
-            border-radius: 5px;
-          }
+      .disabled {
+        background-color: var(--disabled);
+        color: var(--grey);
+        cursor: not-allowed;
+        &:hover {
+          background-color: var(--disabled);
+          color: var(--grey);
         }
       }
     }
   }
-  .right {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex: 1;
-    .handler {
-      .quantity {
-        border: 1px solid var(--background-1);
-        height: 50px;
-        display: flex;
-        align-items: center;
-        p {
-          font-size: 20px;
-          margin-right: 5px;
-          margin-left: 5px;
-        }
-        button {
-          height: 100%;
-          width: 30px;
-          background-color: var(--input-background);
-          color: var(--button);
-          font-size: 20px;
-        }
-        .disabled {
-          background-color: var(--background-1);
-          cursor: not-allowed;
-        }
-      }
-      .in-stock {
-        margin-top: 10px;
-      }
-    }
-
-    .price {
-      display: flex;
-      align-items: center;
-      font-size: 25px;
-    }
+  .price {
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .delete-button {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    padding: 10px 15px;
   }
 }
+// .left {
+//   flex: 2;
+//   .left-wrapper {
+//     display: flex;
+//     img {
+//       width: 100px;
+//     }
+//     .left-info {
+//       margin-left: 30px;
+//       .item-name {
+//         font-size: 26px;
+//       }
+//       .free-shipping {
+//         display: flex;
+//         align-items: center;
+//         margin-top: 25px;
+
+//         color: green;
+//         a {
+//           font-size: 24px;
+//         }
+//         button {
+//           margin-left: 40px;
+//           background-color: rgb(184, 34, 34);
+//           color: var(--text-primary);
+//           padding: 5px 10px;
+//           width: 40px;
+//           border-radius: 5px;
+//         }
+//       }
+//     }
+//   }
+// }
+// .right {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   flex: 1;
+//   .handler {
+//     .quantity {
+//       border: 1px solid var(--background-1);
+//       height: 50px;
+//       display: flex;
+//       align-items: center;
+//       p {
+//         font-size: 20px;
+//         margin-right: 5px;
+//         margin-left: 5px;
+//       }
+//       button {
+//         height: 100%;
+//         width: 30px;
+//         background-color: var(--input-background);
+//         color: var(--button);
+//         font-size: 20px;
+//       }
+//     }
+//     .in-stock {
+//       margin-top: 10px;
+//     }
+//   }
+
+//   .price {
+//     display: flex;
+//     align-items: center;
+//     font-size: 25px;
+//   }
+// }

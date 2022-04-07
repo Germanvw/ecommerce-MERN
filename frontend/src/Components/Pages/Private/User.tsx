@@ -10,15 +10,15 @@ import { OrderTableUser } from "../../Items/Tables/OrderTableUser";
 import { useEffect } from "react";
 import { startOrderFetchAll } from "../../redux/actions/OrderActions";
 import { OrderModalUser } from "../../Items/Modals/Order/OrderModalUser";
+import UserProfile from "../../Items/Other/UserProfile";
 
 import "./index.scss";
-import UserProfile from "../../Items/Other/UserProfile";
 
 export const User = () => {
   const { user } = useSelector((state: RootState) => state.auth);
   const { orderList } = useSelector((state: RootState) => state.order);
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   // Functions
 
   const handleModalPassword = () => {
@@ -37,8 +37,8 @@ export const User = () => {
   return (
     <div className="user-body">
       <div className="container">
-        <div className="row">
-          <div className="row m-0 pb-5">
+        <div className="row d-flex justify-content-center">
+          <div className="col-lg-4 col-xl-4 col-xs-12 d-flex justify-content-center">
             <UserProfile
               user={user}
               handleModalPassword={handleModalPassword}
@@ -46,7 +46,7 @@ export const User = () => {
             />
           </div>
           <div className="user-orders col-xl-8 col-xs-12">
-            <h2>Your Orders:</h2>
+            <h2 className="mt-5">Your Orders:</h2>
             <div className="table">
               <OrderTableUser orders={orderList} />
             </div>

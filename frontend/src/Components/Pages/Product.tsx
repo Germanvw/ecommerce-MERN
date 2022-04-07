@@ -90,8 +90,6 @@ export const Product = () => {
     }
   }, [product]);
 
-  //el stock lo tengo
-
   return (
     <div className="page-product">
       <div className="container">
@@ -101,10 +99,10 @@ export const Product = () => {
           </button>
         </div>
         <div className="content row m-0">
-          <div className="col-lg-5 col-md-4 col-sm-12 p-1">
-            <img src={image} alt="product image"></img>
+          <div className="col-lg-5 col-md-12 col-sm-12 p-1 d-flex align-items-center">
+            <img src={image} className="img-fluid" alt="product image"></img>
           </div>
-          <div className="right col-lg-7 col-md-8 col-sm-12 p-1">
+          <div className="right col-lg-7 col-md-12 col-sm-12 p-1">
             <div className="category-link">
               Category: <span>{category}</span>
             </div>
