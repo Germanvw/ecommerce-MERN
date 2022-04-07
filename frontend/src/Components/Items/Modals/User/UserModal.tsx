@@ -13,8 +13,9 @@ import { customProductStyles } from "../Product/imports";
 import { Dropdown } from "../../Forms/Dropdown";
 import { startAuthUserUpdate } from "../../../redux/actions/authActions";
 import { handleError } from "../../../helpers/handleErrorInput";
-
 import Modal from "react-modal";
+
+import "./../styles.scss";
 
 export const UserModal = () => {
   const { modal, darkMode } = useSelector((state: RootState) => state.ui);
@@ -73,6 +74,7 @@ export const UserModal = () => {
       });
     }
   }, [user]);
+
   return (
     <Modal
       isOpen={modal.user}
@@ -98,10 +100,10 @@ export const UserModal = () => {
           ))}
           <div className="dropdown-gender">
             <Dropdown
-              options={genderOptions}
-              handleChange={handleChange}
               dwName="gender"
+              options={genderOptions}
               selected={user.gender}
+              handleChange={handleChange}
             />
           </div>
           <button>Modificar</button>

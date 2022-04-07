@@ -1,21 +1,24 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FormInput } from "../../Items/Forms/FormInput";
 import { startCatFetchAll } from "../../redux/actions/categoryActions";
 import { CategoryTable } from "../../Items/Tables/CategoryTable";
 import { uiOpenModalCategory } from "../../redux/actions/uiActions";
 import { CategoryModal } from "../../Items/Modals/Category/CategoryModal";
 import { inputProps } from "../../Items/Modals/Category/imports";
-import { Pagination } from "../../Items/Buttons/Pagination";
-import { DropdownPagination } from "../../Items/Forms/Dropdown";
 import { usePagination } from "../../hooks/usePagination";
 import { useFilterSearch } from "../../hooks/useFilterSearch";
 import { RootState } from "../../redux/reducer/rootReducer";
+import { PaginationNav } from "../../Items/Nav/PaginationNav";
+import { SearchNav } from "../../Items/Nav/SearchNav";
 
-import "./index.scss";
+import "./styles.scss";
+
 export const Categories = () => {
   const { categoryList }: any = useSelector((state: RootState) => state.cat);
+
   const dispatch = useDispatch();
+
+  const pagOptions = [5, 10, 15, 20];
 
   // Hooks
   const {
@@ -41,41 +44,27 @@ export const Categories = () => {
   };
 
   return (
-    <div className="table-bg">
-      <div className="table-body">
-        <div className="header">
-          <FormInput
-            value={filterInput}
-            handleChange={handleChange}
-            {...inputProps}
-          />
-          <button onClick={handleCreate}>Create new</button>
-        </div>
-        <div className="table">
-          <CategoryTable categories={paginatedArray} />
-        </div>
-        <div className="bottom">
-          <div className="total">
-            {`Categories found: ${array && array.length}`}
-          </div>
-          <Pagination
-            length={array.length}
-            perPage={perPage}
-            handlePagination={handlePagination}
-            pagination={pagination}
-            setPagination={setPagination}
-          />
-          <div className="perPage">
-            <DropdownPagination
-              dwName="perPage"
-              handleChange={handlePerPage}
-              options={[5, 10, 15, 20]}
-              setPerPage={setPerPage}
-            />
-          </div>
-        </div>
-        <CategoryModal />
+    <div className="categories-body">
+      <div className="container">
+        <SearchNav
+          filterInput={filterInput}
+          handleChange={handleChange}
+          handleCreate={handleCreate}
+          inputProps={{ ...inputProps }}
+        />
+        <CategoryTable categories={paginatedArray} />
+        <PaginationNav
+          array={array}
+          perPage={perPage}
+          pagination={pagination}
+          pagOptions={pagOptions}
+          setPagination={setPagination}
+          handlePerPage={handlePerPage}
+          handlePagination={handlePagination}
+          setPerPage={setPerPage}
+        />
       </div>
+      <CategoryModal />
     </div>
   );
 };

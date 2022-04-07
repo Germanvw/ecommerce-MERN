@@ -13,6 +13,14 @@ export interface productPropsDocument {
   __v?: number;
 }
 
+export const errorProductInit = {
+  name: true,
+  description: true,
+  image: true,
+  price: true,
+  inStock: true,
+};
+
 export const inputProps = {
   placeholder: "Filter by name...",
   type: "text",

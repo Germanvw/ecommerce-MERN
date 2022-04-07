@@ -9,17 +9,23 @@ interface optionProps {
 interface dropdownProps {
   options: optionProps[];
   dwName: string;
-  handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   selected?: string;
+  handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+}
+
+interface DropdownPagination {
+  options: number[];
+  dwName: string;
+  handleChange: ({ target }: any) => void;
+  setPerPage: (perPage: number) => void;
 }
 
 export const Dropdown = ({
-  options,
   dwName,
+  options,
   selected,
   handleChange,
 }: dropdownProps) => {
-  console.log(selected);
   return (
     <div className="simple-dropdown">
       <label>{dwName}</label>
@@ -45,45 +51,43 @@ export const Dropdown = ({
 };
 
 export const DropdownCategory = ({
-  options,
   dwName,
-  handleChange,
+  options,
   selected,
+  handleChange,
 }: dropdownProps) => {
   return (
-    <select name={dwName} onChange={handleChange}>
-      {options.map(({ _id, name }: any) => {
-        if (selected === _id) {
-          return (
-            <option key={_id} value={_id} selected>
-              {name}
-            </option>
-          );
-        } else {
-          return (
-            <option key={_id} value={_id}>
-              {name}
-            </option>
-          );
-        }
-      })}
-    </select>
+    <div className="simple-dropdown">
+      <label className="m-0">{dwName}</label>
+      <select name={dwName} onChange={handleChange}>
+        {options.map(({ _id, name }: any) => {
+          if (selected === _id) {
+            return (
+              <option key={_id} value={_id} selected>
+                {name}
+              </option>
+            );
+          } else {
+            return (
+              <option key={_id} value={_id}>
+                {name}
+              </option>
+            );
+          }
+        })}
+      </select>
+    </div>
   );
 };
 
 export const DropdownPagination = ({
   options,
   dwName,
-  handleChange,
   setPerPage,
-}: {
-  options: number[];
-  dwName: string;
-  handleChange: ({ target }: any) => void;
-  setPerPage: any;
-}) => {
+  handleChange,
+}: DropdownPagination) => {
   useEffect(() => {
-    setPerPage(options[0]);
+    setPerPage(options[0]!);
   }, [options[0]]);
 
   return (

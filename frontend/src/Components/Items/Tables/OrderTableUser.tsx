@@ -19,78 +19,73 @@ export const OrderTableUser = ({ orders }: any) => {
   };
 
   return (
-    <>
-      <table className="table custom-table">
-        <thead>
-          <tr className="">
-            {headerTableUser.map((item: string) => {
-              console.log(item);
-              if (item === "Products") {
-                return (
-                  <th
-                    scope="col"
-                    className="d-sm-none d-md-block d-none d-sm-block"
-                  >
-                    {item}
-                  </th>
-                );
-              } else if (item === "Delivered") {
-                return (
-                  <th
-                    scope="col"
-                    className="d-sm-none d-md-block d-none d-sm-block"
-                  >
-                    {item}
-                  </th>
-                );
-              } else {
-                return <th scope="col">{item}</th>;
-              }
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {orders.length > 0 &&
-            orders.map((order: any) => (
-              <tr key={order._id} className="">
-                <td className="d-sm-none d-md-block d-none d-sm-block">
-                  {order.cart.length}
-                </td>
-                <td>{`$${order.total}`}</td>
-                <td className="d-sm-none d-md-block d-none d-sm-block">
-                  {order.delivered ? "Yes" : "No"}
-                </td>
-                <td
-                  className={
-                    order.status === "Cancelled"
-                      ? "cancelled"
-                      : order.status === "Paid"
-                      ? "paid"
-                      : "pending"
-                  }
+    <table className="table custom-table">
+      <thead>
+        <tr>
+          {headerTableUser.map((item: string) => {
+            if (item === "Products") {
+              return (
+                <th scope="col" className="d-md-table-cell d-none" key={item}>
+                  {item}
+                </th>
+              );
+            } else if (item === "Delivered") {
+              return (
+                <th scope="col" className="d-md-table-cell d-none" key={item}>
+                  {item}
+                </th>
+              );
+            } else {
+              return (
+                <th scope="col" className="text-center" key={item}>
+                  {item}
+                </th>
+              );
+            }
+          })}
+        </tr>
+      </thead>
+      <tbody>
+        {orders.length > 0 &&
+          orders.map((order: any) => (
+            <tr key={order._id}>
+              <td className="d-md-table-cell d-none text-center align-middle">
+                {order.cart.length}
+              </td>
+              <td className="text-center align-middle">{`$${order.total}`}</td>
+              <td className="d-md-table-cell d-none text-center align-middle">
+                {order.delivered ? "Yes" : "No"}
+              </td>
+              <td
+                className={`text-center align-middle ${
+                  order.status === "Cancelled"
+                    ? "cancelled"
+                    : order.status === "Paid"
+                    ? "paid"
+                    : "pending"
+                }`}
+              >
+                {order.status}
+              </td>
+              <td className="text-center align-middle">
+                <button className="more" onClick={() => handleDisplay(order)}>
+                  Details
+                </button>
+              </td>
+              <td className="text-center align-middle">
+                <button
+                  className={`cancel ${
+                    order.status === "Cancelled" && "disabled"
+                  }`}
+                  onClick={() => handleCancel(order._id)}
+                  disabled={order.status === "Cancelled"}
                 >
-                  {order.status}
-                </td>
-                <td>
-                  <button className="more" onClick={() => handleDisplay(order)}>
-                    Details
-                  </button>
-                </td>
-                <td>
-                  <button
-                    className={`cancel ${
-                      order.status === "Cancelled" && "disabled"
-                    }`}
-                    onClick={() => handleCancel(order._id)}
-                    disabled={order.status === "Cancelled"}
-                  >
-                    Cancel
-                  </button>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
-    </>
+                  Cancel
+                </button>
+              </td>
+            </tr>
+          ))}
+      </tbody>
+    </table>
   );
 };

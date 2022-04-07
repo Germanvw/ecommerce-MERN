@@ -8,10 +8,10 @@ import { RootState } from "../redux/reducer/rootReducer";
 import { startProdFetchAll } from "../redux/actions/productActions";
 import { inputProps } from "../Items/Modals/Product/imports";
 import { ProductCard } from "../Items/Cards/ProductCard";
-import { Pagination } from "../Items/Buttons/Pagination";
-import { DropdownPagination } from "../Items/Forms/Dropdown";
+import { PaginationNav } from "../Items/Nav/PaginationNav";
 
 import "./index.scss";
+
 export const Products = () => {
   const { productList } = useSelector((state: RootState) => state.prod);
 
@@ -49,31 +49,21 @@ export const Products = () => {
             {...inputProps}
           />
         </div>
-        <div className="product-display">
+        <div className="product-display d-flex justify-content-center">
           {paginatedArray.map((product: any, index: any) => (
             <ProductCard product={product} key={product._id} index={index} />
           ))}
         </div>
-        <div className="pagination-body">
-          <div className="pag-total">{`Products found: ${
-            array && array.length
-          }`}</div>
-          <Pagination
-            length={array.length}
-            perPage={perPage}
-            handlePagination={handlePagination}
-            pagination={pagination}
-            setPagination={setPagination}
-          />
-          <div className="perPage">
-            <DropdownPagination
-              dwName="perPage"
-              handleChange={handlePerPage}
-              options={pagOptions}
-              setPerPage={setPerPage}
-            />
-          </div>
-        </div>
+        <PaginationNav
+          array={array}
+          perPage={perPage}
+          pagination={pagination}
+          pagOptions={pagOptions}
+          setPagination={setPagination}
+          handlePerPage={handlePerPage}
+          handlePagination={handlePagination}
+          setPerPage={setPerPage}
+        />
       </div>
     </div>
   );

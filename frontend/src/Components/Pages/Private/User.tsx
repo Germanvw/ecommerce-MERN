@@ -47,9 +47,7 @@ export const User = () => {
           </div>
           <div className="user-orders col-xl-8 col-xs-12">
             <h2 className="mt-5">Your Orders:</h2>
-            <div className="table">
-              <OrderTableUser orders={orderList} />
-            </div>
+            <OrderTableUser orders={orderList} />
           </div>
         </div>
         <PasswordModal />

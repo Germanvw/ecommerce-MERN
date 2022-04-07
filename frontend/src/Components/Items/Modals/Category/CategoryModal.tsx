@@ -9,13 +9,15 @@ import { uiCloseModal } from "../../../redux/actions/uiActions";
 import { RootState } from "../../../redux/reducer/rootReducer";
 import {
   customCategoryStyles,
+  errorCategoryInit,
   formCategoryImputs,
   initialCategoryState,
 } from "./imports";
 import { FormInput } from "../../Forms/FormInput";
-
+import { handleError } from "../../../helpers/handleErrorInput";
 import Modal from "react-modal";
-import "./../index.scss";
+
+import "./../styles.scss";
 
 export const CategoryModal = () => {
   const { modal, darkMode } = useSelector((state: RootState) => state.ui);
@@ -25,30 +27,36 @@ export const CategoryModal = () => {
 
   // States
   const [category, setCategory] = useState(initialCategoryState);
+  const [errors, setErrors] = useState(errorCategoryInit);
+
+  //Functions
 
   const handleFormChange = ({ target }: any) => {
     setCategory({
       ...category,
       [target.name]: target.value,
     });
+    handleError(target, errors, setErrors);
   };
-
-  // Functions
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (active) {
-      dispatch(startCatUpdate(category));
-    } else {
-      dispatch(startCatAdd(category));
+
+    if (!errors.name && !errors.description && !errors.image) {
+      if (active) {
+        dispatch(startCatUpdate(category));
+      } else {
+        dispatch(startCatAdd(category));
+      }
+      setErrors(errorCategoryInit);
     }
   };
 
   //Modal handling
   const closeModal = () => {
     dispatch(uiCloseModal());
-    setCategory(initialCategoryState);
     dispatch(catClearActive());
+    setCategory(initialCategoryState);
   };
 
   // Effects
@@ -58,13 +66,26 @@ export const CategoryModal = () => {
     } else {
       setCategory(initialCategoryState);
     }
+  }, [modal]);
+
+  useEffect(() => {
+    if (active !== null) {
+      setErrors({
+        name: false,
+        description: false,
+        image: false,
+      });
+    } else {
+      setErrors(errorCategoryInit);
+    }
   }, [active]);
+
   return (
     <Modal
       isOpen={modal.category}
       onRequestClose={closeModal}
       closeTimeoutMS={200}
-      className="modal"
+      className={`${darkMode ? "modal-d" : "modal-l"} modal-category modal-x`}
       style={customCategoryStyles}
       overlayClassName="modal-background"
       ariaHideApp={false}
@@ -78,6 +99,7 @@ export const CategoryModal = () => {
               key={input.name}
               value={category[input.name]}
               handleChange={handleFormChange}
+              error={errors![input.name]}
               {...input}
             />
           ))}

@@ -4,9 +4,11 @@ import { uiCloseModal } from "../../../redux/actions/uiActions";
 import { RootState } from "../../../redux/reducer/rootReducer";
 import { customProductStyles } from "../Product/imports";
 import { orderClearActive } from "../../../redux/actions/OrderActions";
-
-import Modal from "react-modal";
 import { OrderTableUserDetails } from "../../Tables/OrderTableUserDetails";
+import Modal from "react-modal";
+
+import "./../styles.scss";
+
 export const OrderModalUser = () => {
   const { modal, darkMode } = useSelector((state: RootState) => state.ui);
   const { active } = useSelector((state: RootState) => state.order);

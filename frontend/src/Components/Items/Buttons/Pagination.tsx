@@ -1,28 +1,31 @@
-import "./index.scss";
 import { useEffect } from "react";
+
+import "./index.scss";
+
+interface PaginationProps {
+  perPage: number;
+  howMany: number;
+  pagination: any;
+  handlePagination: (value: number) => void;
+  setPagination: (value: any) => void;
+}
 
 export const Pagination = ({
   perPage,
-  length,
-  handlePagination,
+  howMany,
   pagination,
+  handlePagination,
   setPagination,
-}: {
-  perPage: number;
-  length: number;
-  handlePagination: (value: number) => void;
-  pagination: any;
-  setPagination: any;
-}) => {
+}: PaginationProps) => {
   const { index, last, first } = pagination;
 
   useEffect(() => {
     setPagination({
       ...pagination,
       index: 1,
-      last: Math.ceil(length / perPage),
+      last: Math.ceil(howMany / perPage),
     });
-  }, [perPage, length]);
+  }, [perPage, howMany]);
 
   return (
     <div className="pagination-body">

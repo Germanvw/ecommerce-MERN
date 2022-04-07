@@ -15,8 +15,9 @@ import { FormInput } from "../../Forms/FormInput";
 import { customProductStyles } from "../Product/imports";
 import { startAuthChangePassword } from "../../../redux/actions/authActions";
 import { handleError } from "../../../helpers/handleErrorInput";
-
 import Modal from "react-modal";
+
+import "./../styles.scss";
 
 export const PasswordModal = () => {
   const { modal, darkMode } = useSelector((state: RootState) => state.ui);

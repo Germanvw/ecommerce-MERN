@@ -42,6 +42,12 @@ interface formCategoryProps {
   type: string;
 }
 
+export const errorCategoryInit = {
+  name: true,
+  image: true,
+  description: true,
+};
+
 export const formCategoryImputs = [
   { label: "Name", name: "name", type: "text", placeholder: "Name..." },
   {
