@@ -27,6 +27,12 @@ export const startOrderUpdate = (order: any) => {
 export const startOrderAdd = (order: any) => {
   return async (dispatch: any) => {
     try {
+      //Add 'review' to order
+
+      order.forEach((product: any) => {
+        product.review = false;
+      });
+      console.log(order);
       dispatch(uiStartLoad());
       const req = await fetchToken("orders", order, "post");
       const answ = await req.json();

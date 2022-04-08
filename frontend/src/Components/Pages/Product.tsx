@@ -6,6 +6,7 @@ import { StarRating } from "../Items/Reviews/StarRating";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/reducer/rootReducer";
 import { handleProductCart } from "../helpers/handleProductCart";
+import { fetchRatings } from "../helpers/handleFetchRatings";
 
 export const Product = () => {
   const { cart } = useSelector((state: RootState) => state.cart);
@@ -55,22 +56,18 @@ export const Product = () => {
     handleProductCart(productCart, cart, dispatch);
   };
 
-  const fetchRatings = async () => {
-    const req = await fetchNoToken(`rating/${id}`, {});
-    const answ = await req.json();
-    if (!answ.status) return;
-    setRatingList(answ.ratings);
+  const handleReq = async () => {
+    const r = await fetchRatings(id!);
+    setRatingList(r);
   };
 
   useEffect(() => {
     getProduct();
-    fetchRatings();
+    handleReq();
   }, [id]);
 
   useEffect(() => {
     if (product) {
-      // get reviews
-      // get current in cart
       cart.filter((item: any) => {
         if (item._id === _id) {
           setQuantity(item.quantity);
@@ -82,7 +79,6 @@ export const Product = () => {
   useEffect(() => {
     if (ratingList.length > 0) {
       const current = getRating(ratingList);
-      // setRating(getRating(ratingList));
       setRating(Math.floor(current));
     }
   }, [ratingList]);

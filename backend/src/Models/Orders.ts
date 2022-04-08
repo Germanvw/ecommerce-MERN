@@ -13,6 +13,7 @@ export interface ProductsOrder {
   name: string;
   price: number;
   quantity: number;
+  rated: boolean;
 }
 
 interface IOrders {

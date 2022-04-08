@@ -59,6 +59,7 @@ export const Checkout = () => {
       navigate("/user");
     }
   };
+
   useEffect(() => {
     if (order) {
       if (order.paymentMethod !== "None") {

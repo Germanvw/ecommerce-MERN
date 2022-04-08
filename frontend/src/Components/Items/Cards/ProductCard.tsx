@@ -1,16 +1,46 @@
 import { AddCartButton } from "../Buttons/AddCartButton";
 import { StarRating } from "../Reviews/StarRating";
 import { useNavigate } from "react-router-dom";
+import { fetchNoToken } from "../../hooks/useFetch";
+import { useEffect, useState } from "react";
+import { getRating } from "../../helpers/handleGetRating";
+import { fetchRatings } from "../../helpers/handleFetchRatings";
 
 import "./index.scss";
 
 export const ProductCard = ({ product, index }: any) => {
+  const navigate = useNavigate();
+
   const { name, image } = product;
 
-  const navigation = useNavigate();
+  const [currentProduct, setCurrentProduct] = useState(null);
+  const [rating, setRating] = useState(0);
+  const [ratingList, setRatingList] = useState([]);
 
-  const rating = 4.5;
-  const amountReview = 25;
+  const getProduct = async () => {
+    const req = await fetchNoToken(`products/${product._id}`, {});
+    const answ = await req.json();
+
+    if (!answ.status) return navigate("/products");
+    setCurrentProduct(answ.product);
+  };
+
+  const handleReq = async () => {
+    const r = await fetchRatings(product._id);
+    setRatingList(r);
+  };
+
+  useEffect(() => {
+    getProduct();
+    handleReq();
+  }, [product]);
+
+  useEffect(() => {
+    if (ratingList.length > 0) {
+      const current = getRating(ratingList);
+      setRating(Math.floor(current));
+    }
+  }, [ratingList]);
 
   return (
     <div
@@ -21,11 +51,11 @@ export const ProductCard = ({ product, index }: any) => {
       <div className="card-body text-center">
         <div className="rating d-flex justify-content-center align-items-center mt-2">
           <StarRating stars={rating} />
-          <div className="reviews px-3">({amountReview})</div>
+          <div className="reviews px-3">({ratingList.length})</div>
         </div>
         <h5 className="pt-2">{name}</h5> <span>{`$ ${product.price}`}</span>
         <div className="cart-button mt-1 px-2 d-flex justify-content-around align-items-center">
-          <button onClick={() => navigation(`/products/${product._id}`)}>
+          <button onClick={() => navigate(`/products/${product._id}`)}>
             <i className="fa-solid fa-circle-info"></i>
           </button>
           <AddCartButton product={product} />
