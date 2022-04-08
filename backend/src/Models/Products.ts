@@ -1,4 +1,5 @@
 import mongoose, { Schema, model } from "mongoose";
+import { IRating } from "./Rating";
 
 interface IProducts {
   name: string;

@@ -10,34 +10,17 @@ import { handleProductCart } from "../helpers/handleProductCart";
 export const Product = () => {
   const { cart } = useSelector((state: RootState) => state.cart);
   const { id } = useParams();
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-  const reviews = [
-    {
-      _id: "1",
-      uid: "6247e9801ef88052fd5a5182",
-      comment: "Nice product",
-      rating: 5,
-    },
-    {
-      _id: "2",
-      uid: "6248a0f03f136db4eab1d83e",
-      comment: "I really like this product",
-      rating: 2,
-    },
-    {
-      _id: "3",
-      uid: "6249d9c182727434a3f1bd8d",
-      comment: "Could be better",
-      rating: 2,
-    },
-  ];
 
   //States
   const [product, setProduct] = useState<any>("");
-  const [rating, setRating] = useState(2);
+  const [rating, setRating] = useState(0);
   const [quantity, setQuantity] = useState(0);
+  const [ratingList, setRatingList] = useState([]);
+
   //destructuring
   const { _id, name, category, description, image, price, inStock } = product;
 
@@ -52,7 +35,7 @@ export const Product = () => {
   const getRating = (reviews: any) => {
     let sum = 0;
     reviews.forEach((review: any) => {
-      sum += review.rating;
+      sum += review.stars;
     });
     return sum / reviews.length;
   };
@@ -72,15 +55,21 @@ export const Product = () => {
     handleProductCart(productCart, cart, dispatch);
   };
 
+  const fetchRatings = async () => {
+    const req = await fetchNoToken(`rating/${id}`, {});
+    const answ = await req.json();
+    if (!answ.status) return;
+    setRatingList(answ.ratings);
+  };
+
   useEffect(() => {
     getProduct();
+    fetchRatings();
   }, [id]);
 
   useEffect(() => {
     if (product) {
       // get reviews
-      setRating(getRating(reviews));
-
       // get current in cart
       cart.filter((item: any) => {
         if (item._id === _id) {
@@ -89,6 +78,14 @@ export const Product = () => {
       });
     }
   }, [product]);
+
+  useEffect(() => {
+    if (ratingList.length > 0) {
+      const current = getRating(ratingList);
+      // setRating(getRating(ratingList));
+      setRating(Math.floor(current));
+    }
+  }, [ratingList]);
 
   return (
     <div className="page-product">
@@ -107,8 +104,10 @@ export const Product = () => {
               Category: <span>{category}</span>
             </div>
             <h2 className="mt-4 mb-3">{name}</h2>
-            <StarRating stars={rating} />
-            <p>{rating}</p>
+            <div className="d-flex align-items-center">
+              <StarRating stars={rating} />
+              <p className="m-0 mx-2">{rating} Reviews</p>
+            </div>
             <p className="my-3">{description}</p>
             <h4>Price: ${price}</h4>
             <div className="product mt-4">
@@ -144,8 +143,8 @@ export const Product = () => {
           </div>
         </div>
         <div className="row m-0">
-          {reviews.length > 0 ? (
-            <ReviewsList reviews={reviews} />
+          {ratingList && ratingList.length > 0 ? (
+            <ReviewsList reviews={ratingList} />
           ) : (
             <div>
               <p>No reviews found</p>

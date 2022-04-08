@@ -94,3 +94,23 @@ export const userRenewToken = async (req: any, res: Response) => {
     return res.status(500).json({ status: false, msg: "Error on request" });
   }
 };
+
+export const getUserInfo = async (req: any, res: Response) => {
+  const uid = req.params.id;
+  try {
+    const userObj = await User.findOne({ _id: uid }).select("-password");
+    if (!userObj) {
+      return res.status(400).json({ status: false, msg: "User not found" });
+    }
+    const userData = {
+      uid: uid,
+      username: userObj.username,
+      picture: userObj.picture,
+    };
+
+    //found
+    return res.json({ status: true, msg: "User found", user: userData });
+  } catch (err) {
+    return res.status(500).json({ status: false, msg: "Error on request" });
+  }
+};

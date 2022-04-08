@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 export const StarRating = ({ stars }: any) => {
-  const [starsArray, setStarsArray] = useState(getStars(stars));
+  const [array, setArray] = useState([0, 0, 0, 0, 0]);
+
+  useEffect(() => {
+    const answ = getStars(stars);
+    if (answ!.length > 0) {
+      setArray(answ!);
+    }
+  }, [stars]);
 
   return (
     <div className="d-flex">
-      {starsArray?.map((star, index) => {
+      {array?.map((star, index) => {
         if (star === 100 || star === 0) {
           return (
             <i

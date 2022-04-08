@@ -28,7 +28,8 @@ app.use("/api/categories", require("./routes/categories"));
 app.use("/api/users", require("./routes/users"));
 //api/orders
 app.use("/api/orders", require("./routes/orders"));
-// //
+//api/rating
+app.use("/api/rating", require("./routes/rating"));
 
 //Listen
 app.listen(process.env.PORT, () =>
