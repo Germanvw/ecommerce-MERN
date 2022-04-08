@@ -24,9 +24,7 @@ export const PaginationNav = ({
 }: PaginationNavInterface) => {
   return (
     <div className="pagination-body justify-content-around">
-      <div className="pag-total">
-        {`Products found: ${array && array.length}`}
-      </div>
+      <div className="pag-total">{`Found: ${array && array.length}`}</div>
       <div className="pagination">
         <Pagination
           perPage={perPage}

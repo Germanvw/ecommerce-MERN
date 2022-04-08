@@ -1,20 +1,16 @@
 import { useEffect } from "react";
-import { inputProps } from "../../Items/Modals/Product/imports";
 import { useDispatch, useSelector } from "react-redux";
-import { startProdFetchAll } from "../../redux/actions/productActions";
-import { ProductModal } from "../../Items/Modals/Product/ProductModal";
-import { ProductTable } from "../../Items/Tables/ProductTable";
-import { uiOpenModalProduct } from "../../redux/actions/uiActions";
-import { usePagination } from "../../hooks/usePagination";
 import { useFilterSearch } from "../../hooks/useFilterSearch";
-import { RootState } from "../../redux/reducer/rootReducer";
+import { usePagination } from "../../hooks/usePagination";
+import { inputProps } from "../../Items/Modals/Category/imports";
 import { PaginationNav } from "../../Items/Nav/PaginationNav";
 import { SearchNav } from "../../Items/Nav/SearchNav";
+import { OrderTable } from "../../Items/Tables/OrderTable";
+import { startOrderAdmin } from "../../redux/actions/OrderActions";
+import { RootState } from "../../redux/reducer/rootReducer";
 
-import "./styles.scss";
-
-export const Products = () => {
-  const { productList } = useSelector((state: RootState) => state.prod);
+export const Orders = () => {
+  const { orderList } = useSelector((state: RootState) => state.order);
 
   const dispatch = useDispatch();
 
@@ -31,27 +27,22 @@ export const Products = () => {
   }: any = usePagination();
 
   const { filterInput, handleChange, paginatedArray, array }: any =
-    useFilterSearch(pagination, perPage, productList);
+    useFilterSearch(pagination, perPage, orderList);
 
   //Effects
   useEffect(() => {
-    dispatch(startProdFetchAll());
+    dispatch(startOrderAdmin());
   }, []);
 
-  const handleCreate = () => {
-    dispatch(uiOpenModalProduct());
-  };
-
   return (
-    <div className="products-admin-body">
+    <div className="orders-admin-body">
       <div className="container">
         <SearchNav
           filterInput={filterInput}
           handleChange={handleChange}
-          handleCreate={handleCreate}
           inputProps={{ ...inputProps }}
         />
-        <ProductTable products={paginatedArray} />
+        <OrderTable orders={paginatedArray} />
         <PaginationNav
           array={array}
           perPage={perPage}
@@ -63,7 +54,7 @@ export const Products = () => {
           setPerPage={setPerPage}
         />
       </div>
-      <ProductModal />
+      {/* <OrderModal /> */}
     </div>
   );
 };

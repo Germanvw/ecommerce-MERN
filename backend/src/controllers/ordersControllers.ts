@@ -1,6 +1,7 @@
 import { Response } from "express";
 import { cartTotal } from "../helpers/cartTotal";
 import { validateProducts, handleStock } from "../helpers/validateStock";
+
 import Orders, { OrdersDocument } from "../Models/Orders";
 
 export const createOrder = async (req: any, res: Response) => {
@@ -120,7 +121,6 @@ export const cancelOrder = async (req: any, res: Response) => {
 
 export const fetchOrderUser = async (req: any, res: Response) => {
   const { user } = req;
-
   try {
     const orders = await Orders.find({ uid: user.uid })
       .select("-createdAt")
@@ -145,7 +145,6 @@ export const fetchOrderUser = async (req: any, res: Response) => {
 
 export const fetchOrder = async (req: any, res: Response) => {
   const { user } = req;
-
   try {
     const order = await Orders.findById(req.params.id);
 
@@ -169,5 +168,28 @@ export const fetchOrder = async (req: any, res: Response) => {
     });
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const fetchOrderAdmin = async (req: any, res: Response) => {
+  try {
+    const orders = await Orders.find()
+      .select("-createdAt")
+      .select("-__v")
+      .select("-updatedAt");
+
+    if (orders.length === 0) {
+      return res.status(400).json({
+        status: false,
+        msg: "No Orders found",
+      });
+    }
+
+    return res.status(201).json({
+      status: true,
+      orders,
+    });
+  } catch (err) {
+    return res.status(500).json({ status: false, msg: "Error on request" });
   }
 };

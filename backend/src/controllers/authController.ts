@@ -27,7 +27,8 @@ export const registerUser = async (req: Request, res: Response) => {
       picture,
       isAdmin: false,
     });
-    //Save user c
+
+    //Save user
     newUser.save();
     return res.status(201).json({ status: true, msg: "User registered" });
   } catch (err) {

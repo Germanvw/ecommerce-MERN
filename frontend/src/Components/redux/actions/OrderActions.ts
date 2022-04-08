@@ -64,6 +64,24 @@ export const startOrderFetchAll = () => {
   };
 };
 
+export const startOrderAdmin = () => {
+  return async (dispatch: any) => {
+    try {
+      dispatch(uiStartLoad());
+      const req = await fetchToken("orders/admin", {});
+      const answ = await req.json();
+      if (answ.status) {
+        dispatch(orderFetchAll(answ.orders));
+      } else {
+        dispatch(uiSetError(answ.msg));
+      }
+      dispatch(uiEndLoad());
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 export const startOrderCancel = (_id: string) => {
   return async (dispatch: any) => {
     try {

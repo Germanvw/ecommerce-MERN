@@ -5,6 +5,8 @@ import { RootState } from "../../../redux/reducer/rootReducer";
 import { customProductStyles } from "../Product/imports";
 import { orderClearActive } from "../../../redux/actions/OrderActions";
 import { OrderTableUserDetails } from "../../Tables/OrderTableUserDetails";
+import { handleError } from "../../../helpers/handleErrorInput";
+
 import Modal from "react-modal";
 
 import "./../styles.scss";
@@ -26,7 +28,7 @@ export const OrderModalUser = () => {
       isOpen={modal.order}
       onRequestClose={closeModal}
       closeTimeoutMS={200}
-      className="modal modal-order-user-detail"
+      className={`${darkMode ? "modal-d" : "modal-l"} modal-order-user modal-x`}
       style={customProductStyles}
       overlayClassName="modal-background"
       ariaHideApp={false}
@@ -35,33 +37,50 @@ export const OrderModalUser = () => {
         <h1>Order Details.</h1>
         <h3>ID: {active._id}</h3>
         <OrderTableUserDetails order={active} />
-        <div className="extra-info">
-          <div
-            className={`payment-method ${
-              active.paymentMethod === "None" && "cancelled"
-            }`}
-          >
-            Payment: <p>{active.paymentMethod}</p>
+        <div className="d-flex justify-content-around w-100">
+          <div className="row m-0 w-100 text-center">
+            <div className="col-md-6 d-flex justify-content-between">
+              <div className="payment-method">
+                Payment:
+                <p
+                  className={`${
+                    active.paymentMethod === "None" && "cancelled"
+                  }`}
+                >
+                  {active.paymentMethod}
+                </p>
+              </div>
+              <div className="status">
+                Status:
+                <p
+                  className={`${
+                    active.status === "Cancelled"
+                      ? "cancelled"
+                      : active.status === "Paid"
+                      ? "paid"
+                      : "pending"
+                  }`}
+                >
+                  {active.status}
+                </p>
+              </div>
+              <div className="delivered">
+                Delivered:
+                <p
+                  className={`delivered ${
+                    active.delivered ? "paid" : "cancelled"
+                  }`}
+                >
+                  {active.delivered ? "Yes" : "No"}
+                </p>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="total">Total: ${active.total}</div>
+            </div>
+            <button onClick={closeModal}>Cerrar</button>
           </div>
-          <div
-            className={`status ${
-              active.status === "Cancelled"
-                ? "cancelled"
-                : active.status === "Paid"
-                ? "paid"
-                : "pending"
-            }`}
-          >
-            Status: <p>{active.status}</p>
-          </div>
-          <div
-            className={`delivered ${active.delivered ? "paid" : "cancelled"}`}
-          >
-            Delivered: <p>{active.delivered ? "Yes" : "No"}</p>
-          </div>
-          <div className="total">Total: ${active.total}</div>
         </div>
-        <button onClick={closeModal}>Cerrar</button>
       </div>
     </Modal>
   );

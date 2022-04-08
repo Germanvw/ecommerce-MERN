@@ -25,3 +25,12 @@ export const headerTableProducts = [
   "Update",
   "Delete",
 ];
+
+export const headerTableOrderUser = [
+  "Id",
+  "Img",
+  "Name",
+  "Price",
+  "Quantity",
+  "Total",
+];

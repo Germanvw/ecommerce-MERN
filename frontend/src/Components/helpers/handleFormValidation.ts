@@ -16,7 +16,6 @@ export const handleRegisterValidation = ({
 }: RegisterValidation) => {};
 
 export const handleValidate = (value: string, type: string) => {
-  console.log(value, type);
   switch (type) {
     case "text":
       return value.length > 3 ? true : false;

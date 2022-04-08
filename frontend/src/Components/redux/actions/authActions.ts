@@ -22,6 +22,9 @@ export const startAuthLogin = (form: any) => {
   return async (dispatch: any) => {
     try {
       dispatch(uiStartLoad());
+
+      form.email = form.email.toLowerCase();
+
       const req = await fetchNoToken("auth/login", form, "POST");
       const answ = await req.json();
 
@@ -48,6 +51,9 @@ export const startAuthRegister = (form: any) => {
   return async (dispatch: any) => {
     try {
       dispatch(uiStartLoad());
+
+      form.email = form.email.toLowerCase();
+
       const req = await fetchNoToken("auth/register", form, "POST");
       const answ = await req.json();
       if (answ.status) {

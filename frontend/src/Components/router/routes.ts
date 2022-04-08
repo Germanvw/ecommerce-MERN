@@ -7,6 +7,7 @@ import { Register } from "../Pages/auth/Register";
 //Admin
 import { Categories as AdminCategories } from "../Pages/admin/Categories";
 import { Products as AdminProducts } from "../Pages/admin/Products";
+import { Orders as AdminOrders } from "../Pages/admin/Orders";
 //User
 import { User } from "../Pages/Private/User";
 import { Cart } from "../Pages/Private/Cart";
@@ -83,5 +84,10 @@ export const adminRoutes: Route[] = [
     name: "Products",
     path: "admin/products",
     Component: AdminProducts,
+  },
+  {
+    name: "Products",
+    path: "admin/orders",
+    Component: AdminOrders,
   },
 ];

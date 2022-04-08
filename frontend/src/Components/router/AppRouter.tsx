@@ -9,11 +9,11 @@ import { AdminRoutes } from "./AdminRoutes";
 // Rutas dinamicas
 import { publicRoutes, authRoutes, unAuthRoutes, adminRoutes } from "./routes";
 import { startAuthCheck } from "../redux/actions/authActions";
-
-import Swal from "sweetalert2";
-import "../../styles/styles.scss";
 import { Navbar } from "../Items/Nav/Navbar";
 import { startCartFetchAll } from "../redux/actions/cartActions";
+import Swal from "sweetalert2";
+
+import "../../styles/styles.scss";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
