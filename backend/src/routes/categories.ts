@@ -11,11 +11,10 @@ import { validJWT } from "../middlewares/validJWT";
 
 const router = Router();
 router.use(validJWT);
-router.use(isAdmin);
 
-router.post("/", createCategory);
-router.put("/:id", editCategory);
-router.delete("/:id", deleteCategory);
+router.post("/", isAdmin, createCategory);
+router.put("/:id", isAdmin, editCategory);
+router.delete("/:id", isAdmin, deleteCategory);
 router.get("/", fetchCategories);
 router.get("/:id", fetchCategory);
 

@@ -5,6 +5,7 @@ import { usePagination } from "../../hooks/usePagination";
 import { inputProps } from "../../Items/Modals/Category/imports";
 import { PaginationNav } from "../../Items/Nav/PaginationNav";
 import { SearchNav } from "../../Items/Nav/SearchNav";
+import { Sidebar } from "../../Items/Nav/Sidebar";
 import { OrderTable } from "../../Items/Tables/OrderTable";
 import { startOrderAdmin } from "../../redux/actions/OrderActions";
 import { RootState } from "../../redux/reducer/rootReducer";
@@ -36,23 +37,30 @@ export const Orders = () => {
 
   return (
     <div className="orders-admin-body">
-      <div className="container">
-        <SearchNav
-          filterInput={filterInput}
-          handleChange={handleChange}
-          inputProps={{ ...inputProps }}
-        />
-        <OrderTable orders={paginatedArray} />
-        <PaginationNav
-          array={array}
-          perPage={perPage}
-          pagination={pagination}
-          pagOptions={pagOptions}
-          setPagination={setPagination}
-          handlePerPage={handlePerPage}
-          handlePagination={handlePagination}
-          setPerPage={setPerPage}
-        />
+      <div className="row m-0 w-100">
+        <div className="col-md-2 p-0">
+          <Sidebar />
+        </div>
+        <div className="col-md-10 body">
+          <div className="container">
+            <SearchNav
+              filterInput={filterInput}
+              handleChange={handleChange}
+              inputProps={{ ...inputProps }}
+            />
+            <OrderTable orders={paginatedArray} />
+            <PaginationNav
+              array={array}
+              perPage={perPage}
+              pagination={pagination}
+              pagOptions={pagOptions}
+              setPagination={setPagination}
+              handlePerPage={handlePerPage}
+              handlePagination={handlePagination}
+              setPerPage={setPerPage}
+            />
+          </div>
+        </div>
       </div>
       {/* <OrderModal /> */}
     </div>

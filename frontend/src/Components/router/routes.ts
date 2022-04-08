@@ -8,6 +8,8 @@ import { Register } from "../Pages/auth/Register";
 import { Categories as AdminCategories } from "../Pages/admin/Categories";
 import { Products as AdminProducts } from "../Pages/admin/Products";
 import { Orders as AdminOrders } from "../Pages/admin/Orders";
+import { Brands as AdminBrands } from "../Pages/admin/Brands";
+import { Users as AdminUsers } from "../Pages/admin/Users";
 //User
 import { User } from "../Pages/Private/User";
 import { Cart } from "../Pages/Private/Cart";
@@ -17,6 +19,8 @@ import { Product } from "../Pages/Product";
 interface Route {
   path: string;
   name: string;
+  url?: string;
+  icon?: string;
   Component: () => JSX.Element;
 }
 
@@ -78,16 +82,36 @@ export const adminRoutes: Route[] = [
   {
     name: "Categories",
     path: "admin/categories",
+    url: "/admin/categories",
     Component: AdminCategories,
+    icon: "fa-solid fa-bars",
   },
   {
     name: "Products",
     path: "admin/products",
+    url: "/admin/products",
     Component: AdminProducts,
+    icon: "fa-solid fa-bars",
   },
   {
-    name: "Products",
+    name: "Orders",
     path: "admin/orders",
+    url: "/admin/orders",
     Component: AdminOrders,
+    icon: "fa-solid fa-bag-shopping",
+  },
+  {
+    name: "Brands",
+    path: "admin/brands",
+    url: "/admin/brands",
+    Component: AdminBrands,
+    icon: "fa-solid fa-copyright",
+  },
+  {
+    name: "Users",
+    path: "admin/users",
+    url: "/admin/users",
+    Component: AdminUsers,
+    icon: "fa-solid fa-user",
   },
 ];

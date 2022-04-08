@@ -22,3 +22,8 @@
     height: 15px;
   }
 }
+
+.sidebar-body {
+  min-height: calc(100vh - 50px);
+  background-color: var(--bg-body);
+}

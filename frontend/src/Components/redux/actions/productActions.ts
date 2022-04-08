@@ -1,14 +1,15 @@
 import { types } from "../types";
 import { uiCloseModal, uiEndLoad, uiSetError, uiStartLoad } from "./uiActions";
-import { fetchToken } from "../../hooks/useFetch";
+import { fetchNoToken, fetchToken } from "../../hooks/useFetch";
 import { fireModal } from "../../hooks/useModal";
 
-export const startProdFetchAll = () => {
+export const startProdFetchAll = (cat?: string, searchBrand?: string) => {
   return async (dispatch: any) => {
     try {
       dispatch(uiStartLoad());
 
-      const req = await fetchToken("products", {});
+      const req = await fetchNoToken(`products?cat=${cat}&brand=hola`, {});
+
       const answ = await req.json();
 
       if (answ.status) {

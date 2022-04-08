@@ -12,6 +12,7 @@ import { PaginationNav } from "../../Items/Nav/PaginationNav";
 import { SearchNav } from "../../Items/Nav/SearchNav";
 
 import "./styles.scss";
+import { Sidebar } from "../../Items/Nav/Sidebar";
 
 export const Categories = () => {
   const { categoryList }: any = useSelector((state: RootState) => state.cat);
@@ -45,24 +46,31 @@ export const Categories = () => {
 
   return (
     <div className="categories-body">
-      <div className="container">
-        <SearchNav
-          filterInput={filterInput}
-          handleChange={handleChange}
-          handleCreate={handleCreate}
-          inputProps={{ ...inputProps }}
-        />
-        <CategoryTable categories={paginatedArray} />
-        <PaginationNav
-          array={array}
-          perPage={perPage}
-          pagination={pagination}
-          pagOptions={pagOptions}
-          setPagination={setPagination}
-          handlePerPage={handlePerPage}
-          handlePagination={handlePagination}
-          setPerPage={setPerPage}
-        />
+      <div className="row m-0 w-100">
+        <div className="col-md-2 p-0">
+          <Sidebar />
+        </div>
+        <div className="col-md-10">
+          <div className="container">
+            <SearchNav
+              filterInput={filterInput}
+              handleChange={handleChange}
+              handleCreate={handleCreate}
+              inputProps={{ ...inputProps }}
+            />
+            <CategoryTable categories={paginatedArray} />
+            <PaginationNav
+              array={array}
+              perPage={perPage}
+              pagination={pagination}
+              pagOptions={pagOptions}
+              setPagination={setPagination}
+              handlePerPage={handlePerPage}
+              handlePagination={handlePagination}
+              setPerPage={setPerPage}
+            />
+          </div>
+        </div>
       </div>
       <CategoryModal />
     </div>

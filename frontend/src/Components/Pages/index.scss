@@ -1,6 +1,4 @@
 .products-body {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
   min-height: calc(100vh - 52px);
   .body {
     background-color: var(--bg-primary);

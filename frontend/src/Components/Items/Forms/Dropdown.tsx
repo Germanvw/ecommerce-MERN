@@ -10,6 +10,7 @@ interface dropdownProps {
   options: optionProps[];
   dwName: string;
   selected?: string;
+  index?: optionProps;
   handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
@@ -54,12 +55,18 @@ export const DropdownCategory = ({
   dwName,
   options,
   selected,
+  index,
   handleChange,
 }: dropdownProps) => {
   return (
     <div className="simple-dropdown">
       <label className="m-0">{dwName}</label>
       <select name={dwName} onChange={handleChange}>
+        {index && (
+          <option key={index._id} value={index._id} selected disabled>
+            {index.name}
+          </option>
+        )}
         {options.map(({ _id, name }: any) => {
           if (selected === _id) {
             return (

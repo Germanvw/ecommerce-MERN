@@ -94,8 +94,22 @@ export const fetchProduct = async (req: any, res: Response) => {
   }
 };
 export const fetchProducts = async (req: any, res: Response) => {
+  const { cat, brand } = req.query;
+  console.log(req.query);
   try {
-    const products = await Products.find().populate("category");
+    let products;
+    if (cat !== "none" && brand !== "none") {
+      products = await Products.find({ category: cat, brand }).populate(
+        "category"
+      );
+    } else if (cat !== "none") {
+      products = await Products.find({ category: cat }).populate("category");
+    } else if (brand !== "none") {
+      products = await Products.find({ brand }).populate("category");
+    } else {
+      products = await Products.find().populate("category");
+    }
+
     if (products.length === 0) {
       return res.status(400).json({
         status: false,
