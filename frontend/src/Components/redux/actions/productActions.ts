@@ -11,7 +11,6 @@ export const startProdFetchAll = (cat?: string, brand?: string) => {
       const req = await fetchNoToken(`products?cat=${cat}&brand=${brand}`, {});
 
       const answ = await req.json();
-      console.log(answ.products);
       if (answ.status) {
         dispatch(prodFetchAll(answ.products));
       } else {

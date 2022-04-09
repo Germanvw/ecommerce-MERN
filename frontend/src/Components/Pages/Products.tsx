@@ -51,7 +51,7 @@ export const Products = () => {
           <Sidebar />
         </div>
         <div className="col-md-10 body">
-          <div className="filter mb-3">
+          <div className="w-100 d-flex justify-content-center mt-3">
             <FormInput
               value={filterInput}
               handleChange={handleChange}

@@ -33,8 +33,10 @@ export const startCatAdd = (category: any) => {
   return async (dispatch: any) => {
     try {
       dispatch(uiStartLoad());
+
       const req = await fetchToken("categories", category, "post");
       const answ = await req.json();
+
       if (answ.status) {
         dispatch(catAdd(answ.category));
         dispatch(uiCloseModal());

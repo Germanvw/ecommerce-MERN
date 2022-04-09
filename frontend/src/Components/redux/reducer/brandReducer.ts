@@ -1,6 +1,7 @@
 import { types } from "../types";
 
 export interface brandProps {
+  _id?: string;
   name: string;
   image: string;
 }

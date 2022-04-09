@@ -34,3 +34,5 @@ export const headerTableOrderUser = [
   "Quantity",
   "Total",
 ];
+
+export const headerTableBrands = ["Id", "Img", "Name", "Update", "Delete"];

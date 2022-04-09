@@ -1,4 +1,5 @@
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useFilterSearch } from "../../hooks/useFilterSearch";
 import { usePagination } from "../../hooks/usePagination";
 import { BrandModal } from "../../Items/Modals/Brand/BrandModal";
@@ -6,10 +7,16 @@ import { inputProps } from "../../Items/Modals/Category/imports";
 import { PaginationNav } from "../../Items/Nav/PaginationNav";
 import { SearchNav } from "../../Items/Nav/SearchNav";
 import { Sidebar } from "../../Items/Nav/Sidebar";
-import { ProductTable } from "../../Items/Tables/ProductTable";
+import { BrandTable } from "../../Items/Tables/BrandTable";
+import { startBrandFetchAll } from "../../redux/actions/brandActions";
 import { uiOpenModalBrand } from "../../redux/actions/uiActions";
+import { RootState } from "../../redux/reducer/rootReducer";
+
+import "./styles.scss";
 
 export const Brands = () => {
+  const { brandList }: any = useSelector((state: RootState) => state.brand);
+
   const dispatch = useDispatch();
   const pagOptions = [5, 10, 15, 20];
 
@@ -24,13 +31,18 @@ export const Brands = () => {
   }: any = usePagination();
 
   const { filterInput, handleChange, paginatedArray, array }: any =
-    useFilterSearch(pagination, perPage, []);
+    useFilterSearch(pagination, perPage, brandList);
 
-  // Effects
-  //Fetch
+  //Functions
+
   const handleCreate = () => {
     dispatch(uiOpenModalBrand());
   };
+
+  // Effects
+  useEffect(() => {
+    dispatch(startBrandFetchAll());
+  }, []);
 
   return (
     <div className="brands-body">
@@ -46,7 +58,7 @@ export const Brands = () => {
               handleCreate={handleCreate}
               inputProps={{ ...inputProps }}
             />
-            <ProductTable products={paginatedArray} />
+            <BrandTable brands={paginatedArray} />
             <PaginationNav
               array={array}
               perPage={perPage}

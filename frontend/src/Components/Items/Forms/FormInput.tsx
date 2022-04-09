@@ -9,7 +9,7 @@ export const FormInput = ({
   ...inputProps
 }: any) => {
   return (
-    <div className="input-body">
+    <div className="input-body text-center">
       <div className="input-container">
         <label>{label}</label>
         <input

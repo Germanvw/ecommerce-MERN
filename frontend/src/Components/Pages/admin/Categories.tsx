@@ -10,15 +10,14 @@ import { useFilterSearch } from "../../hooks/useFilterSearch";
 import { RootState } from "../../redux/reducer/rootReducer";
 import { PaginationNav } from "../../Items/Nav/PaginationNav";
 import { SearchNav } from "../../Items/Nav/SearchNav";
+import { Sidebar } from "../../Items/Nav/Sidebar";
 
 import "./styles.scss";
-import { Sidebar } from "../../Items/Nav/Sidebar";
 
 export const Categories = () => {
   const { categoryList }: any = useSelector((state: RootState) => state.cat);
 
   const dispatch = useDispatch();
-
   const pagOptions = [5, 10, 15, 20];
 
   // Hooks
@@ -34,15 +33,15 @@ export const Categories = () => {
   const { filterInput, handleChange, paginatedArray, array }: any =
     useFilterSearch(pagination, perPage, categoryList);
 
-  //Effects
-  useEffect(() => {
-    dispatch(startCatFetchAll());
-  }, []);
-
   // Functions
   const handleCreate = () => {
     dispatch(uiOpenModalCategory());
   };
+
+  //Effects
+  useEffect(() => {
+    dispatch(startCatFetchAll());
+  }, []);
 
   return (
     <div className="categories-body">

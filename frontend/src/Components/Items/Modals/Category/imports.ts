@@ -36,12 +36,6 @@ export const customCategoryStyles = {
   },
 };
 
-interface formCategoryProps {
-  label: string;
-  name: string;
-  type: string;
-}
-
 export const errorCategoryInit = {
   name: true,
   image: true,
