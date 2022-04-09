@@ -56,7 +56,11 @@ export const Products = () => {
               handleCreate={handleCreate}
               inputProps={{ ...inputProps }}
             />
-            <ProductTable products={paginatedArray} />
+            {paginatedArray.length > 0 ? (
+              <ProductTable products={paginatedArray} />
+            ) : (
+              <h4 className="text-center">Product list is empty</h4>
+            )}
             <PaginationNav
               array={array}
               perPage={perPage}

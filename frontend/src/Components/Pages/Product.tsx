@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/reducer/rootReducer";
 import { handleProductCart } from "../helpers/handleProductCart";
 import { fetchRatings } from "../helpers/handleFetchRatings";
+import { confirmDeleteProductCart } from "../hooks/useConfirmModal";
+import { startCartRemove } from "../redux/actions/cartActions";
 
 export const Product = () => {
   const { cart } = useSelector((state: RootState) => state.cart);
@@ -41,23 +43,35 @@ export const Product = () => {
   };
 
   const handleQuantity = (q: number) => {
-    const newQuantity = Math.max(0, Math.min(quantity + q, product.inStock));
-    setQuantity(newQuantity);
-    const productCart = {
-      image,
-      inStock,
-      name,
-      price,
-      quantity: newQuantity,
-      _id,
-    };
+    let newQuantity;
+    if (quantity + q === 0) {
+      confirmDeleteProductCart(_id, dispatch);
+    } else {
+      newQuantity = Math.max(0, Math.min(quantity + q, product.inStock));
+      setQuantity(newQuantity);
+      const productCart = {
+        image,
+        inStock,
+        name,
+        price,
+        quantity: newQuantity,
+        _id,
+      };
 
-    handleProductCart(productCart, cart, dispatch);
+      handleProductCart(productCart, cart, dispatch);
+    }
   };
 
   const handleReq = async () => {
     const r = await fetchRatings(id!);
     setRatingList(r);
+  };
+
+  const notFound = async () => {
+    const found = await cart.find((item: any) => item._id === id);
+    if (!found) return false;
+
+    return true;
   };
 
   useEffect(() => {
@@ -74,6 +88,14 @@ export const Product = () => {
       });
     }
   }, [product]);
+
+  useEffect(() => {
+    notFound().then((res: any) => {
+      if (res === false) {
+        setQuantity(0);
+      }
+    });
+  }, [cart]);
 
   useEffect(() => {
     if (ratingList.length > 0) {

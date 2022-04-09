@@ -57,7 +57,11 @@ export const Categories = () => {
               handleCreate={handleCreate}
               inputProps={{ ...inputProps }}
             />
-            <CategoryTable categories={paginatedArray} />
+            {paginatedArray.length > 0 ? (
+              <CategoryTable categories={paginatedArray} />
+            ) : (
+              <h4 className="text-center">Category list is empty</h4>
+            )}
             <PaginationNav
               array={array}
               perPage={perPage}

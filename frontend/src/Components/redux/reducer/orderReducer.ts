@@ -61,6 +61,11 @@ export const orderReducer = (state = initialState, action: any) => {
         ...state,
         orderList: action.payload,
       };
+    case types.orderClean:
+      return {
+        orderList: [],
+        active: null,
+      };
     case types.orderSetActive:
       return {
         ...state,

@@ -58,7 +58,11 @@ export const Brands = () => {
               handleCreate={handleCreate}
               inputProps={{ ...inputProps }}
             />
-            <BrandTable brands={paginatedArray} />
+            {paginatedArray.length > 0 ? (
+              <BrandTable brands={paginatedArray} />
+            ) : (
+              <h4 className="text-center">Brand list is empty</h4>
+            )}
             <PaginationNav
               array={array}
               perPage={perPage}

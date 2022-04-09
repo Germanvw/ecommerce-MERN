@@ -40,7 +40,12 @@ export const Users = () => {
               handleChange={handleChange}
               inputProps={{ ...inputProps }}
             />
-            <ProductTable products={paginatedArray} />
+            {paginatedArray.length > 0 ? (
+              // <ProductTable products={paginatedArray} />
+              <></>
+            ) : (
+              <h4 className="text-center">User list is empty</h4>
+            )}
             <PaginationNav
               array={array}
               perPage={perPage}

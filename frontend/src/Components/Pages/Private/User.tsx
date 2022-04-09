@@ -47,7 +47,11 @@ export const User = () => {
           </div>
           <div className="user-orders col-xl-8 col-xs-12">
             <h2 className="mt-5">Your Orders:</h2>
-            <OrderTableUser orders={orderList} />
+            {orderList.length > 0 ? (
+              <OrderTableUser orders={orderList} />
+            ) : (
+              <h4 className="text-center">Your order list is empty</h4>
+            )}
           </div>
         </div>
         <PasswordModal />

@@ -1,6 +1,7 @@
 import { types } from "../types";
 import { fetchNoToken, fetchToken } from "../../hooks/useFetch";
 import { fireModal } from "../../hooks/useModal";
+import { orderClean } from "./OrderActions";
 import {
   uiClearError,
   uiCloseModal,
@@ -164,6 +165,7 @@ export const startAuthCheck = () => {
 export const startAuthLogout = () => {
   return async (dispatch: any) => {
     localStorage.removeItem("x-token");
+    dispatch(orderClean());
     dispatch(authLogout());
   };
 };

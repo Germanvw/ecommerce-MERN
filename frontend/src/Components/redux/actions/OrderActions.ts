@@ -116,6 +116,10 @@ export const orderClearActive = () => ({
   type: types.orderClearActive,
 });
 
+export const orderClean = () => ({
+  type: types.orderClean,
+});
+
 const orderAdd = (order: {}) => ({
   type: types.orderAdd,
   payload: order,

@@ -126,7 +126,7 @@ export const fetchOrderUser = async (req: any, res: Response) => {
       .select("-createdAt")
       .select("-__v")
       .select("-updatedAt");
-
+    console.log(orders);
     if (orders.length === 0) {
       return res.status(400).json({
         status: false,

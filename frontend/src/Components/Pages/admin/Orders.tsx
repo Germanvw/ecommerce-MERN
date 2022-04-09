@@ -48,7 +48,11 @@ export const Orders = () => {
               handleChange={handleChange}
               inputProps={{ ...inputProps }}
             />
-            <OrderTable orders={paginatedArray} />
+            {paginatedArray.length > 0 ? (
+              <OrderTable orders={paginatedArray} />
+            ) : (
+              <h4 className="text-center">Order list is empty</h4>
+            )}
             <PaginationNav
               array={array}
               perPage={perPage}

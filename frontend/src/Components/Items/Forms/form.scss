@@ -4,7 +4,7 @@
   background-color: var(--input-bg);
   color: var(--text);
   margin-bottom: 15px;
-  padding: 14px 20px;
+  padding: 7px 10px;
   margin-bottom: 8px;
   max-width: 400px;
   .input-container {
@@ -47,6 +47,7 @@
   flex-direction: column;
   padding: 7px 10px;
   margin-bottom: 8px;
+  max-width: 400px;
   label {
     font-size: 11px;
     color: var(--label-color);

@@ -4,11 +4,11 @@ import { RootState } from "../../redux/reducer/rootReducer";
 import { adminRoutes } from "../../router/routes";
 import { NavLink, useNavigate } from "react-router-dom";
 import { DropdownCategory } from "../Forms/Dropdown";
-
-import "./styles.scss";
 import { startCatFetchAll } from "../../redux/actions/categoryActions";
 import { indexCat, indexBrand } from "./imports";
 import { startBrandFetchAll } from "../../redux/actions/brandActions";
+
+import "./styles.scss";
 
 export const Sidebar = () => {
   const { user } = useSelector((state: RootState) => state.auth);
@@ -74,7 +74,7 @@ export const Sidebar = () => {
             <hr className="w-100 m-0 my-3" />
           </>
         )}
-        {user.isAdmin && <h4>Admin Routes:</h4>}
+        {user && user.isAdmin && <h4>Admin Routes:</h4>}
         {user &&
           user.isAdmin &&
           adminRoutes.map((route: any) => (

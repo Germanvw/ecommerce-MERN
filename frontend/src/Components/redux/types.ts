@@ -51,6 +51,7 @@ export const types = {
   orderRemove: "[Order] Remove",
   orderUpdate: "[Order] Update",
   orderFetchAll: "[Order] Fetch All",
+  orderClean: "[Order] Clean",
   orderSetActive: "[Order] Set Active",
   orderClearActive: "[Order] Clear Active",
 

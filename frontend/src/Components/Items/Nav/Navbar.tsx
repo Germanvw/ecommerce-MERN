@@ -69,32 +69,3 @@ export const Navbar = ({ isAuth }: any) => {
     </nav>
   );
 };
-
-{
-  /* {isAuth && (
-    <div className="user-options">
-    <div className="user">
-                  <Link to="/user">Profile</Link>
-                </div>
-                <div className="cart">
-                  <Link to="/cart">
-                    <i className="fa-solid fa-cart-shopping"></i>
-                    {itemsCart >= 0 && (
-                      <div className="cart-amount">{itemsCart}</div>
-                    )}
-                  </Link>
-                </div>
-              </div>
-            )}
-            {!isAuth ? (
-              <button className="auth">
-                <Link className="login" to="/login">
-                  Login
-                </Link>
-              </button>
-            ) : (
-              <div className="logout">
-                <LogoutButton />
-              </div>
-            )} */
-}

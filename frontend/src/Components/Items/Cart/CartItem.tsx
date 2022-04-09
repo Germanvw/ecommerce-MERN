@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { confirmDeleteProductCart } from "../../hooks/useConfirmModal";
 import { fetchNoToken } from "../../hooks/useFetch";
 import {
   startCartRemove,
@@ -29,7 +30,7 @@ export const CartItem = ({ product }: any) => {
   };
 
   const handleDelete = (_id: string) => {
-    dispatch(startCartRemove(_id));
+    confirmDeleteProductCart(_id, dispatch);
   };
 
   useEffect(() => {

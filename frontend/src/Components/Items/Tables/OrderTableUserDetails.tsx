@@ -36,13 +36,13 @@ export const OrderTableUserDetails = ({ order }: any) => {
             <tr key={product._id}>
               <td
                 className="d-md-table-cell d-none text-center align-middle"
-                key={product}
+                key={`${product._id}td`}
               >
                 {product._id}
               </td>
               <td
                 className="d-md-table-cell d-none text-center align-middle"
-                key={product}
+                key={product.image}
               >
                 <img
                   className="img-cart"
@@ -50,19 +50,20 @@ export const OrderTableUserDetails = ({ order }: any) => {
                   alt={product.image}
                 />
               </td>
-              <td className="text-center align-middle" key={product}>
+              <td className="text-center align-middle" key={product.name}>
                 {product.name}
               </td>
               <td
-                key={product}
+                key={product.price}
                 className="text-center align-middle"
               >{`$ ${product.price}`}</td>
-              <td key={product} className="text-center align-middle">
+              <td key={product.quantity} className="text-center align-middle">
                 {product.quantity}
               </td>
-              <td key={product} className="text-center align-middle">{`$${
-                product.price * product.quantity
-              }`}</td>
+              <td
+                key={`${product.price}total`}
+                className="text-center align-middle"
+              >{`$${product.price * product.quantity}`}</td>
             </tr>
           ))}
       </tbody>

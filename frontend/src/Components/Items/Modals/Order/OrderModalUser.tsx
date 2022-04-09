@@ -5,16 +5,18 @@ import { RootState } from "../../../redux/reducer/rootReducer";
 import { customProductStyles } from "../Product/imports";
 import { orderClearActive } from "../../../redux/actions/OrderActions";
 import { OrderTableUserDetails } from "../../Tables/OrderTableUserDetails";
-import { handleError } from "../../../helpers/handleErrorInput";
 
 import Modal from "react-modal";
 
 import "./../styles.scss";
+import { useNavigate } from "react-router-dom";
 
 export const OrderModalUser = () => {
   const { modal, darkMode } = useSelector((state: RootState) => state.ui);
   const { active } = useSelector((state: RootState) => state.order);
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   //Modal handling
   const closeModal = () => {
@@ -78,6 +80,11 @@ export const OrderModalUser = () => {
             <div className="col-md-6">
               <div className="total">Total: ${active.total}</div>
             </div>
+            {active.paymentMethod === "None" && (
+              <button onClick={() => navigate(`/checkout/${active._id}`)}>
+                Checkout
+              </button>
+            )}
             <button onClick={closeModal}>Cerrar</button>
           </div>
         </div>
