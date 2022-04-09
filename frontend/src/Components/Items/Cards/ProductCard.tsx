@@ -11,7 +11,7 @@ import "./index.scss";
 export const ProductCard = ({ product, index }: any) => {
   const navigate = useNavigate();
 
-  const { name, image } = product;
+  const { name, image, brand } = product;
 
   const [currentProduct, setCurrentProduct] = useState(null);
   const [rating, setRating] = useState(0);
@@ -41,13 +41,15 @@ export const ProductCard = ({ product, index }: any) => {
       setRating(Math.floor(current));
     }
   }, [ratingList]);
-
   return (
     <div
       className="card product-card px-4 py-4 my-4 mx-4"
       style={{ width: "18rem" }}
     >
-      <img src={product.image} className="card-img-top" alt="Product Image" />
+      <div className="branding">
+        <div className="brand-text text-center">{brand.name}</div>
+        <img src={product.image} className="card-img-top" alt="Product Image" />
+      </div>
       <div className="card-body text-center">
         <div className="rating d-flex justify-content-center align-items-center mt-2">
           <StarRating stars={rating} />

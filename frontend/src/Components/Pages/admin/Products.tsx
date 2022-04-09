@@ -35,7 +35,7 @@ export const Products = () => {
 
   //Effects
   useEffect(() => {
-    dispatch(startProdFetchAll());
+    dispatch(startProdFetchAll("none", "none"));
   }, []);
 
   const handleCreate = () => {

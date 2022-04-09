@@ -3,15 +3,15 @@ import { uiCloseModal, uiEndLoad, uiSetError, uiStartLoad } from "./uiActions";
 import { fetchNoToken, fetchToken } from "../../hooks/useFetch";
 import { fireModal } from "../../hooks/useModal";
 
-export const startProdFetchAll = (cat?: string, searchBrand?: string) => {
+export const startProdFetchAll = (cat?: string, brand?: string) => {
   return async (dispatch: any) => {
     try {
       dispatch(uiStartLoad());
 
-      const req = await fetchNoToken(`products?cat=${cat}&brand=hola`, {});
+      const req = await fetchNoToken(`products?cat=${cat}&brand=${brand}`, {});
 
       const answ = await req.json();
-
+      console.log(answ.products);
       if (answ.status) {
         dispatch(prodFetchAll(answ.products));
       } else {

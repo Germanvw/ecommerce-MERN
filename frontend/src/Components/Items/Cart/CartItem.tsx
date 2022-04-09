@@ -24,7 +24,7 @@ export const CartItem = ({ product }: any) => {
   const handleQuantity = (q: number) => {
     const newQuantity = Math.max(1, Math.min(quantity + q, stock));
     product.quantity = newQuantity;
-    console.log(product);
+
     dispatch(startCartUpdate(product));
   };
 

@@ -17,7 +17,6 @@ export const OrderTable = ({ orders }: any) => {
     dispatch(orderSetActive(order));
     dispatch(uiOpenModalOrder());
   };
-  console.log(orders);
   return (
     <table className="table custom-table">
       <thead>

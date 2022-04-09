@@ -21,6 +21,10 @@ export const uiOpenModalOrder = () => ({
   type: types.uiOpenModalOrder,
 });
 
+export const uiOpenModalBrand = () => ({
+  type: types.uiOpenModalBrand,
+});
+
 export const uiOpenModalUser = () => ({
   type: types.uiOpenModalUser,
 });

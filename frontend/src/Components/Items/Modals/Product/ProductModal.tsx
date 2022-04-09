@@ -25,6 +25,7 @@ import "./../styles.scss";
 export const ProductModal = () => {
   const { modal, darkMode } = useSelector((state: RootState) => state.ui);
   const { categoryList } = useSelector((state: RootState) => state.cat);
+  const { brandList } = useSelector((state: RootState) => state.brand);
   const { active } = useSelector((state: RootState) => state.prod);
 
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ export const ProductModal = () => {
   // States
   const [product, setProduct] = useState(initialProductState);
   const [categories, setCategories] = useState<categoryPropsDocument[]>([]);
+  const [brands, setBrands] = useState([]);
   const [errors, setErrors] = useState(errorProductInit);
 
   // Effects
@@ -92,6 +94,10 @@ export const ProductModal = () => {
   }, [categoryList]);
 
   useEffect(() => {
+    setBrands(brandList);
+  }, [brandList]);
+
+  useEffect(() => {
     if (active !== null) {
       setErrors({
         name: false,
@@ -133,6 +139,14 @@ export const ProductModal = () => {
               dwName="category"
               options={categories}
               selected={product.category._id}
+              handleChange={handleFormChange}
+            />
+          </div>
+          <div className="dropdown-gender">
+            <DropdownCategory
+              dwName="brand"
+              options={brands}
+              selected={product.brand}
               handleChange={handleFormChange}
             />
           </div>

@@ -94,9 +94,28 @@
 
       .right {
         .category-link {
-          font-size: 12px;
+          font-size: 14px;
           span {
-            color: var(--primary);
+            a {
+              margin-left: 10px;
+              font-size: 16px;
+              color: var(--primary);
+              &:hover {
+                color: var(--text);
+              }
+            }
+          }
+        }
+        .branding {
+          padding: 5px 10px;
+          background-color: rgb(41, 41, 153);
+          &:hover {
+            background-color: var(--text);
+          }
+          a {
+            &:hover {
+              color: rgb(41, 41, 153);
+            }
           }
         }
         .success {

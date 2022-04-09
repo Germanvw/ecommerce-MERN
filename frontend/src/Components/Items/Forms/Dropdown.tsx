@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface optionProps {
   _id?: string;
@@ -30,22 +30,12 @@ export const Dropdown = ({
   return (
     <div className="simple-dropdown">
       <label>{dwName}</label>
-      <select name={dwName} onChange={handleChange}>
-        {options.map(({ value, name }: optionProps) => {
-          if (selected && name.toUpperCase() === selected.toUpperCase()) {
-            return (
-              <option key={value} value={value} selected>
-                {name}
-              </option>
-            );
-          } else {
-            return (
-              <option key={value} value={value}>
-                {name}
-              </option>
-            );
-          }
-        })}
+      <select name={dwName} onChange={handleChange} defaultValue={selected}>
+        {options.map(({ value, name }: optionProps) => (
+          <option key={value} value={value}>
+            {name}
+          </option>
+        ))}
       </select>
     </div>
   );
@@ -61,27 +51,17 @@ export const DropdownCategory = ({
   return (
     <div className="simple-dropdown">
       <label className="m-0">{dwName}</label>
-      <select name={dwName} onChange={handleChange}>
+      <select name={dwName} onChange={handleChange} value={selected}>
         {index && (
-          <option key={index._id} value={index._id} selected disabled>
+          <option key={index._id} value={index.value}>
             {index.name}
           </option>
         )}
-        {options.map(({ _id, name }: any) => {
-          if (selected === _id) {
-            return (
-              <option key={_id} value={_id} selected>
-                {name}
-              </option>
-            );
-          } else {
-            return (
-              <option key={_id} value={_id}>
-                {name}
-              </option>
-            );
-          }
-        })}
+        {options.map(({ _id, name }: any) => (
+          <option key={_id} value={_id}>
+            {name}
+          </option>
+        ))}
       </select>
     </div>
   );

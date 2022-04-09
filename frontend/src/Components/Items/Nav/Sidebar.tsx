@@ -7,24 +7,22 @@ import { DropdownCategory } from "../Forms/Dropdown";
 
 import "./styles.scss";
 import { startCatFetchAll } from "../../redux/actions/categoryActions";
+import { indexCat, indexBrand } from "./imports";
+import { startBrandFetchAll } from "../../redux/actions/brandActions";
 
 export const Sidebar = () => {
   const { user } = useSelector((state: RootState) => state.auth);
   const { categoryList } = useSelector((state: RootState) => state.cat);
-  // const { brandList } = useSelector((state: RootState) => state.brand);
+  const { brandList } = useSelector((state: RootState) => state.brand);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   // States
-  const [category, setCategory] = useState({ category: "" });
-  const [brand, setBrand] = useState({ brand: "" });
+  const [category, setCategory] = useState({ category: indexCat.value });
+  const [brand, setBrand] = useState({ brand: indexBrand.value });
 
   let str = "/products";
-  const indexCat = {
-    _id: "12",
-    name: "Select One",
-    value: "null",
-  };
 
   // Functions
   const handleChange = ({ target }: any) => {
@@ -43,14 +41,21 @@ export const Sidebar = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (category.category !== "") {
-      navigate(`${str}?cat=${category.category}`);
+    if (category.category !== "none" || brand.brand !== "none") {
+      navigate(`${str}?cat=${category.category}&brand=${brand.brand}`);
     }
+  };
+
+  const handleReset = () => {
+    setCategory({ category: "none" });
+    setBrand({ brand: "none" });
+    navigate("/products");
   };
 
   useEffect(() => {
     //fetchs
     dispatch(startCatFetchAll());
+    dispatch(startBrandFetchAll());
   }, []);
 
   return (
@@ -73,7 +78,10 @@ export const Sidebar = () => {
         {user &&
           user.isAdmin &&
           adminRoutes.map((route: any) => (
-            <div className="d-flex align-items-center justify-content-center mb-2">
+            <div
+              className="d-flex align-items-center justify-content-center mb-2"
+              key={route.name}
+            >
               <i className={route.icon}></i>
               <NavLink style={{ marginLeft: "8px" }} to={route.url}>
                 {route.name}
@@ -87,13 +95,25 @@ export const Sidebar = () => {
               options={categoryList}
               handleChange={handleChange}
               index={indexCat}
+              selected={category.category}
+            />
+          </div>
+          <div className="dropdown-gender">
+            <DropdownCategory
+              dwName="brand"
+              options={brandList}
+              handleChange={handleChange}
+              index={indexBrand}
+              selected={brand.brand}
             />
           </div>
           <div className="d-flex">
-            <button type="submit">Search</button>
+            <button type="submit" className="w-100 my-3">
+              Search
+            </button>
           </div>
         </form>
-        <button onClick={() => navigate("/products")}>Reset</button>
+        <button onClick={handleReset}>Reset</button>
       </div>
     </div>
   );

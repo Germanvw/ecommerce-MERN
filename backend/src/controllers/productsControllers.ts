@@ -2,12 +2,14 @@ import { Response } from "express";
 import Products, { ProductDocument } from "../Models/Products";
 
 export const createProduct = async (req: any, res: Response) => {
-  const { name, description, image, price, inStock, category } = req.body;
+  const { name, description, image, price, inStock, category, brand } =
+    req.body;
 
   try {
     const newProduct: ProductDocument = new Products({
       name,
       description,
+      brand,
       image,
       price,
       inStock,
@@ -76,7 +78,9 @@ export const deleteProduct = async (req: any, res: Response) => {
 };
 export const fetchProduct = async (req: any, res: Response) => {
   try {
-    const product = await Products.findById(req.params.id);
+    const product = await Products.findOne({ _id: req.params.id })
+      .populate("category")
+      .populate("brand");
 
     if (!product) {
       return res.status(400).json({
@@ -84,7 +88,6 @@ export const fetchProduct = async (req: any, res: Response) => {
         msg: "Product doesnt exist",
       });
     }
-
     return res.status(201).json({
       status: true,
       product,
@@ -95,26 +98,22 @@ export const fetchProduct = async (req: any, res: Response) => {
 };
 export const fetchProducts = async (req: any, res: Response) => {
   const { cat, brand } = req.query;
-  console.log(req.query);
   try {
     let products;
     if (cat !== "none" && brand !== "none") {
-      products = await Products.find({ category: cat, brand }).populate(
-        "category"
-      );
+      products = await Products.find({ category: cat, brand })
+        .populate("category")
+        .populate("brand");
     } else if (cat !== "none") {
-      products = await Products.find({ category: cat }).populate("category");
+      products = await Products.find({ category: cat })
+        .populate("category")
+        .populate("brand");
     } else if (brand !== "none") {
-      products = await Products.find({ brand }).populate("category");
+      products = await Products.find({ brand })
+        .populate("category")
+        .populate("brand");
     } else {
-      products = await Products.find().populate("category");
-    }
-
-    if (products.length === 0) {
-      return res.status(400).json({
-        status: false,
-        msg: "No Products found",
-      });
+      products = await Products.find().populate("category").populate("brand");
     }
 
     return res.status(201).json({

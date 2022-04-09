@@ -7,6 +7,7 @@ interface IProducts {
   image: string;
   category: string;
   price: number;
+  brand: string;
   inStock: number;
 }
 
@@ -25,6 +26,11 @@ const ProductsSchema: Schema = new Schema(
     category: {
       type: Schema.Types.ObjectId,
       ref: "Categories",
+      required: true,
+    },
+    brand: {
+      type: Schema.Types.ObjectId,
+      ref: "Brands",
       required: true,
     },
   },

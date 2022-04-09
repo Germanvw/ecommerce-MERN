@@ -8,6 +8,7 @@ export const types = {
 
   uiOpenModalCategory: "[UI] Open Modal Category",
   uiOpenModalProduct: "[UI] Open Modal Product",
+  uiOpenModalBrand: "[UI] Open Modal Brand",
   uiOpenModalOrder: "[UI] Open Modal Order",
   uiOpenModalUser: "[UI] Open Modal User",
   uiOpenModalPassword: "[UI] Open Modal Password",
@@ -52,4 +53,12 @@ export const types = {
   orderFetchAll: "[Order] Fetch All",
   orderSetActive: "[Order] Set Active",
   orderClearActive: "[Order] Clear Active",
+
+  //Brand
+  brandAdd: "[Brand] Add",
+  brandRemove: "[Brand] Remove",
+  brandUpdate: "[Brand] Update",
+  brandFetchAll: "[Brand] Fetch All",
+  brandSetActive: "[Brand] Set Active",
+  brandClearActive: "[Brand] Clear Active",
 };

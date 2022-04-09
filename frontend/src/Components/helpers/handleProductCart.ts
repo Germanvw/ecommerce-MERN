@@ -9,9 +9,7 @@ export const handleProductCart = async (
   cart: any,
   dispatch: any
 ) => {
-  console.log(product);
   const productCart = await cart.find((item: any) => item._id === product._id);
-  console.log(productCart);
   if (productCart) {
     if (product.quantity === 0) {
       dispatch(startCartRemove(product._id));

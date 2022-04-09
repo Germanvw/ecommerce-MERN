@@ -2,7 +2,16 @@
   height: 390px;
   background-color: var(--bg-body);
   border-radius: 12px;
-
+  .branding {
+    position: relative;
+    .brand-text {
+      position: absolute;
+      top: -7px;
+      left: 3px;
+      background-color: rgb(41, 41, 153);
+      padding: 5px 10px;
+    }
+  }
   img {
     height: 180px;
     width: auto;

@@ -9,9 +9,9 @@ import { startProdFetchAll } from "../redux/actions/productActions";
 import { inputProps } from "../Items/Modals/Product/imports";
 import { ProductCard } from "../Items/Cards/ProductCard";
 import { PaginationNav } from "../Items/Nav/PaginationNav";
+import { useSearchParams } from "react-router-dom";
 
 import "./index.scss";
-import { useSearchParams } from "react-router-dom";
 
 export const Products = () => {
   const { productList } = useSelector((state: RootState) => state.prod);
@@ -62,6 +62,11 @@ export const Products = () => {
             {paginatedArray.map((product: any, index: any) => (
               <ProductCard product={product} key={product._id} index={index} />
             ))}
+            {paginatedArray.length === 0 && (
+              <div className="text-center">
+                <h3>No Products Found</h3>
+              </div>
+            )}
           </div>
           <PaginationNav
             array={array}
@@ -78,6 +83,3 @@ export const Products = () => {
     </div>
   );
 };
-function dispatch(arg0: (dispatch: any) => Promise<void>) {
-  throw new Error("Function not implemented.");
-}

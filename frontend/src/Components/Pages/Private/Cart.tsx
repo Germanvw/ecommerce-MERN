@@ -30,7 +30,7 @@ export const Cart = () => {
 
   useEffect(() => {
     if (cart.length > 0) {
-      dispatch(startProdFetchAll());
+      dispatch(startProdFetchAll("none", "none"));
     }
   }, []);
 
