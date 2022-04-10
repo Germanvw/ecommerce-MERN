@@ -6,12 +6,14 @@ export const createBrand = async (req: any, res: Response) => {
   try {
     const brand = await Brands.findOne({ name });
 
+    // Brand exists
     if (brand) {
       return res
         .status(400)
         .json({ status: false, msg: "Brand already registered" });
     }
 
+    // Brand object
     const newBrand = await new Brands<IBrand>({
       name,
       image,
@@ -34,19 +36,22 @@ export const editBrand = async (req: any, res: Response) => {
   try {
     const brand = await Brands.findById(id);
 
+    // Brand exists
     if (!brand) {
       return res.status(400).json({ status: false, msg: "Brand not found" });
     }
 
-    //Save user
+    // Save user
     const brandUnique = await Brands.findOne({ name });
 
+    // Brand's name unique
     if (brandUnique) {
       return res
         .status(400)
         .json({ status: false, msg: "Brand already exists" });
     }
 
+    // update
     const updated = await Brands.findOneAndUpdate({ _id: id }, req.body, {
       returnOriginal: false,
     });
@@ -59,18 +64,30 @@ export const editBrand = async (req: any, res: Response) => {
   }
 };
 
-export const deleteBrand = async (req: any, res: Response) => {
+export const changeActiveBrand = async (req: any, res: Response) => {
   const { id } = req.params;
   try {
     const brand = await Brands.findById(id);
 
+    // Brand exists
     if (!brand) {
       return res.status(400).json({ status: false, msg: "Brand not found" });
     }
 
-    await Brands.findByIdAndRemove(id);
+    // Change active state
+    const updated = await Brands.findOneAndUpdate(
+      { _id: id },
+      { active: !brand.active },
+      {
+        returnOriginal: false,
+      }
+    );
 
-    return res.status(201).json({ status: true, msg: "Brand deleted" });
+    return res.status(201).json({
+      status: true,
+      msg: "Brand active status changed",
+      brand: updated,
+    });
   } catch (err) {
     return res.status(500).json({ status: false, msg: "Error on request" });
   }

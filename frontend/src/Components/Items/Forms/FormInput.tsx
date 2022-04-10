@@ -6,16 +6,19 @@ export const FormInput = ({
   error,
   handleChange,
   handleClick,
+  disabled,
   ...inputProps
 }: any) => {
+  const { active } = inputProps;
   return (
     <div className="input-body">
       <div className="input-container">
         <label>{label}</label>
         <input
-          className="form-input"
+          className={`form-input ${disabled && "form-disabled"}`}
           onChange={handleChange}
           onClick={handleClick}
+          disabled={active}
           {...inputProps}
         ></input>
       </div>

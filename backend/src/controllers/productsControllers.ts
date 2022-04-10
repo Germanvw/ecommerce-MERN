@@ -42,7 +42,9 @@ export const editProduct = async (req: any, res: Response) => {
     }
     const newProduct = await Products.findOneAndUpdate({ _id: id }, req.body, {
       returnOriginal: false,
-    }).populate("category");
+    })
+      .populate("category")
+      .populate("brand");
 
     res.status(201).json({
       status: true,
@@ -54,11 +56,12 @@ export const editProduct = async (req: any, res: Response) => {
   }
 };
 
-export const deleteProduct = async (req: any, res: Response) => {
+export const changeActiveProduct = async (req: any, res: Response) => {
   const { id } = req.params;
   try {
     const product = await Products.findById(id);
-
+    console.log(product!.active!);
+    // Product exists
     if (!product) {
       return res.status(400).json({
         status: false,
@@ -66,11 +69,21 @@ export const deleteProduct = async (req: any, res: Response) => {
       });
     }
 
-    await Products.findByIdAndDelete(id);
+    // Change active state
+    const updated = await Products.findOneAndUpdate(
+      { _id: id },
+      { active: !product.active },
+      {
+        returnOriginal: false,
+      }
+    )
+      .populate("category")
+      .populate("brand");
 
     return res.status(201).json({
       status: true,
-      msg: "Product deleted successfully",
+      msg: "Product active status changed",
+      product: updated,
     });
   } catch (err) {
     return res.status(500).json({ status: false, msg: "Error on request" });

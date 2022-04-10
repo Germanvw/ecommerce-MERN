@@ -1,19 +1,18 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { FormInput } from "../../Items/Forms/FormInput";
 import { Dropdown } from "../../Items/Forms/Dropdown";
 import { startAuthRegister } from "../../redux/actions/authActions";
 import { MainButton } from "../../Items/Buttons/MainButton";
 import { genderOptions, initRegisterErrors, registerInputs } from "./data";
 import { useState, useEffect } from "react";
-import { handleValidate } from "../../helpers/handleFormValidation";
+import { handleError } from "../../helpers/handleErrorInput";
 
 import "./styles.scss";
-import { handleError } from "../../helpers/handleErrorInput";
 
 export const Register = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [value, setValue] = useState({
     username: "",
     email: "",
@@ -39,6 +38,7 @@ export const Register = () => {
     ) {
       if (value.password === value.confirmPassword) {
         dispatch(startAuthRegister(value));
+        navigate("/login");
       } else {
         setErrors({ ...errors, confirmPassword: true });
       }

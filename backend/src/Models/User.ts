@@ -1,12 +1,14 @@
 import mongoose, { Schema, model } from "mongoose";
 
 export interface IUser {
+  uid?: string;
   username: string;
   email: string;
-  password: string;
+  password?: string;
   isAdmin: boolean;
   gender: string;
   picture: string;
+  active?: boolean;
 }
 
 export interface UserDocument extends IUser, mongoose.Document {
@@ -22,6 +24,7 @@ const UserSchema: Schema = new Schema(
     gender: { type: String, required: true },
     picture: { type: String, required: true },
     isAdmin: { type: Boolean, required: true },
+    active: { type: Boolean, required: false, default: true },
   },
   { timestamps: true }
 );

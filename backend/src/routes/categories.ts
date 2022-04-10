@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   createCategory,
   editCategory,
-  deleteCategory,
+  changeActiveCategory,
   fetchCategories,
   fetchCategory,
 } from "../controllers/categoriesController";
@@ -12,9 +12,9 @@ import { validJWT } from "../middlewares/validJWT";
 const router = Router();
 router.use(validJWT);
 
-router.post("/", isAdmin, createCategory);
-router.put("/:id", isAdmin, editCategory);
-router.delete("/:id", isAdmin, deleteCategory);
+router.post("/", validJWT, isAdmin, createCategory);
+router.put("/:id", validJWT, isAdmin, editCategory);
+router.put("/active/:id", validJWT, isAdmin, changeActiveCategory);
 router.get("/", fetchCategories);
 router.get("/:id", fetchCategory);
 

@@ -1,24 +1,24 @@
 import { useDispatch } from "react-redux";
-import { confirmDeleteBrand } from "../../hooks/useConfirmModal";
-import { brandSetActive } from "../../redux/actions/brandActions";
-import { uiOpenModalBrand } from "../../redux/actions/uiActions";
-import { brandProps } from "../../redux/reducer/brandReducer";
+import { confirmChangeStatusUser } from "../../hooks/useConfirmModal";
+// import { userSetActive } from "../../redux/actions/brandActions";
+import { uiOpenModalUser } from "../../redux/actions/uiActions";
+import { setUserActive } from "../../redux/actions/userActions";
 import { headerTableBrands } from "./imports";
 
 import "./index.scss";
 
-export const BrandTable = ({ brands }: any) => {
+export const UsersTable = ({ users }: any) => {
   const dispatch = useDispatch();
 
-  const handleDelete = (_id: string) => {
-    confirmDeleteBrand(_id, dispatch);
+  const handleLogicDelete = (_id: string) => {
+    confirmChangeStatusUser(_id, dispatch);
   };
 
-  const handleUpdate = (category: {}) => {
-    dispatch(brandSetActive(category));
-    dispatch(uiOpenModalBrand());
+  const handleDisplay = (user: any) => {
+    dispatch(setUserActive(user));
+    dispatch(uiOpenModalUser());
   };
-
+  console.log(users);
   return (
     <table className="table custom-table">
       <thead>
@@ -34,16 +34,6 @@ export const BrandTable = ({ brands }: any) => {
                   {item}
                 </th>
               );
-            } else if (item === "Img") {
-              return (
-                <th
-                  key={item}
-                  scope="col"
-                  className="d-sm-table-cell d-none text-center"
-                >
-                  {item}
-                </th>
-              );
             } else {
               return (
                 <th key={item} scope="col" className="text-center">
@@ -55,33 +45,34 @@ export const BrandTable = ({ brands }: any) => {
         </tr>
       </thead>
       <tbody>
-        {brands.length > 0 &&
-          brands.map((brand: brandProps) => (
-            <tr key={brand._id}>
+        {users &&
+          users.length > 0 &&
+          users.map((user: any) => (
+            <tr key={user._id}>
               <td className="d-md-table-cell d-none text-center align-middle">
-                {brand._id}
+                {user._id}
               </td>
-              <td className="d-sm-table-cell d-none text-center">
-                <img src={brand.image} alt={brand.image} />
+              <td className="text-center">
+                <img src={user.picture} alt={user.picture} />
               </td>
               <td
                 className={`align-middle text-center ${
-                  !brand.active && "cancelled"
+                  !user.active && "cancelled"
                 }`}
               >
-                {brand.name}
+                {user.username}
               </td>
               <td className="align-middle text-center">
-                <button className="update" onClick={() => handleUpdate(brand)}>
-                  Update
+                <button className="more" onClick={() => handleDisplay(user)}>
+                  More Info
                 </button>
               </td>
               <td className="align-middle  text-center">
                 <button
                   className="delete"
-                  onClick={() => handleDelete(brand._id!)}
+                  onClick={() => handleLogicDelete(user._id!)}
                 >
-                  {brand.active ? "Desactivate" : "Activate"}
+                  {user.active ? "Desactivate" : "Activate"}
                 </button>
               </td>
             </tr>

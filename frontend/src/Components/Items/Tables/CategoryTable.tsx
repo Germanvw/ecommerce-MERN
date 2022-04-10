@@ -71,14 +71,6 @@ export const CategoryTable = ({ categories }: any) => {
               </td>
               <td className="align-middle text-center">
                 <button
-                  className="more"
-                  onClick={() => handleDisplay(category)}
-                >
-                  Show More
-                </button>
-              </td>
-              <td className="align-middle text-center">
-                <button
                   className="update"
                   onClick={() => handleUpdate(category)}
                 >
@@ -90,7 +82,7 @@ export const CategoryTable = ({ categories }: any) => {
                   className="delete"
                   onClick={() => handleDelete(category._id)}
                 >
-                  Delete
+                  {category.active ? "Desactivate" : "Activate"}
                 </button>
               </td>
             </tr>

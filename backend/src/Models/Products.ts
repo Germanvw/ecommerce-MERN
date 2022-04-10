@@ -9,6 +9,7 @@ interface IProducts {
   price: number;
   brand: string;
   inStock: number;
+  active?: boolean;
 }
 
 export interface ProductDocument extends IProducts, mongoose.Document {
@@ -33,6 +34,7 @@ const ProductsSchema: Schema = new Schema(
       ref: "Brands",
       required: true,
     },
+    active: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

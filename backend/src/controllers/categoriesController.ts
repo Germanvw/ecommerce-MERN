@@ -7,6 +7,7 @@ export const createCategory = async (req: any, res: Response) => {
   try {
     const category = await Categories.findOne({ name });
 
+    // Category exists
     if (category) {
       return res.status(400).json({
         status: false,
@@ -14,12 +15,14 @@ export const createCategory = async (req: any, res: Response) => {
       });
     }
 
+    // Category object
     const newCategory: CategoriesDocument = new Categories({
       name,
       description,
       image,
     });
 
+    // Save category
     const saved = await newCategory.save();
 
     return res.status(201).json({
@@ -38,6 +41,7 @@ export const editCategory = async (req: any, res: Response) => {
   try {
     let category = await Categories.findById(id);
 
+    // Category exists
     if (!category) {
       return res.status(400).json({
         status: false,
@@ -54,6 +58,7 @@ export const editCategory = async (req: any, res: Response) => {
       });
     }
 
+    // Update category
     await Categories.findOneAndUpdate({ _id: id }, req.body);
 
     res.status(201).json({
@@ -64,11 +69,12 @@ export const editCategory = async (req: any, res: Response) => {
     return res.status(500).json({ status: false, msg: "Error on request" });
   }
 };
-export const deleteCategory = async (req: any, res: Response) => {
+export const changeActiveCategory = async (req: any, res: Response) => {
   const { id } = req.params;
   try {
     const category = await Categories.findById(id);
 
+    // Category exists
     if (!category) {
       return res.status(400).json({
         status: false,
@@ -76,16 +82,24 @@ export const deleteCategory = async (req: any, res: Response) => {
       });
     }
 
-    await Categories.findByIdAndDelete(id);
+    const updated = await Categories.findOneAndUpdate(
+      { _id: id },
+      { active: !category.active },
+      {
+        returnOriginal: false,
+      }
+    );
 
     return res.status(201).json({
       status: true,
-      msg: "Category deleted successfully",
+      msg: "Category active status changed",
+      category: updated,
     });
   } catch (err) {
     return res.status(500).json({ status: false, msg: "Error on request" });
   }
 };
+
 export const fetchCategory = async (req: any, res: Response) => {
   try {
     const category = await Categories.findById(req.params.id)

@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface optionProps {
   _id?: string;
   value?: string;
   name: string;
+  disabled?: boolean;
 }
 
 interface dropdownProps {
   options: optionProps[];
   dwName: string;
+  disabled?: boolean;
   selected?: string;
   index?: optionProps;
   handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -17,6 +19,7 @@ interface dropdownProps {
 interface DropdownPagination {
   options: number[];
   dwName: string;
+  disabled?: boolean;
   handleChange: ({ target }: any) => void;
   setPerPage: (perPage: number) => void;
 }
@@ -25,12 +28,18 @@ export const Dropdown = ({
   dwName,
   options,
   selected,
+  disabled,
   handleChange,
 }: dropdownProps) => {
   return (
     <div className="simple-dropdown">
       <label>{dwName}</label>
-      <select name={dwName} onChange={handleChange} defaultValue={selected}>
+      <select
+        name={dwName}
+        onChange={handleChange}
+        defaultValue={selected}
+        disabled={disabled}
+      >
         {options.map(({ value, name }: optionProps) => (
           <option key={value} value={value}>
             {name}
@@ -46,12 +55,18 @@ export const DropdownCategory = ({
   options,
   selected,
   index,
+  disabled,
   handleChange,
 }: dropdownProps) => {
   return (
     <div className="simple-dropdown">
       <label className="m-0">{dwName}</label>
-      <select name={dwName} onChange={handleChange} value={selected}>
+      <select
+        name={dwName}
+        onChange={handleChange}
+        value={selected}
+        disabled={disabled}
+      >
         {index && (
           <option key={index._id} value={index.value}>
             {index.name}

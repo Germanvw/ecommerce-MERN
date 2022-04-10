@@ -51,4 +51,11 @@ export const formCategoryImputs = [
     placeholder: "Description...",
   },
   { label: "Image", name: "image", type: "text", placeholder: "Image..." },
+  {
+    label: "Active",
+    name: "active",
+    type: "text",
+    placeholder: "Active",
+    active: true,
+  },
 ];

@@ -6,6 +6,7 @@ export interface IRating {
   comment: string;
   uid: string;
   product: string;
+  active?: boolean;
 }
 
 interface RatingDocument extends IRating, mongoose.Document {
@@ -27,6 +28,7 @@ const RatingSchema: Schema = new Schema(
       ref: "Product",
       required: true,
     },
+    active: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

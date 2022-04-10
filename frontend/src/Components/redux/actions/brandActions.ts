@@ -46,17 +46,16 @@ export const startBrandAdd = (brand: any) => {
   };
 };
 
-export const startBrandDelete = (_id: string) => {
+export const startChangeStatusBrand = (_id: string) => {
   return async (dispatch: any) => {
     try {
       dispatch(uiStartLoad());
 
-      const req = await fetchToken(`brands/${_id}`, {}, "DELETE");
+      const req = await fetchToken(`brands/active/${_id}`, {}, "PUT");
       const answ = await req.json();
-
       if (answ.status) {
-        dispatch(brandRemove(_id));
-        fireModal("Removed", answ.msg, "success", dispatch);
+        dispatch(brandUpdate(answ.brand));
+        fireModal("Changed status", answ.msg, "success", dispatch);
       } else {
         dispatch(uiSetError(answ.msg));
       }
@@ -106,11 +105,6 @@ const brandAdd = (brand: brandProps) => ({
 const brandUpdate = (brand: brandProps) => ({
   type: types.brandUpdate,
   payload: brand,
-});
-
-const brandRemove = (_id: string) => ({
-  type: types.brandRemove,
-  payload: _id,
 });
 
 const brandFetchAll = (brands: brandProps[]) => ({

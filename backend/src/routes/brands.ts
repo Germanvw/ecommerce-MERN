@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   createBrand,
   editBrand,
-  deleteBrand,
+  changeActiveBrand,
   fetchBrands,
   fetchBrand,
 } from "../controllers/brandsControllers";
@@ -13,7 +13,7 @@ const router = Router();
 
 router.post("/", validJWT, isAdmin, createBrand);
 router.put("/:id", validJWT, isAdmin, editBrand);
-router.delete("/:id", validJWT, isAdmin, deleteBrand);
+router.put("/active/:id", validJWT, isAdmin, changeActiveBrand);
 router.get("/", fetchBrands);
 router.get("/:id", fetchBrand);
 

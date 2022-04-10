@@ -7,14 +7,7 @@ export const headerTableUser = [
   "Cancel",
 ];
 
-export const headerTableCategories = [
-  "Id",
-  "Name",
-  "Img",
-  "More Info",
-  "Update",
-  "Delete",
-];
+export const headerTableCategories = ["Id", "Name", "Img", "Update", "Delete"];
 
 export const headerTableProducts = [
   "Img",

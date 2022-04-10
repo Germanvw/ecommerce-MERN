@@ -4,6 +4,7 @@ export interface brandProps {
   _id?: string;
   name: string;
   image: string;
+  active: boolean;
 }
 
 interface stateProps {
@@ -26,13 +27,6 @@ export const brandReducer = (state = initialState, action: any) => {
       return {
         brandList: state.brandList.map((brand: any) =>
           brand._id === action.payload._id ? action.payload : brand
-        ),
-        active: null,
-      };
-    case types.brandRemove:
-      return {
-        brandList: state.brandList.filter(
-          (brand: any) => brand._id !== action.payload
         ),
         active: null,
       };

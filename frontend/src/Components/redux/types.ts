@@ -22,6 +22,12 @@ export const types = {
   authEndCheck: "[Auth] Check State",
   authUserUpdate: "[Auth] User Update Details",
 
+  //User
+  userSetActive: "[User] Set Active",
+  userClearActive: "[User] Clear Active",
+  userStateChange: "[User] State Change",
+  userFetchAll: "[User] Fetch All",
+
   //Category
   catAdd: "[Category] Add",
   catRemove: "[Category] Remove",

@@ -70,4 +70,5 @@ export const formUserImputs = [
   },
   { label: "Email", placeholder: "Email", type: "email", name: "email" },
   { label: "Picture", placeholder: "Picture", type: "text", name: "picture" },
+  { label: "Active", placeholder: "Active", type: "text", name: "active" },
 ];

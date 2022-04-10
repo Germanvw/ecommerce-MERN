@@ -6,6 +6,35 @@ import { UserDocument } from "../Models/User";
 
 const User = mongoose.model<UserDocument>("User");
 
+export const changeActiveUser = async (req: any, res: Response) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findOne({ _id: id });
+
+    // User exists
+    if (!user) {
+      return res.status(400).json({ status: false, msg: "User not found" });
+    }
+
+    // Change active state
+    const updated = await User.findOneAndUpdate(
+      { _id: id },
+      { active: !user.active },
+      {
+        returnOriginal: false,
+      }
+    );
+
+    return res.status(201).json({
+      status: true,
+      msg: "User active status changed",
+      user: updated,
+    });
+  } catch (err) {
+    return res.status(500).json({ status: false, msg: "Error on request" });
+  }
+};
+
 export const editUserInfo = async (req: any, res: Response) => {
   let { email } = req.body;
   const { user } = req;
@@ -53,7 +82,7 @@ export const editUserPassword = async (req: any, res: Response) => {
       return res.status(400).json({ status: false, msg: "User not found" });
     }
     // Validate old password
-    const match = await isMatch(password, userFound.password);
+    const match = await isMatch(password, userFound.password!);
 
     if (!match) {
       return res.status(400).json({ status: false, msg: "Invalid password" });
@@ -110,6 +139,23 @@ export const getUserInfo = async (req: any, res: Response) => {
 
     //found
     return res.json({ status: true, msg: "User found", user: userData });
+  } catch (err) {
+    return res.status(500).json({ status: false, msg: "Error on request" });
+  }
+};
+
+export const fetchUsersAdmin = async (req: any, res: Response) => {
+  try {
+    const users = await User.find().select("-password");
+
+    if (!users) {
+      return res
+        .status(400)
+        .json({ status: false, msg: "User not found", users: [] });
+    }
+
+    //found
+    return res.json({ status: true, msg: "Users found", users });
   } catch (err) {
     return res.status(500).json({ status: false, msg: "Error on request" });
   }

@@ -17,4 +17,11 @@ export const errorBrandInit = {
 export const formBrandImputs = [
   { label: "Name", name: "name", type: "text", placeholder: "Name..." },
   { label: "Image", name: "image", type: "text", placeholder: "Image..." },
+  {
+    label: "Active",
+    placeholder: "Active",
+    type: "text",
+    name: "active",
+    active: true,
+  },
 ];

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useFilterSearch } from "../../hooks/useFilterSearch";
 import { usePagination } from "../../hooks/usePagination";
 import { inputProps } from "../../Items/Modals/Category/imports";
+import { OrderModalAdmin } from "../../Items/Modals/Order/OrderModalAdmin";
 import { PaginationNav } from "../../Items/Nav/PaginationNav";
 import { SearchNav } from "../../Items/Nav/SearchNav";
 import { Sidebar } from "../../Items/Nav/Sidebar";
@@ -66,7 +67,7 @@ export const Orders = () => {
           </div>
         </div>
       </div>
-      {/* <OrderModal /> */}
+      <OrderModalAdmin />
     </div>
   );
 };
