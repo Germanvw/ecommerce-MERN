@@ -13,6 +13,7 @@ import { OrderModalUser } from "../../Items/Modals/Order/OrderModalUser";
 import UserProfile from "../../Items/Other/UserProfile";
 
 import "./index.scss";
+import { ReviewModal } from "../../Items/Modals/Review/ReviewModal";
 
 export const User = () => {
   const { user } = useSelector((state: RootState) => state.auth);
@@ -57,6 +58,7 @@ export const User = () => {
         <PasswordModal />
         <UserModal />
         <OrderModalUser />
+        <ReviewModal />
       </div>
     </div>
   );

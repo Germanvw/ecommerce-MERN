@@ -1,12 +1,13 @@
 import { fetchNoToken, fetchToken } from "../../hooks/useFetch";
 import { uiCloseModal, uiEndLoad, uiSetError, uiStartLoad } from "./uiActions";
-
 import { types } from "../types";
-import { brandProps } from "../reducer/brandReducer";
 import { fireModal } from "../../hooks/useModal";
+import { ThunkDispatch } from "redux-thunk/es/types";
+import { AnyAction } from "redux";
+import { IBrand } from "../reducer/brandReducer";
 
 export const startBrandFetchAll = () => {
-  return async (dispatch: any) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
       dispatch(uiStartLoad());
 
@@ -25,7 +26,7 @@ export const startBrandFetchAll = () => {
 };
 
 export const startBrandAdd = (brand: any) => {
-  return async (dispatch: any) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
       dispatch(uiStartLoad());
 
@@ -47,7 +48,7 @@ export const startBrandAdd = (brand: any) => {
 };
 
 export const startChangeStatusBrand = (_id: string) => {
-  return async (dispatch: any) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
       dispatch(uiStartLoad());
 
@@ -67,7 +68,7 @@ export const startChangeStatusBrand = (_id: string) => {
 };
 
 export const startBrandUpdate = (brand: any) => {
-  return async (dispatch: any) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
       dispatch(uiStartLoad());
       const req = await fetchToken(`brands/${brand._id}`, brand, "PUT");
@@ -88,7 +89,7 @@ export const startBrandUpdate = (brand: any) => {
   };
 };
 
-export const brandSetActive = (brand: {}) => ({
+export const brandSetActive = (brand: IBrand) => ({
   type: types.brandSetActive,
   payload: brand,
 });
@@ -97,17 +98,17 @@ export const brandClearActive = () => ({
   type: types.brandClearActive,
 });
 
-const brandAdd = (brand: brandProps) => ({
+const brandAdd = (brand: IBrand) => ({
   type: types.brandAdd,
   payload: brand,
 });
 
-const brandUpdate = (brand: brandProps) => ({
+const brandUpdate = (brand: IBrand) => ({
   type: types.brandUpdate,
   payload: brand,
 });
 
-const brandFetchAll = (brands: brandProps[]) => ({
+const brandFetchAll = (brands: IBrand[]) => ({
   type: types.brandFetchAll,
   payload: brands,
 });

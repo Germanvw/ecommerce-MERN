@@ -37,9 +37,7 @@ export const startUserFetchAll = () => {
     try {
       dispatch(uiStartLoad());
       const req = await fetchToken("users/all", {});
-      console.log(req);
       const answ = await req.json();
-      console.log(answ);
       if (answ.status) {
         dispatch(userFetchAll(answ.users));
       } else {

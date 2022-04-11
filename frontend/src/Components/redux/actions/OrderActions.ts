@@ -3,9 +3,34 @@ import { fetchToken } from "../../hooks/useFetch";
 import { uiEndLoad, uiSetError, uiStartLoad } from "./uiActions";
 import { cartClear } from "./cartActions";
 import { fireModal } from "../../hooks/useModal";
+import { ThunkDispatch } from "redux-thunk/es/types";
+import { AnyAction } from "redux";
 
-export const startOrderUpdate = (order: any) => {
-  return async (dispatch: any) => {
+export interface IProductCart {
+  _id?: string;
+  oid?: string;
+  name: string;
+  image: string;
+  quantity: number;
+  price: number;
+  inStock: number;
+  review?: {};
+}
+
+export interface IOrder {
+  _id?: string;
+  uid: string;
+  cart: IProductCart[];
+  paymentMethod: string;
+  status: string;
+  delivered: boolean;
+  active: boolean;
+  review: boolean;
+  total: number;
+}
+
+export const startOrderUpdate = (order: IOrder) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
       dispatch(uiStartLoad());
       const req = await fetchToken(`orders/${order._id}`, order, "PUT");
@@ -24,13 +49,9 @@ export const startOrderUpdate = (order: any) => {
   };
 };
 
-export const startOrderAdd = (order: any) => {
+export const startOrderAdd = (order: IProductCart[]) => {
   return async (dispatch: any) => {
     try {
-      order.forEach((product: any) => {
-        product.review = false;
-      });
-
       dispatch(uiStartLoad());
       const req = await fetchToken("orders", order, "post");
       const answ = await req.json();
@@ -107,7 +128,7 @@ export const startOrderCancel = (_id: string) => {
   };
 };
 
-export const orderSetActive = (order: {}) => ({
+export const orderSetActive = (order: IOrder) => ({
   type: types.orderSetActive,
   payload: order,
 });
@@ -120,17 +141,17 @@ export const orderClean = () => ({
   type: types.orderClean,
 });
 
-const orderAdd = (order: {}) => ({
+const orderAdd = (order: IOrder) => ({
   type: types.orderAdd,
   payload: order,
 });
 
-const orderUpdate = (order: {}) => ({
+const orderUpdate = (order: IOrder) => ({
   type: types.orderUpdate,
   payload: order,
 });
 
-const orderFetchAll = (orders: {}[]) => ({
+const orderFetchAll = (orders: IOrder[]) => ({
   type: types.orderFetchAll,
   payload: orders,
 });

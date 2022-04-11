@@ -1,4 +1,5 @@
 import { Response } from "express";
+import mongoose from "mongoose";
 import { cartTotal } from "../helpers/cartTotal";
 import { validateProducts, handleStock } from "../helpers/validateStock";
 
@@ -9,10 +10,16 @@ export const createOrder = async (req: any, res: Response) => {
 
   try {
     const newOrder: OrdersDocument = new Orders({
+      _id: new mongoose.Types.ObjectId(),
       uid: user.uid,
       cart: req.body,
       total: cartTotal(req.body),
     });
+
+    newOrder.cart.forEach((product: any) => {
+      product.review = "None";
+    });
+
     // Validate avalability of products
     const avalability = await validateProducts(newOrder);
 
@@ -22,6 +29,7 @@ export const createOrder = async (req: any, res: Response) => {
         msg: avalability.msg,
       });
     }
+
     // Update stock
     await handleStock(newOrder, "create");
 
@@ -42,6 +50,7 @@ export const createOrder = async (req: any, res: Response) => {
 export const editOrder = async (req: any, res: Response) => {
   const { id } = req.params;
   const { user } = req;
+
   try {
     let order = await Orders.findById(id);
 
@@ -126,7 +135,6 @@ export const fetchOrderUser = async (req: any, res: Response) => {
       .select("-createdAt")
       .select("-__v")
       .select("-updatedAt");
-    console.log(orders);
     if (orders.length === 0) {
       return res.status(400).json({
         status: false,

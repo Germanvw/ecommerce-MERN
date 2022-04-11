@@ -2,9 +2,12 @@ import { types } from "../types";
 import { uiCloseModal, uiEndLoad, uiSetError, uiStartLoad } from "./uiActions";
 import { fetchNoToken, fetchToken } from "../../hooks/useFetch";
 import { fireModal } from "../../hooks/useModal";
+import { ThunkDispatch } from "redux-thunk/es/types";
+import { AnyAction } from "redux";
+import { IProductCart, startOrderUpdate } from "./OrderActions";
 
 export const startProdFetchAll = (cat?: string, brand?: string) => {
-  return async (dispatch: any) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
       dispatch(uiStartLoad());
 
@@ -25,7 +28,7 @@ export const startProdFetchAll = (cat?: string, brand?: string) => {
 
 export const startProdAdd = (product: any) => {
   const { category } = product;
-  return async (dispatch: any) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
       dispatch(uiStartLoad());
 
@@ -66,7 +69,7 @@ export const startProdAdd = (product: any) => {
 
 export const startProdUpdate = (product: any) => {
   const { _id, category } = product;
-  return async (dispatch: any) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
       dispatch(uiStartLoad());
       //get Category
@@ -104,7 +107,7 @@ export const startProdUpdate = (product: any) => {
 };
 
 export const startProdRemove = (_id: string) => {
-  return async (dispatch: any) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
       dispatch(uiStartLoad());
 
@@ -113,6 +116,36 @@ export const startProdRemove = (_id: string) => {
 
       if (answ.status) {
         dispatch(prodRemove(_id));
+        fireModal("Success", answ.msg, "success", dispatch);
+      } else {
+        dispatch(uiSetError(answ.msg));
+      }
+      dispatch(uiEndLoad());
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const startReviewProduct = (
+  cartItem: IProductCart,
+  stars: number,
+  comment: string,
+  oid: string
+) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    console.log(oid);
+    try {
+      const req = await fetchToken(
+        `review/${cartItem._id}`,
+        { stars, comment, oid },
+        "POST"
+      );
+
+      const answ = await req.json();
+      if (answ.status) {
+        dispatch(uiCloseModal());
+        dispatch(startOrderUpdate(answ.order));
         fireModal("Success", answ.msg, "success", dispatch);
       } else {
         dispatch(uiSetError(answ.msg));

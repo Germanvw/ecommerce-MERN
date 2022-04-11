@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { confirmDeleteCategory } from "../../hooks/useConfirmModal";
+import { confirmChangeStateCategory } from "../../hooks/useConfirmModal";
 import { catSetActive } from "../../redux/actions/categoryActions";
 import { uiOpenModalCategory } from "../../redux/actions/uiActions";
 import { headerTableCategories } from "./imports";
@@ -9,16 +9,11 @@ import "./index.scss";
 export const CategoryTable = ({ categories }: any) => {
   const dispatch = useDispatch();
 
-  const handleDelete = (_id: string) => {
-    confirmDeleteCategory(_id, dispatch);
+  const handleChangeState = (_id: string) => {
+    confirmChangeStateCategory(_id, dispatch);
   };
 
   const handleUpdate = (category: {}) => {
-    dispatch(catSetActive(category));
-    dispatch(uiOpenModalCategory());
-  };
-
-  const handleDisplay = (category: {}) => {
     dispatch(catSetActive(category));
     dispatch(uiOpenModalCategory());
   };
@@ -65,9 +60,15 @@ export const CategoryTable = ({ categories }: any) => {
               <td className="d-lg-table-cell d-none text-center align-middle">
                 {category._id}
               </td>
-              <td className="align-middle text-center">{category.name}</td>
               <td className="d-md-table-cell d-none text-center">
                 <img src={category.image} alt={category.image} />
+              </td>
+              <td
+                className={`align-middle text-center ${
+                  !category.active && "cancelled"
+                }`}
+              >
+                {category.name}
               </td>
               <td className="align-middle text-center">
                 <button
@@ -80,7 +81,7 @@ export const CategoryTable = ({ categories }: any) => {
               <td className="align-middle  text-center">
                 <button
                   className="delete"
-                  onClick={() => handleDelete(category._id)}
+                  onClick={() => handleChangeState(category._id)}
                 >
                   {category.active ? "Desactivate" : "Activate"}
                 </button>

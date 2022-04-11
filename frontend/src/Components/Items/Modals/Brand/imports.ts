@@ -1,3 +1,5 @@
+import { IBrand } from "../../../redux/reducer/brandReducer";
+
 export const inputProps = {
   placeholder: "Filter by name...",
   type: "text",

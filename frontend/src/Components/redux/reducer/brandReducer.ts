@@ -1,18 +1,18 @@
 import { types } from "../types";
 
-export interface brandProps {
+export interface IBrand {
   _id?: string;
   name: string;
   image: string;
-  active: boolean;
+  active?: boolean;
 }
 
-interface stateProps {
-  brandList: brandProps[];
-  active: brandProps | null;
+interface IBrandProp {
+  brandList: IBrand[];
+  active: IBrand | null;
 }
 
-const initialState: stateProps = {
+const initialState: IBrandProp = {
   brandList: [],
   active: null,
 };

@@ -9,6 +9,11 @@ import {
   uiSetError,
   uiStartLoad,
 } from "./uiActions";
+import {
+  errorPasswordInit,
+  errorUserProfileInit,
+  initPasswordState,
+} from "../../Items/Modals/User/imports";
 
 interface UserObject {
   uid: string;
@@ -72,9 +77,13 @@ export const startAuthRegister = (form: any) => {
 export const startAuthChangePassword = ({
   password,
   newPassword,
+  setErrors,
+  setValue,
 }: {
   password: string;
   newPassword: string;
+  setErrors: any;
+  setValue: any;
 }) => {
   return async (dispatch: any) => {
     try {
@@ -88,6 +97,8 @@ export const startAuthChangePassword = ({
       if (answ.status) {
         dispatch(uiCloseModal());
         fireModal("Success", answ.msg, "success", dispatch);
+        setErrors(errorPasswordInit);
+        setValue(initPasswordState);
       } else {
         dispatch(uiSetError(answ.msg));
       }
@@ -98,7 +109,11 @@ export const startAuthChangePassword = ({
   };
 };
 
-export const startAuthUserUpdate = (form: any) => {
+export const startAuthUserUpdate = (
+  form: any,
+  setErrors: any,
+  type?: string
+) => {
   return async (dispatch: any) => {
     try {
       dispatch(uiStartLoad());

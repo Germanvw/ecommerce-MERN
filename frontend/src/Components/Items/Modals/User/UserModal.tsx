@@ -37,13 +37,11 @@ export const UserModal = () => {
     });
     handleError(target, errors, setErrors);
   };
-
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
     if (!errors.username && !errors.email && !errors.picture) {
-      dispatch(startAuthUserUpdate(value));
-      setErrors(errorUserProfileInit);
+      dispatch(startAuthUserUpdate(value, setErrors));
     }
   };
 

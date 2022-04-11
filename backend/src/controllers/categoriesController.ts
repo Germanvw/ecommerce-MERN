@@ -82,6 +82,7 @@ export const changeActiveCategory = async (req: any, res: Response) => {
       });
     }
 
+    // Update category state
     const updated = await Categories.findOneAndUpdate(
       { _id: id },
       { active: !category.active },

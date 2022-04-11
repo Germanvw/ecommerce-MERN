@@ -4,13 +4,13 @@ export const StarRating = ({ stars }: any) => {
 
   useEffect(() => {
     const answ = getStars(stars);
-    if (answ!.length > 0) {
+    if (answ && answ!.length > 0) {
       setArray(answ!);
     }
   }, [stars]);
 
   return (
-    <div className="d-flex">
+    <div className="d-flex justify-content-center align-items-center">
       {array?.map((star, index) => {
         if (star === 100 || star === 0) {
           return (

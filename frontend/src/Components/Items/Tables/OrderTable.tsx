@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { confirmCancelOrder } from "../../hooks/useConfirmModal";
-import { orderSetActive } from "../../redux/actions/OrderActions";
+import { IOrder, orderSetActive } from "../../redux/actions/OrderActions";
 import { uiOpenModalOrder } from "../../redux/actions/uiActions";
-import { headerTableUser } from "./imports";
+import { headerTableOrdersUser } from "./imports";
 
 import "./index.scss";
 
@@ -13,7 +13,7 @@ export const OrderTable = ({ orders }: any) => {
     confirmCancelOrder(_id, dispatch);
   };
 
-  const handleDisplay = (order: {}) => {
+  const handleDisplay = (order: IOrder) => {
     dispatch(orderSetActive(order));
     dispatch(uiOpenModalOrder());
   };
@@ -21,7 +21,7 @@ export const OrderTable = ({ orders }: any) => {
     <table className="table custom-table">
       <thead>
         <tr>
-          {headerTableUser.map((item: string) => {
+          {headerTableOrdersUser.map((item: string) => {
             if (item === "Products") {
               return (
                 <th scope="col" className="d-md-table-cell d-none" key={item}>

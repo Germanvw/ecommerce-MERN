@@ -47,9 +47,10 @@ export const PasswordModal = () => {
           startAuthChangePassword({
             password: value.oldPassword,
             newPassword: value.password,
+            setErrors,
+            setValue,
           })
         );
-        setValue(initPasswordState);
       } else {
         dispatch(uiSetError("Passwords must match"));
       }

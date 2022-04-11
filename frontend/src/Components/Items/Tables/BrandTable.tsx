@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
-import { confirmDeleteBrand } from "../../hooks/useConfirmModal";
+import { confirmChangeStateBrand } from "../../hooks/useConfirmModal";
 import { brandSetActive } from "../../redux/actions/brandActions";
 import { uiOpenModalBrand } from "../../redux/actions/uiActions";
-import { brandProps } from "../../redux/reducer/brandReducer";
+import { IBrand } from "../../redux/reducer/brandReducer";
 import { headerTableBrands } from "./imports";
 
 import "./index.scss";
@@ -11,11 +11,11 @@ export const BrandTable = ({ brands }: any) => {
   const dispatch = useDispatch();
 
   const handleDelete = (_id: string) => {
-    confirmDeleteBrand(_id, dispatch);
+    confirmChangeStateBrand(_id, dispatch);
   };
 
-  const handleUpdate = (category: {}) => {
-    dispatch(brandSetActive(category));
+  const handleUpdate = (brand: IBrand) => {
+    dispatch(brandSetActive(brand));
     dispatch(uiOpenModalBrand());
   };
 
@@ -56,7 +56,7 @@ export const BrandTable = ({ brands }: any) => {
       </thead>
       <tbody>
         {brands.length > 0 &&
-          brands.map((brand: brandProps) => (
+          brands.map((brand: IBrand) => (
             <tr key={brand._id}>
               <td className="d-md-table-cell d-none text-center align-middle">
                 {brand._id}

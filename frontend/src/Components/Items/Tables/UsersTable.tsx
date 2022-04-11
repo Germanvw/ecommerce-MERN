@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { confirmChangeStatusUser } from "../../hooks/useConfirmModal";
-// import { userSetActive } from "../../redux/actions/brandActions";
-import { uiOpenModalUser } from "../../redux/actions/uiActions";
+
+import { uiOpenModalUser, uiSetError } from "../../redux/actions/uiActions";
 import { setUserActive } from "../../redux/actions/userActions";
 import { headerTableBrands } from "./imports";
 
@@ -10,15 +10,18 @@ import "./index.scss";
 export const UsersTable = ({ users }: any) => {
   const dispatch = useDispatch();
 
-  const handleLogicDelete = (_id: string) => {
-    confirmChangeStatusUser(_id, dispatch);
+  const handleLogicDelete = (user: any) => {
+    if (user.isAdmin) {
+      dispatch(uiSetError("Cant disable admin account"));
+    } else {
+      confirmChangeStatusUser(user._id, dispatch);
+    }
   };
 
   const handleDisplay = (user: any) => {
     dispatch(setUserActive(user));
     dispatch(uiOpenModalUser());
   };
-  console.log(users);
   return (
     <table className="table custom-table">
       <thead>
@@ -70,7 +73,7 @@ export const UsersTable = ({ users }: any) => {
               <td className="align-middle  text-center">
                 <button
                   className="delete"
-                  onClick={() => handleLogicDelete(user._id!)}
+                  onClick={() => handleLogicDelete(user)}
                 >
                   {user.active ? "Desactivate" : "Activate"}
                 </button>

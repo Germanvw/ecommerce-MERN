@@ -70,5 +70,35 @@ export const formUserImputs = [
   },
   { label: "Email", placeholder: "Email", type: "email", name: "email" },
   { label: "Picture", placeholder: "Picture", type: "text", name: "picture" },
-  { label: "Active", placeholder: "Active", type: "text", name: "active" },
+];
+
+export const formUserAdminImputs = [
+  {
+    label: "Username",
+    placeholder: "Username",
+    type: "text",
+    name: "username",
+    active: true,
+  },
+  {
+    label: "Email",
+    placeholder: "Email",
+    type: "email",
+    name: "email",
+    active: true,
+  },
+  {
+    label: "Picture",
+    placeholder: "Picture",
+    type: "text",
+    name: "picture",
+    active: true,
+  },
+  {
+    label: "Active",
+    placeholder: "Active",
+    type: "text",
+    name: "active",
+    active: true,
+  },
 ];

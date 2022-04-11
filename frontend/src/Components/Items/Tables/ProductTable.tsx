@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { confirmDeleteProduct } from "../../hooks/useConfirmModal";
+import { confirmChangeStateProduct } from "../../hooks/useConfirmModal";
 import { prodSetActive } from "../../redux/actions/productActions";
 import { uiOpenModalProduct } from "../../redux/actions/uiActions";
 import { headerTableProducts } from "./imports";
@@ -9,8 +9,8 @@ import "./index.scss";
 export const ProductTable = ({ products }: any) => {
   const dispatch = useDispatch();
 
-  const handleDelete = (_id: string) => {
-    confirmDeleteProduct(_id, dispatch);
+  const handleChangeState = (_id: string) => {
+    confirmChangeStateProduct(_id, dispatch);
   };
 
   const handleUpdate = (product: {}) => {
@@ -73,7 +73,13 @@ export const ProductTable = ({ products }: any) => {
               <td className="d-none d-md-block text-center">
                 <img src={product.image} alt={product.image} />
               </td>
-              <td className="align-middle text-center">{product.name}</td>
+              <td
+                className={`align-middle text-center ${
+                  !product.active && "cancelled"
+                }`}
+              >
+                {product.name}
+              </td>
               <td className="d-none d-sm-table-cell align-middle text-center">{`$ ${product.price}`}</td>
               <td className="d-none d-md-table-cell align-middle text-center">
                 {product.inStock}
@@ -94,7 +100,7 @@ export const ProductTable = ({ products }: any) => {
               <td className="align-middle text-center">
                 <button
                   className="delete"
-                  onClick={() => handleDelete(product._id)}
+                  onClick={() => handleChangeState(product._id)}
                 >
                   Delete
                 </button>

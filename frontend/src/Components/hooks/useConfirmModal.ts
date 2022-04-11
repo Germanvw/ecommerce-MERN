@@ -1,36 +1,36 @@
 import Swal, { SweetAlertOptions } from "sweetalert2";
-import { startCatRemove } from "../redux/actions/categoryActions";
+import { startChangeStateCategory } from "../redux/actions/categoryActions";
 import { startOrderCancel } from "../redux/actions/OrderActions";
 import { startProdRemove } from "../redux/actions/productActions";
 import { startChangeStatusBrand } from "../redux/actions/brandActions";
 import { startCartRemove } from "../redux/actions/cartActions";
 import { startChangeStateUser } from "../redux/actions/userActions";
 
-export const confirmDeleteCategory = (_id: string, dispatch: any) => {
+export const confirmChangeStateCategory = (_id: string, dispatch: any) => {
   Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
+    title: "Change state?",
+    text: "You will be able to revert this",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete category!",
+    confirmButtonText: "Yes, change it!",
   } as SweetAlertOptions).then((result) => {
     if (result.isConfirmed) {
-      dispatch(startCatRemove(_id));
+      dispatch(startChangeStateCategory(_id));
     }
   });
 };
 
-export const confirmDeleteProduct = (_id: string, dispatch: any) => {
+export const confirmChangeStateProduct = (_id: string, dispatch: any) => {
   Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
+    title: "Change state?",
+    text: "You will be able to revert this",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete product!",
+    confirmButtonText: "Yes, change it!",
   } as SweetAlertOptions).then((result) => {
     if (result.isConfirmed) {
       dispatch(startProdRemove(_id));
@@ -38,15 +38,15 @@ export const confirmDeleteProduct = (_id: string, dispatch: any) => {
   });
 };
 
-export const confirmDeleteBrand = (_id: string, dispatch: any) => {
+export const confirmChangeStateBrand = (_id: string, dispatch: any) => {
   Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
+    title: "Change state?",
+    text: "You will be able to revert this",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete brand!",
+    confirmButtonText: "Yes, change it!",
   } as SweetAlertOptions).then((result) => {
     if (result.isConfirmed) {
       dispatch(startChangeStatusBrand(_id));
@@ -56,13 +56,13 @@ export const confirmDeleteBrand = (_id: string, dispatch: any) => {
 
 export const confirmCancelOrder = (_id: string, dispatch: any) => {
   Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
+    title: "Cancel order?",
+    text: "You will not be able to revert this!",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, cancel order!",
+    confirmButtonText: "Yes, cancel it!",
   } as SweetAlertOptions).then((result) => {
     if (result.isConfirmed) {
       dispatch(startOrderCancel(_id));
@@ -89,8 +89,8 @@ export const confirmDeleteProductCart = (_id: string, dispatch: any) => {
 
 export const confirmChangeStatusUser = (_id: string, dispatch: any) => {
   Swal.fire({
-    title: "Are you sure?",
-    text: "Change user status!",
+    title: "Change state?",
+    text: "You will be able to revert this",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",

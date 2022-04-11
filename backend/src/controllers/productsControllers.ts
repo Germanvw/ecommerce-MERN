@@ -5,6 +5,7 @@ export const createProduct = async (req: any, res: Response) => {
   const { name, description, image, price, inStock, category, brand } =
     req.body;
 
+  // Product exists
   try {
     const newProduct: ProductDocument = new Products({
       name,
@@ -16,6 +17,7 @@ export const createProduct = async (req: any, res: Response) => {
       category,
     });
 
+    // Product save
     const saved = await newProduct.save();
 
     return res.status(201).json({
@@ -34,12 +36,15 @@ export const editProduct = async (req: any, res: Response) => {
   try {
     let product = await Products.findById(id);
 
+    // Product exists
     if (!product) {
       return res.status(400).json({
         status: false,
         msg: "Product doesnt exist",
       });
     }
+
+    // Update product
     const newProduct = await Products.findOneAndUpdate({ _id: id }, req.body, {
       returnOriginal: false,
     })
@@ -60,7 +65,7 @@ export const changeActiveProduct = async (req: any, res: Response) => {
   const { id } = req.params;
   try {
     const product = await Products.findById(id);
-    console.log(product!.active!);
+
     // Product exists
     if (!product) {
       return res.status(400).json({
@@ -89,6 +94,7 @@ export const changeActiveProduct = async (req: any, res: Response) => {
     return res.status(500).json({ status: false, msg: "Error on request" });
   }
 };
+
 export const fetchProduct = async (req: any, res: Response) => {
   try {
     const product = await Products.findOne({ _id: req.params.id })

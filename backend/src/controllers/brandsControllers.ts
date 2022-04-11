@@ -31,7 +31,7 @@ export const createBrand = async (req: any, res: Response) => {
 };
 
 export const editBrand = async (req: any, res: Response) => {
-  const { name, image } = req.body;
+  const { name } = req.body;
   const { id } = req.params;
   try {
     const brand = await Brands.findById(id);

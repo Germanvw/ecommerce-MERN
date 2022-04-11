@@ -8,12 +8,17 @@ interface Status {
   string: "Pending" | "Paid" | "Cancelled";
 }
 
+interface ProductReview {
+  uid: string;
+  rid: string;
+}
+
 export interface ProductsOrder {
   _id: string;
   name: string;
   price: number;
   quantity: number;
-  rated: boolean;
+  review: "None" | ProductReview;
 }
 
 interface IOrders {
@@ -23,6 +28,7 @@ interface IOrders {
   total: number;
   delivered: boolean;
   status: Status;
+  review: boolean;
 }
 
 export interface OrdersDocument extends IOrders, mongoose.Document {
@@ -38,6 +44,7 @@ const OrdersSchema: Schema = new Schema(
     total: { type: Number, required: true, min: 0 },
     delivered: { type: Boolean, default: false },
     status: { type: String, default: "Pending" },
+    review: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

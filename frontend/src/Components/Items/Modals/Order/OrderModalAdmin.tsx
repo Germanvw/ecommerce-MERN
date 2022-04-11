@@ -26,7 +26,6 @@ export const OrderModalAdmin = () => {
 
   // Effects
   if (!active) return <></>;
-  console.log(active);
   return (
     <Modal
       isOpen={modal.order}

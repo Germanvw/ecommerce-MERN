@@ -1,9 +1,15 @@
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { uiCloseModal } from "../../../redux/actions/uiActions";
+import {
+  uiCloseModal,
+  uiOpenModalReview,
+} from "../../../redux/actions/uiActions";
 import { RootState } from "../../../redux/reducer/rootReducer";
 import { customProductStyles } from "../Product/imports";
-import { orderClearActive } from "../../../redux/actions/OrderActions";
+import {
+  IOrder,
+  orderClearActive,
+  orderSetActive,
+} from "../../../redux/actions/OrderActions";
 import { OrderTableUserDetails } from "../../Tables/OrderTableUserDetails";
 
 import Modal from "react-modal";
@@ -22,6 +28,11 @@ export const OrderModalUser = () => {
   const closeModal = () => {
     dispatch(uiCloseModal());
     dispatch(orderClearActive());
+  };
+  const handleReview = (order: IOrder) => {
+    dispatch(uiCloseModal());
+    dispatch(orderSetActive(order));
+    dispatch(uiOpenModalReview());
   };
   // Effects
   if (!active) return <></>;
@@ -80,10 +91,16 @@ export const OrderModalUser = () => {
             <div className="col-md-6">
               <div className="total">Total: ${active.total}</div>
             </div>
-            {active.paymentMethod === "None" && (
+            {active.paymentMethod === "None" ? (
               <button onClick={() => navigate(`/checkout/${active._id}`)}>
                 Checkout
               </button>
+            ) : (
+              !active.rated && (
+                <button onClick={() => handleReview(active)}>
+                  Review products
+                </button>
+              )
             )}
             <button onClick={closeModal}>Cerrar</button>
           </div>

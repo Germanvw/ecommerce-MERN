@@ -4,7 +4,7 @@ import { uiCloseModal } from "../../../redux/actions/uiActions";
 import { RootState } from "../../../redux/reducer/rootReducer";
 import {
   errorUserProfileInit,
-  formUserImputs,
+  formUserAdminImputs,
   genderOptions,
   initialUserState,
 } from "./imports";
@@ -40,8 +40,7 @@ export const UserAdminModal = () => {
     e.preventDefault();
 
     if (!errors.username && !errors.email && !errors.picture) {
-      dispatch(startAuthUserUpdate(value));
-      setErrors(errorUserProfileInit);
+      dispatch(startAuthUserUpdate(value, setErrors));
     }
   };
 
@@ -89,7 +88,7 @@ export const UserAdminModal = () => {
         <h1>See Details</h1>
 
         <form onSubmit={handleSubmit}>
-          {formUserImputs.map((input: any, index: any) => (
+          {formUserAdminImputs.map((input: any, index: any) => (
             <FormInput
               key={index}
               value={value[input.name]}

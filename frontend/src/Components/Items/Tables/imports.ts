@@ -1,10 +1,10 @@
-export const headerTableUser = [
+export const headerTableOrdersUser = [
   "Products",
   "Total",
   "Delivered",
   "Status",
   "See Details",
-  "Cancel",
+  "Action",
 ];
 
 export const headerTableCategories = ["Id", "Name", "Img", "Update", "Delete"];

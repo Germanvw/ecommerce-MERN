@@ -51,15 +51,15 @@ export const startCatAdd = (category: any) => {
   };
 };
 
-export const startCatRemove = (_id: string) => {
+export const startChangeStateCategory = (_id: string) => {
   return async (dispatch: any) => {
     try {
       dispatch(uiStartLoad());
-      const req = await fetchToken(`categories/${_id}`, {}, "DELETE");
+      const req = await fetchToken(`categories/active/${_id}`, {}, "PUT");
       const answ = await req.json();
 
       if (answ.status) {
-        dispatch(catRemove(_id));
+        dispatch(catUpdate(answ.category));
         fireModal("Removed", answ.msg, "success", dispatch);
       } else {
         dispatch(uiSetError(answ.msg));
