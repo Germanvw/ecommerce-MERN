@@ -131,10 +131,10 @@ export const startReviewProduct = (
   cartItem: IProductCart,
   stars: number,
   comment: string,
-  oid: string
+  oid: string,
+  setReview: any
 ) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
-    console.log(oid);
     try {
       const req = await fetchToken(
         `review/${cartItem._id}`,
@@ -144,7 +144,14 @@ export const startReviewProduct = (
 
       const answ = await req.json();
       if (answ.status) {
-        dispatch(uiCloseModal());
+        // Change state of the saved review
+        let encontrado: { review: any };
+        answ.order.cart.forEach((item: any) => {
+          if (item._id === cartItem._id) {
+            encontrado = item;
+          }
+        });
+        setReview({ ...encontrado!.review });
         dispatch(startOrderUpdate(answ.order));
         fireModal("Success", answ.msg, "success", dispatch);
       } else {

@@ -15,7 +15,7 @@ export const FormInput = ({
       <div className="input-container">
         <label>{label}</label>
         <input
-          className={`form-input ${disabled && "form-disabled"}`}
+          className="form-input "
           onChange={handleChange}
           onClick={handleClick}
           disabled={active}

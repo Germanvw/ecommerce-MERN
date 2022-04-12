@@ -15,6 +15,7 @@ import ReviewModalItem from "./ReviewModalItem";
 export const ReviewModal = () => {
   const { modal, darkMode } = useSelector((state: RootState) => state.ui);
   const { active } = useSelector((state: RootState) => state.order);
+
   const dispatch = useDispatch();
   //Modal handling
   const closeModal = () => {
@@ -40,7 +41,11 @@ export const ReviewModal = () => {
         <div className="d-flex justify-content-around w-100">
           <div className="row m-0 w-100 text-center">
             {active.cart.map((cartItem: IProductCart) => (
-              <ReviewModalItem cartItem={cartItem} key={cartItem._id!} />
+              <ReviewModalItem
+                active={active}
+                cartItem={cartItem}
+                key={cartItem._id!}
+              />
             ))}
           </div>
         </div>

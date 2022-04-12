@@ -23,7 +23,6 @@ export const OrderTableUser = ({ orders }: { orders: IOrder[] }) => {
   };
 
   const handleReview = (order: IOrder) => {
-    dispatch(uiCloseModal());
     dispatch(orderSetActive(order));
     dispatch(uiOpenModalReview());
   };
