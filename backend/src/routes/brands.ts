@@ -4,6 +4,7 @@ import {
   editBrand,
   changeActiveBrand,
   fetchBrands,
+  fetchBrandsActive,
   fetchBrand,
 } from "../controllers/brandsControllers";
 import { isAdmin } from "../middlewares/isAdmin";
@@ -15,6 +16,7 @@ router.post("/", validJWT, isAdmin, createBrand);
 router.put("/:id", validJWT, isAdmin, editBrand);
 router.put("/active/:id", validJWT, isAdmin, changeActiveBrand);
 router.get("/", fetchBrands);
+router.get("/active/", fetchBrandsActive);
 router.get("/:id", fetchBrand);
 
 module.exports = router;

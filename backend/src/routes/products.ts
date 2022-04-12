@@ -5,6 +5,7 @@ import {
   changeActiveProduct,
   fetchProducts,
   fetchProduct,
+  FetchProductsActive,
 } from "../controllers/productsControllers";
 import { isAdmin } from "../middlewares/isAdmin";
 import { validJWT } from "../middlewares/validJWT";
@@ -15,6 +16,7 @@ router.post("/", validJWT, isAdmin, createProduct);
 router.put("/:id", validJWT, isAdmin, editProduct);
 router.put("/active/:id", validJWT, isAdmin, changeActiveProduct);
 router.get("/", fetchProducts);
+router.get("/active/", FetchProductsActive);
 router.get("/:id", fetchProduct);
 
 module.exports = router;

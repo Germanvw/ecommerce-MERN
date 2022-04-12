@@ -145,3 +145,26 @@ export const fetchCategories = async (req: any, res: Response) => {
     return res.status(500).json({ status: false, msg: "Error on request" });
   }
 };
+
+export const fetchCategoriesActive = async (req: any, res: Response) => {
+  try {
+    const categories = await Categories.find({ active: true })
+      .select("-createdAt")
+      .select("-__v")
+      .select("-updatedAt");
+
+    if (categories.length === 0) {
+      return res.status(400).json({
+        status: false,
+        msg: "No categories found",
+      });
+    }
+
+    return res.status(201).json({
+      status: true,
+      categories,
+    });
+  } catch (err) {
+    return res.status(500).json({ status: false, msg: "Error on request" });
+  }
+};

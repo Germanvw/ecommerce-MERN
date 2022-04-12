@@ -8,7 +8,6 @@ import { RootState } from "../redux/reducer/rootReducer";
 import { handleProductCart } from "../helpers/handleProductCart";
 import { fetchRatings } from "../helpers/handleFetchRatings";
 import { confirmDeleteProductCart } from "../hooks/useConfirmModal";
-import { startCartRemove } from "../redux/actions/cartActions";
 
 export const Product = () => {
   const { cart } = useSelector((state: RootState) => state.cart);
@@ -20,9 +19,8 @@ export const Product = () => {
 
   //States
   const [product, setProduct] = useState<any>("");
-  const [rating, setRating] = useState(0);
   const [quantity, setQuantity] = useState(0);
-  const [ratingList, setRatingList] = useState([]);
+
   //destructuring
   const { _id, name, category, brand, description, image, price, inStock } =
     product;
@@ -62,11 +60,6 @@ export const Product = () => {
     }
   };
 
-  const handleReq = async () => {
-    const r = await fetchRatings(id!);
-    setRatingList(r);
-  };
-
   const notFound = async () => {
     const found = await cart.find((item: any) => item._id === id);
     if (!found) return false;
@@ -76,7 +69,6 @@ export const Product = () => {
 
   useEffect(() => {
     getProduct();
-    handleReq();
   }, [id]);
 
   useEffect(() => {
@@ -96,13 +88,6 @@ export const Product = () => {
       }
     });
   }, [cart]);
-
-  useEffect(() => {
-    if (ratingList.length > 0) {
-      const current = getRating(ratingList);
-      setRating(Math.floor(current));
-    }
-  }, [ratingList]);
   return (
     <div className="page-product">
       <div className="container">
@@ -116,20 +101,25 @@ export const Product = () => {
             <img src={image} className="img-fluid" alt="product image"></img>
           </div>
           <div className="right col-lg-7 col-md-12 col-sm-12 p-1">
-            <div className="category-link">
-              Category:
-              {category && (
-                <span>
-                  <Link to={`/products?cat=${category._id}`}>
-                    {category.name}
-                  </Link>
-                </span>
-              )}
+            <div className="d-flex justify-content-between">
+              <div className="category-link">
+                Category:
+                {category && (
+                  <span>
+                    <Link to={`/products?cat=${category._id}`}>
+                      {category.name}
+                    </Link>
+                  </span>
+                )}
+              </div>
+              <div className="total-sold">
+                <span>{product.totalSold} Sold</span>
+              </div>
             </div>
             <h2 className="mt-4 mb-3">{name}</h2>
             <div className="d-flex align-items-center">
-              <StarRating stars={rating} />
-              <p className="m-0 mx-2">{rating} Reviews</p>
+              <StarRating stars={product.rating} />
+              <p className="m-0 mx-2">{product.totalReview} Reviews</p>
               <div className="branding">
                 {brand && (
                   <span>
@@ -175,8 +165,8 @@ export const Product = () => {
           </div>
         </div>
         <div className="row m-0">
-          {ratingList && ratingList.length > 0 ? (
-            <ReviewsList reviews={ratingList} />
+          {product.totalReview > 0 ? (
+            <ReviewsList prodId={product._id} />
           ) : (
             <div>
               <p>No reviews found</p>

@@ -29,7 +29,6 @@ export const createRating = async (req: any, res: Response) => {
     let { cart } = reqOrd!;
     let newCart;
     let newOrder;
-
     if (cart.length > 0) {
       cart!.forEach((productItem: any) => {
         if (productItem._id === id) {
@@ -39,12 +38,23 @@ export const createRating = async (req: any, res: Response) => {
       newCart = cart;
       newOrder = await Orders.findOneAndUpdate(
         { _id: req.body.oid },
-        { cart: newCart },
+        {
+          cart: newCart,
+        },
         {
           returnOriginal: false,
         }
       );
     }
+
+    // Update product's rating
+    await Products.findOneAndUpdate(
+      { _id: id },
+      {
+        totalReview: product.totalReview + 1,
+        rating: (product.rating + req.body.stars) / (product.totalReview + 1),
+      }
+    );
 
     return res.status(201).json({
       status: true,
@@ -53,6 +63,7 @@ export const createRating = async (req: any, res: Response) => {
       order: newOrder,
     });
   } catch (err) {
+    console.log(err);
     return res.status(500).json({ status: false, msg: "Error on request" });
   }
 };

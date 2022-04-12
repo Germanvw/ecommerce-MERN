@@ -40,7 +40,7 @@ export const Categories = () => {
 
   //Effects
   useEffect(() => {
-    dispatch(startCatFetchAll());
+    dispatch(startCatFetchAll(true));
   }, []);
 
   return (

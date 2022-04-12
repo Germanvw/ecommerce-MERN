@@ -121,3 +121,17 @@ export const fetchBrand = async (req: any, res: Response) => {
     return res.status(500).json({ status: false, msg: "Error on request" });
   }
 };
+
+export const fetchBrandsActive = async (req: any, res: Response) => {
+  try {
+    const brands = await Brands.find({ active: true });
+
+    if (brands.length === 0) {
+      return res.status(400).json({ status: false, msg: "No Brands found" });
+    }
+
+    return res.status(201).json({ status: true, brands });
+  } catch (err) {
+    return res.status(500).json({ status: false, msg: "Error on request" });
+  }
+};

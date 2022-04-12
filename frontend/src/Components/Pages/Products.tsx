@@ -18,7 +18,7 @@ export const Products = () => {
   const dispatch = useDispatch();
 
   const pagOptions = [8, 16, 24, 32];
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const searchCat = searchParams.get("cat") || "none";
   const searchBrand = searchParams.get("brand") || "none";
@@ -37,11 +37,11 @@ export const Products = () => {
 
   //Effects
   useEffect(() => {
-    dispatch(startProdFetchAll(searchCat, searchBrand));
+    dispatch(startProdFetchAll(searchCat, searchBrand, true));
   }, []);
 
   useEffect(() => {
-    dispatch(startProdFetchAll(searchCat, searchBrand));
+    dispatch(startProdFetchAll(searchCat, searchBrand, true));
   }, [searchCat, searchBrand]);
 
   return (

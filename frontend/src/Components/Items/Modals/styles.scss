@@ -4,8 +4,8 @@
 }
 
 .ReactModalPortal .ReactModal__Overlay {
-  align-items: center;
   display: flex;
+  align-items: center;
   justify-content: center;
   transition: opacity 0.2s ease-in-out;
   z-index: 999;
@@ -29,10 +29,10 @@
 }
 
 .modal-x {
-  border-radius: 20px;
   width: 500px;
   outline: none;
   .modal-bg {
+    margin: auto auto;
     padding: 30px 20px;
     border-radius: 10px;
     display: flex;

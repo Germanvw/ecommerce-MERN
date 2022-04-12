@@ -143,3 +143,38 @@ export const fetchProducts = async (req: any, res: Response) => {
     return res.status(500).json({ status: false, msg: "Error on request" });
   }
 };
+
+export const FetchProductsActive = async (req: any, res: Response) => {
+  const { cat, brand } = req.query;
+  try {
+    let products: any;
+    if (cat !== "none" && brand !== "none") {
+      products = await Products.find({ category: cat, brand, active: true })
+        .populate("category")
+        .populate("brand");
+    } else if (cat !== "none") {
+      products = await Products.find({ category: cat, active: true })
+        .populate("category")
+        .populate("brand");
+    } else if (brand !== "none") {
+      products = await Products.find({ brand, active: true })
+        .populate("category")
+        .populate("brand");
+    } else {
+      products = await Products.find({ active: true })
+        .populate("category")
+        .populate("brand");
+    }
+
+    products = products.filter(
+      (product: any) => product.category.active && product.brand.active
+    );
+
+    return res.status(201).json({
+      status: true,
+      products,
+    });
+  } catch (err) {
+    return res.status(500).json({ status: false, msg: "Error on request" });
+  }
+};

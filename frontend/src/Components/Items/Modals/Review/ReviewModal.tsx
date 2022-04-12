@@ -11,6 +11,7 @@ import {
 } from "../../../redux/actions/OrderActions";
 import { customProductStyles } from "../Product/imports";
 import ReviewModalItem from "./ReviewModalItem";
+import { ReviewModalList } from "./ReviewModalList";
 
 export const ReviewModal = () => {
   const { modal, darkMode } = useSelector((state: RootState) => state.ui);
@@ -22,7 +23,6 @@ export const ReviewModal = () => {
     dispatch(uiCloseModal());
     dispatch(orderClearActive());
   };
-
   // Effects
   if (!active) return <></>;
   return (
@@ -40,13 +40,7 @@ export const ReviewModal = () => {
         <h3>Order: {active._id}</h3>
         <div className="d-flex justify-content-around w-100">
           <div className="row m-0 w-100 text-center">
-            {active.cart.map((cartItem: IProductCart) => (
-              <ReviewModalItem
-                active={active}
-                cartItem={cartItem}
-                key={cartItem._id!}
-              />
-            ))}
+            <ReviewModalList list={active.cart} orderId={active._id} />
           </div>
         </div>
       </div>

@@ -1,7 +1,10 @@
 import { useDispatch } from "react-redux";
 import { confirmChangeStateProduct } from "../../hooks/useConfirmModal";
 import { prodSetActive } from "../../redux/actions/productActions";
-import { uiOpenModalProduct } from "../../redux/actions/uiActions";
+import {
+  uiOpenModalProduct,
+  uiOpenModalProductDisplay,
+} from "../../redux/actions/uiActions";
 import { headerTableProducts } from "./imports";
 
 import "./index.scss";
@@ -19,7 +22,7 @@ export const ProductTable = ({ products }: any) => {
   };
   const handleDisplay = (product: {}) => {
     dispatch(prodSetActive(product));
-    dispatch(uiOpenModalProduct());
+    dispatch(uiOpenModalProductDisplay());
   };
   return (
     <table className="table custom-table">
@@ -102,7 +105,7 @@ export const ProductTable = ({ products }: any) => {
                   className="delete"
                   onClick={() => handleChangeState(product._id)}
                 >
-                  Delete
+                  {product.active ? "Desactivate" : "Activate"}
                 </button>
               </td>
             </tr>

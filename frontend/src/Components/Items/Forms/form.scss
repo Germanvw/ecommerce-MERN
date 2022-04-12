@@ -6,8 +6,10 @@
   margin-bottom: 15px;
   padding: 7px 10px;
   margin-bottom: 8px;
+  width: 100%;
   max-width: 400px;
   .input-container {
+    width: 100%;
     display: flex;
     flex-direction: column;
   }
@@ -47,6 +49,7 @@
   flex-direction: column;
   padding: 7px 10px;
   margin-bottom: 8px;
+  width: 100%;
   max-width: 400px;
   label {
     font-size: 11px;
@@ -58,4 +61,9 @@
     border: none;
     border-radius: 4px;
   }
+}
+
+.dropdown-gender {
+  width: 100%;
+  max-width: 400px;
 }

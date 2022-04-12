@@ -24,13 +24,11 @@ export const validateProducts = async (newOrder: OrdersDocument) => {
 const validateStock = async (_id: any, quantity: number) => {
   try {
     const product = await Products.findById(_id);
-    if (!product) {
-      return false;
-    }
 
-    if (product.inStock >= quantity) {
-      return true;
-    }
+    if (!product) return false;
+
+    if (product.inStock >= quantity) return true;
+
     return false;
   } catch (err) {
     return false;
@@ -43,19 +41,21 @@ export const handleStock = async (
 ) => {
   const { cart } = newOrder;
   cart.forEach(async (item: any) => {
-    const productFetched = await Products.findById(item._id);
-    if (productFetched) {
+    // Find product
+    const product = await Products.findById(item._id);
+    if (product) {
       if (reqType === "create") {
+        //Create order = rest stock, sum total sold
         await Products.findByIdAndUpdate(item._id, {
-          inStock: productFetched.inStock - item.quantity,
+          inStock: product.inStock - item.quantity,
+          totalSold: product.totalSold + item.quantity,
         });
       } else {
-        const currentProduct = await Products.findById(item._id);
-        if (currentProduct) {
-          await Products.findByIdAndUpdate(item._id, {
-            inStock: productFetched.inStock + item.quantity,
-          });
-        }
+        //Create order = sum stock, rest total sold
+        await Products.findByIdAndUpdate(item._id, {
+          inStock: product.inStock + item.quantity,
+          totalSold: product.totalSold - item.quantity,
+        });
       }
     }
   });

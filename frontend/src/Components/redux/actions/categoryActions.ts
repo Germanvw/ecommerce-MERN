@@ -3,30 +3,32 @@ import { fetchToken } from "../../hooks/useFetch";
 import { uiCloseModal, uiEndLoad, uiSetError, uiStartLoad } from "./uiActions";
 import { fireModal } from "../../hooks/useModal";
 
-export const startCatUpdate = (category: any) => {
-  return async (dispatch: any) => {
-    try {
-      dispatch(uiStartLoad());
-      const req = await fetchToken(
-        `categories/${category._id}`,
-        category,
-        "PUT"
-      );
-      const answ = await req.json();
+interface CategoryProp {
+  _id?: string;
+  name: string;
+  description: string;
+  image: string;
+  active?: boolean;
+}
 
-      dispatch(uiEndLoad());
-      if (answ.status) {
-        dispatch(catUpdate(category));
-        dispatch(uiCloseModal());
-        fireModal("Updated", answ.msg, "success", dispatch);
-      } else {
-        dispatch(uiSetError(answ.msg));
-      }
+export const startCatUpdate = (category: any) => async (dispatch: any) => {
+  try {
+    dispatch(uiStartLoad());
+    const req = await fetchToken(`categories/${category._id}`, category, "PUT");
+    const answ = await req.json();
+
+    dispatch(uiEndLoad());
+    if (answ.status) {
+      dispatch(catUpdate(category));
       dispatch(uiCloseModal());
-    } catch (err) {
-      console.log(err);
+      fireModal("Updated", answ.msg, "success", dispatch);
+    } else {
+      dispatch(uiSetError(answ.msg));
     }
-  };
+    dispatch(uiCloseModal());
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const startCatAdd = (category: any) => {
@@ -71,10 +73,10 @@ export const startChangeStateCategory = (_id: string) => {
   };
 };
 
-export const startCatFetchAll = () => {
+export const startCatFetchAll = (active: boolean) => {
   return async (dispatch: any) => {
     try {
-      const req = await fetchToken("categories", {});
+      const req = await fetchToken(`categories/${active && "active/"}`, {});
       const answ = await req.json();
       if (answ.status) {
         dispatch(catFetchAll(answ.categories));

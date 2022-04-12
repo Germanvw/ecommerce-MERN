@@ -54,8 +54,8 @@ export const Sidebar = () => {
 
   useEffect(() => {
     //fetchs
-    dispatch(startCatFetchAll());
-    dispatch(startBrandFetchAll());
+    dispatch(startCatFetchAll(true));
+    dispatch(startBrandFetchAll(true));
   }, []);
 
   return (

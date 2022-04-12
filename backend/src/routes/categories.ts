@@ -5,6 +5,7 @@ import {
   changeActiveCategory,
   fetchCategories,
   fetchCategory,
+  fetchCategoriesActive,
 } from "../controllers/categoriesController";
 import { isAdmin } from "../middlewares/isAdmin";
 import { validJWT } from "../middlewares/validJWT";
@@ -16,6 +17,7 @@ router.post("/", validJWT, isAdmin, createCategory);
 router.put("/:id", validJWT, isAdmin, editCategory);
 router.put("/active/:id", validJWT, isAdmin, changeActiveCategory);
 router.get("/", fetchCategories);
+router.get("/active/", fetchCategoriesActive);
 router.get("/:id", fetchCategory);
 
 module.exports = router;

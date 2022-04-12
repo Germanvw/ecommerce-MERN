@@ -4,6 +4,7 @@ import { types } from "../types";
 interface modalProps {
   category: boolean;
   product: boolean;
+  productDisplay: boolean;
   order: boolean;
   user: boolean;
   password: boolean;
@@ -21,6 +22,7 @@ interface uiProps {
 const initialModal: modalProps = {
   category: false,
   product: false,
+  productDisplay: false,
   order: false,
   user: false,
   password: false,
@@ -72,7 +74,11 @@ export const uiReducer = (state = initialState, action: AnyAction) => {
         ...state,
         modal: { ...state.modal, product: true },
       };
-
+    case types.uiOpenModalProductDisplay:
+      return {
+        ...state,
+        modal: { ...state.modal, productDisplay: true },
+      };
     case types.uiOpenModalOrder:
       return {
         ...state,

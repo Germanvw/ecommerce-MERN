@@ -7,10 +7,10 @@ import { StarRating } from "../../Reviews/StarRating";
 
 const ReviewModalItem = ({
   cartItem,
-  active,
+  orderId,
 }: {
   cartItem: any;
-  active: any;
+  orderId: string;
 }) => {
   const dispatch = useDispatch();
   const [stars, setStars] = useState(0);
@@ -28,13 +28,7 @@ const ReviewModalItem = ({
       );
     } else {
       dispatch(
-        startReviewProduct(
-          cartItem,
-          stars,
-          review.comment,
-          active._id,
-          setReview
-        )
+        startReviewProduct(cartItem, stars, review.comment, orderId, setReview)
       );
     }
   };

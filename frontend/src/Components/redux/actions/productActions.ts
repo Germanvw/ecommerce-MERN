@@ -6,13 +6,23 @@ import { ThunkDispatch } from "redux-thunk/es/types";
 import { AnyAction } from "redux";
 import { IProductCart, startOrderUpdate } from "./OrderActions";
 
-export const startProdFetchAll = (cat?: string, brand?: string) => {
+export const startProdFetchAll = (
+  cat?: string,
+  brand?: string,
+  active?: boolean
+) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
       dispatch(uiStartLoad());
-
-      const req = await fetchNoToken(`products?cat=${cat}&brand=${brand}`, {});
-
+      let req;
+      if (active) {
+        req = await fetchNoToken(
+          `products/active/?cat=${cat}&brand=${brand}`,
+          {}
+        );
+      } else {
+        req = await fetchNoToken(`products/?cat=${cat}&brand=${brand}`, {});
+      }
       const answ = await req.json();
       if (answ.status) {
         dispatch(prodFetchAll(answ.products));
@@ -106,16 +116,16 @@ export const startProdUpdate = (product: any) => {
   };
 };
 
-export const startProdRemove = (_id: string) => {
+export const startChangeStateProduct = (_id: string) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
       dispatch(uiStartLoad());
 
-      const req = await fetchToken(`products/${_id}`, {}, "delete");
+      const req = await fetchToken(`products/active/${_id}`, {}, "PUT");
       const answ = await req.json();
 
       if (answ.status) {
-        dispatch(prodRemove(_id));
+        dispatch(prodUpdate(answ.product));
         fireModal("Success", answ.msg, "success", dispatch);
       } else {
         dispatch(uiSetError(answ.msg));
@@ -141,7 +151,6 @@ export const startReviewProduct = (
         { stars, comment, oid },
         "POST"
       );
-
       const answ = await req.json();
       if (answ.status) {
         // Change state of the saved review

@@ -6,12 +6,11 @@ import { ThunkDispatch } from "redux-thunk/es/types";
 import { AnyAction } from "redux";
 import { IBrand } from "../reducer/brandReducer";
 
-export const startBrandFetchAll = () => {
+export const startBrandFetchAll = (active: boolean) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
       dispatch(uiStartLoad());
-
-      const req = await fetchNoToken("brands", {});
+      const req = await fetchNoToken(`brands/${active && "active/"}`, {});
       const answ = await req.json();
       if (answ.status) {
         dispatch(brandFetchAll(answ.brands));

@@ -41,7 +41,7 @@ export const Brands = () => {
 
   // Effects
   useEffect(() => {
-    dispatch(startBrandFetchAll());
+    dispatch(startBrandFetchAll(false));
   }, []);
 
   return (

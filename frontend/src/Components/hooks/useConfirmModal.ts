@@ -1,7 +1,7 @@
 import Swal, { SweetAlertOptions } from "sweetalert2";
 import { startChangeStateCategory } from "../redux/actions/categoryActions";
 import { startOrderCancel } from "../redux/actions/OrderActions";
-import { startProdRemove } from "../redux/actions/productActions";
+import { startChangeStateProduct } from "../redux/actions/productActions";
 import { startChangeStatusBrand } from "../redux/actions/brandActions";
 import { startCartRemove } from "../redux/actions/cartActions";
 import { startChangeStateUser } from "../redux/actions/userActions";
@@ -33,7 +33,7 @@ export const confirmChangeStateProduct = (_id: string, dispatch: any) => {
     confirmButtonText: "Yes, change it!",
   } as SweetAlertOptions).then((result) => {
     if (result.isConfirmed) {
-      dispatch(startProdRemove(_id));
+      dispatch(startChangeStateProduct(_id));
     }
   });
 };

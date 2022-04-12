@@ -8,19 +8,23 @@ import {
 import { uiCloseModal } from "../../../redux/actions/uiActions";
 import { RootState } from "../../../redux/reducer/rootReducer";
 import {
-  customProductStyles,
   errorProductInit,
-  formProductsImputs,
+  formProductsDisplay,
   initialProductState,
+  customProductStyles,
 } from "./imports";
 import { FormInput } from "../../Forms/FormInput";
 import { DropdownCategory } from "../../Forms/Dropdown";
 import { startCatFetchAll } from "../../../redux/actions/categoryActions";
-import { categoryPropsDocument } from "../Category/imports";
+import {
+  categoryPropsDocument,
+  customCategoryStyles,
+} from "../Category/imports";
 import { handleError } from "../../../helpers/handleErrorInput";
 import Modal from "react-modal";
 
 import "./../styles.scss";
+import { formProductsImputs } from "./imports";
 
 export const ProductModal = () => {
   const { modal, darkMode } = useSelector((state: RootState) => state.ui);
@@ -78,7 +82,7 @@ export const ProductModal = () => {
 
   useEffect(() => {
     // Fetch
-    dispatch(startCatFetchAll());
+    dispatch(startCatFetchAll(true));
   }, []);
 
   useEffect(() => {
@@ -110,47 +114,74 @@ export const ProductModal = () => {
       setErrors(errorProductInit);
     }
   }, [active]);
-
   return (
     <Modal
-      isOpen={modal.product}
+      isOpen={modal.product || modal.productDisplay}
       onRequestClose={closeModal}
       closeTimeoutMS={200}
-      className={`${darkMode ? "modal-d" : "modal-l"} modal-product modal-x`}
-      style={customProductStyles}
+      className={`${darkMode ? "modal-d" : "modal-l"} modal-category modal-x`}
+      style={customCategoryStyles}
       overlayClassName="modal-background"
       ariaHideApp={false}
     >
       <div className="modal-bg" theme-color={darkMode ? "dark" : "light"}>
-        <h1>{active === null ? "Create product." : "Edit product."}</h1>
-
-        <form onSubmit={handleSubmit}>
-          {formProductsImputs.map((input: any) => (
-            <FormInput
-              key={input.name}
-              value={product[input.name]}
-              handleChange={handleFormChange}
-              error={errors![input.name]}
-              {...input}
-            />
-          ))}
+        <h1>
+          {modal.productDisplay
+            ? "Product Information"
+            : active === null
+            ? "Create product."
+            : "Edit product."}
+        </h1>
+        <form
+          onSubmit={handleSubmit}
+          className="w-100 d-flex justify-content-center align-items-center flex-column"
+        >
+          {active ? (
+            <>
+              {formProductsDisplay.map((input: any) => (
+                <FormInput
+                  key={input.name}
+                  value={product[input.name]}
+                  handleChange={handleFormChange}
+                  error={errors![input.name]}
+                  {...input}
+                />
+              ))}
+            </>
+          ) : (
+            <>
+              {formProductsImputs.map((input: any) => (
+                <FormInput
+                  key={input.name}
+                  value={product[input.name]}
+                  handleChange={handleFormChange}
+                  error={errors![input.name]}
+                  {...input}
+                />
+              ))}
+            </>
+          )}
           <div className="dropdown-gender">
             <DropdownCategory
               dwName="category"
               options={categories}
               selected={product.category._id}
               handleChange={handleFormChange}
+              disabled={modal.productDisplay}
             />
           </div>
           <div className="dropdown-gender">
             <DropdownCategory
               dwName="brand"
               options={brands}
-              selected={product.brand}
+              selected={product.brand._id}
               handleChange={handleFormChange}
+              disabled={modal.productDisplay}
             />
           </div>
-          <button>{active ? "Editar" : "Crear"}</button>
+          {!modal.productDisplay && (
+            <button>{active ? "Editar" : "Crear"}</button>
+          )}
         </form>
       </div>
     </Modal>

@@ -8,6 +8,7 @@ export const types = {
 
   uiOpenModalCategory: "[UI] Open Modal Category",
   uiOpenModalProduct: "[UI] Open Modal Product",
+  uiOpenModalProductDisplay: "[UI] Open Modal Product Display",
   uiOpenModalBrand: "[UI] Open Modal Brand",
   uiOpenModalOrder: "[UI] Open Modal Order",
   uiOpenModalReview: "[UI] Open Modal Review",

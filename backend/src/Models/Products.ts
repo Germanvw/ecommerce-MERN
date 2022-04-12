@@ -4,10 +4,13 @@ interface IProducts {
   name: string;
   description: string;
   image: string;
-  category: string;
+  category: { active: boolean };
+  brand: { active: boolean };
   price: number;
-  brand: string;
   inStock: number;
+  totalSold: number;
+  totalReview: number;
+  rating: number;
   active?: boolean;
 }
 
@@ -32,6 +35,18 @@ const ProductsSchema: Schema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Brands",
       required: true,
+    },
+    rating: {
+      type: Number,
+      default: 0,
+    },
+    totalReview: {
+      type: Number,
+      default: 0,
+    },
+    totalSold: {
+      type: Number,
+      default: 0,
     },
     active: { type: Boolean, default: true },
   },

@@ -17,6 +17,10 @@ export const uiOpenModalProduct = () => ({
   type: types.uiOpenModalProduct,
 });
 
+export const uiOpenModalProductDisplay = () => ({
+  type: types.uiOpenModalProductDisplay,
+});
+
 export const uiOpenModalOrder = () => ({
   type: types.uiOpenModalOrder,
 });
