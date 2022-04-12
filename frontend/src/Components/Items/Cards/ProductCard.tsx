@@ -30,7 +30,7 @@ export const ProductCard = ({ product, index }: any) => {
       className="card product-card px-4 py-4 my-4 mx-4"
       style={{ width: "18rem" }}
     >
-      <div className="branding">
+      <div className="branding d-flex justify-content-center">
         <div className="brand-text text-center">{brand.name}</div>
         <img src={product.image} className="card-img-top" alt="Product Image" />
       </div>

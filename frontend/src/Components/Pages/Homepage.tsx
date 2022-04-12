@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { ProductCard } from "../Items/Cards/ProductCard";
 import { startProdFetchAll } from "../redux/actions/productActions";
+import { DisplayTop } from "../Items/Other/DisplayTop";
 
 export const Homepage = () => {
   const { productList }: any = useSelector((state: RootState) => state.prod);
@@ -20,7 +21,6 @@ export const Homepage = () => {
   const handleSold = (quantity: number) => {
     if (productList.length > 0) {
       let sorted = productList.sort((a: any, b: any) => {
-        console.log(a, b);
         return b.totalSold - a.totalSold;
       });
       sorted = sorted.slice(0, quantity);
@@ -57,9 +57,7 @@ export const Homepage = () => {
     handleRating(5);
     handleNew(5);
   }, [productList]);
-  console.log("topSold: ", topSold);
-  console.log("topRating: ", topRating);
-  console.log("topNew: ", topNew);
+
   return (
     <div className="page">
       <header>
@@ -78,50 +76,7 @@ export const Homepage = () => {
         </div>
       </header>
       <main>
-        <div className="products-body">
-          <div className="row m-0 w-100">
-            <div className="col-md-12 body">
-              <h3>Rating</h3>
-              <div className="product-display d-flex justify-content-center">
-                {topRating.map((product: any, index: any) => (
-                  <ProductCard
-                    product={product}
-                    key={product._id}
-                    index={index}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="row m-0 w-100">
-            <div className="col-md-12 body">
-              <h3>Sold</h3>
-              <div className="product-display d-flex justify-content-center">
-                {topSold.map((product: any, index: any) => (
-                  <ProductCard
-                    product={product}
-                    key={product._id}
-                    index={index}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="row m-0 w-100">
-            <div className="col-md-12 body">
-              <h3>New</h3>
-              <div className="product-display d-flex justify-content-center">
-                {topNew.map((product: any, index: any) => (
-                  <ProductCard
-                    product={product}
-                    key={product._id}
-                    index={index}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        <DisplayTop />
       </main>
     </div>
   );

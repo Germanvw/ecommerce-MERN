@@ -6,7 +6,6 @@ import { StarRating } from "../Items/Reviews/StarRating";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/reducer/rootReducer";
 import { handleProductCart } from "../helpers/handleProductCart";
-import { fetchRatings } from "../helpers/handleFetchRatings";
 import { confirmDeleteProductCart } from "../hooks/useConfirmModal";
 
 export const Product = () => {

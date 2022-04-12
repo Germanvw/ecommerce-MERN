@@ -67,3 +67,11 @@
   width: 100%;
   max-width: 400px;
 }
+
+.dropdownPagination {
+  width: 150px;
+  border: none;
+  color: var(--text);
+  background-color: var(--input-bg);
+  padding: 5px 10px;
+}

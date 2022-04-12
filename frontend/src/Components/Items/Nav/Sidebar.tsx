@@ -113,7 +113,9 @@ export const Sidebar = () => {
             </button>
           </div>
         </form>
-        <button onClick={handleReset}>Reset</button>
+        <button onClick={handleReset} className="mb-3">
+          Reset
+        </button>
       </div>
     </div>
   );

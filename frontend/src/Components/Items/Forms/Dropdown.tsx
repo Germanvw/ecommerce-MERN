@@ -93,7 +93,11 @@ export const DropdownPagination = ({
   }, [options[0]]);
 
   return (
-    <select name={dwName} onChange={handleChange}>
+    <select
+      name={dwName}
+      onChange={handleChange}
+      className="dropdownPagination"
+    >
       {options.map((value: number) => (
         <option key={value} value={value}>
           {value}
