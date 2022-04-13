@@ -10,7 +10,7 @@ export const startBrandFetchAll = (active: boolean) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
       dispatch(uiStartLoad());
-      const req = await fetchNoToken(`brands/${active && "active/"}`, {});
+      const req = await fetchNoToken(`brands/${active ? "active/" : ""}`, {});
       const answ = await req.json();
       if (answ.status) {
         dispatch(brandFetchAll(answ.brands));

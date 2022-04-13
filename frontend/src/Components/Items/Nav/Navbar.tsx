@@ -5,6 +5,7 @@ import { RootState } from "../../redux/reducer/rootReducer";
 import { useEffect, useState } from "react";
 
 import "./styles.scss";
+import { SwitchThemeButton } from "../Buttons/SwitchThemeButton";
 
 export const Navbar = ({ isAuth }: any) => {
   const { cart } = useSelector((state: RootState) => state.cart);
@@ -52,6 +53,9 @@ export const Navbar = ({ isAuth }: any) => {
                 </div>
               </>
             )}
+            <div className="theme-switch">
+              <SwitchThemeButton />
+            </div>
             {!isAuth ? (
               <button className="auth">
                 <Link className="login" to="/login">

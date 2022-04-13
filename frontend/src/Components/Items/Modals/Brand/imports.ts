@@ -1,4 +1,11 @@
-import { IBrand } from "../../../redux/reducer/brandReducer";
+export interface brandPropsDocument {
+  _id: string;
+  name: string;
+  image: string;
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: number;
+}
 
 export const inputProps = {
   placeholder: "Filter by name...",

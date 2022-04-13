@@ -52,11 +52,12 @@ export const DisplayTop = () => {
     handleRating(5);
     handleNew(5);
   }, [productList]);
+
   return (
     <div className="products-body pt-4">
+      <h3 className="text-center">Top Rated</h3>
       <div className="row m-0 w-100">
-        <h3 className="text-center">Top Rated</h3>
-        <div className="col-md-12 body">
+        <div className="col-md-12 body-top">
           <div className="product-display d-flex justify-content-center">
             {topRating.map((product: any, index: any) => (
               <ProductCard product={product} key={product._id} index={index} />
@@ -64,9 +65,9 @@ export const DisplayTop = () => {
           </div>
         </div>
       </div>
+      <h3 className="text-center">Top Sold</h3>
       <div className="row m-0 w-100">
-        <div className="col-md-12 body">
-          <h3 className="text-center">Top Sold</h3>
+        <div className="col-md-12 body-top">
           <div className="product-display d-flex justify-content-center">
             {topSold.map((product: any, index: any) => (
               <ProductCard product={product} key={product._id} index={index} />
@@ -74,9 +75,9 @@ export const DisplayTop = () => {
           </div>
         </div>
       </div>
+      <h3 className="text-center">Newest</h3>
       <div className="row m-0 w-100">
-        <h3 className="text-center">Newest</h3>
-        <div className="col-md-12 body">
+        <div className="col-md-12 body-top">
           <div className="product-display d-flex justify-content-center">
             {topNew.map((product: any, index: any) => (
               <ProductCard product={product} key={product._id} index={index} />

@@ -3,24 +3,27 @@
   --primary: #ef3651;
   --disabled: #852130;
   --error: #ff2424;
+  --white: #f5f5f5;
   --success: #55d85a;
   --grey: #abb4bd;
   --text: #222222;
-  --delete: #b62c2c;
-  --update: #008000;
+  --delete: #d62d2d;
+  --update: #009400;
   --update-disabled: #074d07;
   --more: #2889c5;
 
-  --bg-body: #ffffff;
-  --bg-primary: #f9f9f9;
+  --bg-body: #f9f9f9;
+  --bg-primary: #ffffff;
 
   // label - input
-  --input-bg: #ffffff;
+  --input-bg: #f9f9f9;
   --label-color: #9b9b9b;
 }
 
 :root [data-theme="dark"] {
   --text: #f5f5f5;
+  --delete: #b62c2c;
+  --update: #008000;
 
   // backgrounds
   --bg-body: #2f313f;
@@ -35,7 +38,6 @@ input:-webkit-autofill,
 textarea:-webkit-autofill,
 select:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px var(--input-bg) inset !important;
-  --webkit-border-radius: 0 !important;
   -webkit-text-fill-color: var(--text) !important;
 }
 
@@ -52,6 +54,7 @@ input:focus {
 }
 
 a {
+  font-weight: 600;
   color: var(--text);
   text-decoration: none;
   &:hover {
@@ -59,14 +62,19 @@ a {
   }
 }
 
+th,
+td {
+  color: var(--text);
+}
+
 button {
   outline: none;
   border: none;
   cursor: pointer;
   background-color: var(--primary);
-  color: var(--text);
+  color: var(--white);
   &:hover {
-    background-color: var(--text);
+    background-color: var(--white);
     color: var(--primary);
   }
 }

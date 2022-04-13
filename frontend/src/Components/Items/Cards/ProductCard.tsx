@@ -9,7 +9,7 @@ import "./index.scss";
 export const ProductCard = ({ product, index }: any) => {
   const navigate = useNavigate();
 
-  const { name, image, brand } = product;
+  const { name, brand } = product;
 
   const [currentProduct, setCurrentProduct] = useState(null);
 

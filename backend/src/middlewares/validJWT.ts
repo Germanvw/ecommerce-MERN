@@ -8,7 +8,6 @@ export const validJWT = (req: any, res: Response, next: NextFunction) => {
   if (!token) {
     return res.status(401).json({
       status: false,
-      msg: "Authentication token doesnt exist",
     });
   }
 

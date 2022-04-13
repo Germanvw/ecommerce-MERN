@@ -72,9 +72,9 @@ export const DropdownCategory = ({
             {index.name}
           </option>
         )}
-        {options.map(({ _id, name }: any) => (
-          <option key={_id} value={_id}>
-            {name}
+        {options.map((opt: any) => (
+          <option key={opt._id} value={opt._id}>
+            {opt.name}
           </option>
         ))}
       </select>

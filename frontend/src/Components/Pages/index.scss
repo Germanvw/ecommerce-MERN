@@ -1,4 +1,15 @@
 .products-body {
+  .body-top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .product-display {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
   .body {
     background-color: var(--bg-primary);
     display: flex;
@@ -18,9 +29,7 @@
       flex-wrap: wrap;
     }
     .pagination-body {
-      color: var(--text-primary);
       height: 54px;
-      background-color: var(--background-2);
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -56,8 +65,10 @@
   background-color: var(--bg-primary);
   header {
     .banner {
+      background-image: url("https://images6.alphacoders.com/942/thumb-1920-942455.jpg");
+      background-size: cover;
+      background-position: center;
       min-height: calc(80vh - 50px);
-      background-color: rgb(24, 24, 24);
       color: white;
       h1 {
         font-weight: 700;
@@ -80,10 +91,10 @@
         padding: 10px;
         border-radius: 10px;
         background-color: var(--primary);
-        color: var(--text);
+        color: var(--white);
         border-radius: 50%;
         &:hover {
-          background-color: var(--text);
+          background-color: var(--white);
           color: var(--primary);
         }
       }
@@ -106,12 +117,14 @@
           }
         }
         .branding {
+          font-weight: 600;
           padding: 5px 10px;
           background-color: rgb(41, 41, 153);
           &:hover {
-            background-color: var(--text);
+            background-color: var(--white);
           }
           a {
+            color: var(--white);
             &:hover {
               color: rgb(41, 41, 153);
             }

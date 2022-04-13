@@ -25,6 +25,7 @@ import Modal from "react-modal";
 
 import "./../styles.scss";
 import { formProductsImputs } from "./imports";
+import { brandPropsDocument } from "../Brand/imports";
 
 export const ProductModal = () => {
   const { modal, darkMode } = useSelector((state: RootState) => state.ui);
@@ -37,9 +38,8 @@ export const ProductModal = () => {
   // States
   const [product, setProduct] = useState(initialProductState);
   const [categories, setCategories] = useState<categoryPropsDocument[]>([]);
-  const [brands, setBrands] = useState([]);
+  const [brands, setBrands] = useState<brandPropsDocument[]>([]);
   const [errors, setErrors] = useState(errorProductInit);
-
   // Effects
   const handleFormChange = ({ target }: any) => {
     setProduct({
@@ -87,8 +87,12 @@ export const ProductModal = () => {
 
   useEffect(() => {
     if (!active) {
-      if (categories[0]) {
-        setProduct({ ...initialProductState, category: categories[0]._id });
+      if (categories[0] && brands[0]) {
+        setProduct({
+          ...initialProductState,
+          category: categories[0]._id,
+          brand: brands[0]._id,
+        });
       }
     }
   }, [categories]);
@@ -136,7 +140,7 @@ export const ProductModal = () => {
           onSubmit={handleSubmit}
           className="w-100 d-flex justify-content-center align-items-center flex-column"
         >
-          {active ? (
+          {modal.productDisplay ? (
             <>
               {formProductsDisplay.map((input: any) => (
                 <FormInput
@@ -165,7 +169,11 @@ export const ProductModal = () => {
             <DropdownCategory
               dwName="category"
               options={categories}
-              selected={product.category._id}
+              selected={
+                typeof product.category === "string"
+                  ? product.category
+                  : product.category._id
+              }
               handleChange={handleFormChange}
               disabled={modal.productDisplay}
             />
@@ -174,7 +182,11 @@ export const ProductModal = () => {
             <DropdownCategory
               dwName="brand"
               options={brands}
-              selected={product.brand._id}
+              selected={
+                typeof product.brand === "string"
+                  ? product.brand
+                  : product.brand._id
+              }
               handleChange={handleFormChange}
               disabled={modal.productDisplay}
             />

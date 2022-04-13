@@ -80,6 +80,7 @@ const ReviewModalItem = ({
               name="comment"
               onChange={handleChange}
               className="mt-3"
+              placeholder="Comment..."
             />
           ) : (
             <textarea value={review.comment} className="mt-3" readOnly={true} />

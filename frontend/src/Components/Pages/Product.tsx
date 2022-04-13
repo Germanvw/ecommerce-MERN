@@ -163,7 +163,7 @@ export const Product = () => {
             </div>
           </div>
         </div>
-        <div className="row m-0">
+        <div className="row m-0 pb-4">
           {product.totalReview > 0 ? (
             <ReviewsList prodId={product._id} />
           ) : (

@@ -3,10 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { confirmDeleteProductCart } from "../../hooks/useConfirmModal";
 import { fetchNoToken } from "../../hooks/useFetch";
-import {
-  startCartRemove,
-  startCartUpdate,
-} from "../../redux/actions/cartActions";
+import { startCartUpdate } from "../../redux/actions/cartActions";
 
 import "./index.scss";
 export const CartItem = ({ product }: any) => {

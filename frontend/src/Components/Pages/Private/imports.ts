@@ -6,7 +6,7 @@ export const paymentOptions = [
 ];
 
 export const paymentAdressInfo = {
-  label: "Adress",
+  label: "Receiving Adress",
   placeholder: "Adress",
   type: "text",
   name: "payAdress",
