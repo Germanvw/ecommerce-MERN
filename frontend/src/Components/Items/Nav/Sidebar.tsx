@@ -88,7 +88,10 @@ export const Sidebar = () => {
               </NavLink>
             </div>
           ))}
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={handleSubmit}
+          className="d-flex flex-column justify-content-center align-items-center"
+        >
           <div className="dropdown-gender">
             <DropdownCategory
               dwName="category"
@@ -107,11 +110,9 @@ export const Sidebar = () => {
               selected={brand.brand}
             />
           </div>
-          <div className="d-flex">
-            <button type="submit" className="w-100 my-3">
-              Search
-            </button>
-          </div>
+          <button type="submit" className="w-100 my-3">
+            Search
+          </button>
         </form>
         <button onClick={handleReset} className="mb-3">
           Reset

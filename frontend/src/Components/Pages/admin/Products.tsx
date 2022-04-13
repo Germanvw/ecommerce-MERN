@@ -45,10 +45,10 @@ export const Products = () => {
   return (
     <div className="products-admin-body">
       <div className="row m-0 w-100">
-        <div className="col-md-2 p-0">
+        <div className="col-lg-2 p-0">
           <Sidebar />
         </div>
-        <div className="col-md-10">
+        <div className="col-lg-10">
           <div className="container">
             <SearchNav
               filterInput={filterInput}
