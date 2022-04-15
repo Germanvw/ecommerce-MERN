@@ -2,22 +2,25 @@
 
 ## Descripcion
 
-Este es mi primer proyecto luego de haber terminado varios cursos de react. Se trata de un Ecommerce full stack utilizando MERN el cual me demoro un poco mas de 2 semanas.
+Este es mi primer proyecto real luego de haber terminado varios cursos de react. Se trata de un Ecommerce full stack utilizando MERN el cual me demoro un poco mas de 2 semanas.
 
 La idea del mismo era mejorar mis habilidades con redux y typescript (que hasta el momento no había utilizado).
-
-[TOC]
 
 ## Demo
 
 [https://ecommercemern-gw.herokuapp.com/](https://ecommercemern-gw.herokuapp.com/)
 
-> Hosteada en heroku, por lo cual en caso de que el servidor se encuentre desconectado puede tardar un tiempo en cargar la página.
+> **Admin Login: **
+
+- User: Admin
+- Password: asdasd
+
+> **Hosteada en Heroku**, en caso de que el servidor se encuentre desconectado puede tardar un tiempo en cargar la página, despues de eso deberia de funcionar correctamente.
 
 ### Funcionalidades
 
 - **Usuarios**:
-  - **Comprador**: Unicamente puede realizar ordenes, elegir método de pago, ver su perfil/editar datos de usuario y hacer review de los productos comprados.
+  - **Comprador**: Unicamente puede realizar ordenes, elegir método de pago, ver su perfil/editar datos de usuario y hacer review de los productos recibidos.
   - **Administrador**: Además de poseer todas las funcionalidades previas, este tiene acceso a varias vistas en la direccion /admin/\* con las cuales puede crear, editar, modificar estado activo/no-activo y leer registros de: Productos, Categorias, Marcas, Ordenes y Usuarios.
 - **Carro de Compras**: El usuario puede agregar productos, aumentar la cantidad en caso de que ya se encuentre agregado o eliminarlo.
 - **Ordenes:**
@@ -30,44 +33,44 @@ La idea del mismo era mejorar mis habilidades con redux y typescript (que hasta 
 - **Extra: ** Sidebar con filtros de búsqueda (categorias y marcas), cambio de color (tema oscuro y claro) y paginación hecha desde 0 por mi.
 - **Backend: ** MongoDB, Express y NodeJs con typescript. La autenticación esta hecha con JWT.
 
-###Imagenes
+## Imagenes
 
 ![](https://i.imgur.com/fhm9HAI.png)
 
-> Products navigation.
+> Navegación de productos
 
 ![](https://i.imgur.com/PvmpGOU.png)
 
-> Product information
+> Información producto
 
 ![](https://i.imgur.com/RazGkFt.png)
 
-> Admin-only CRUD views
+> Vistas CRUD administrador
 
 ![](https://i.imgur.com/amoMjfz.png)
 
-> Admin-only actions
+> Acciones de administrador
 
 ![](https://i.imgur.com/9uGEokX.png)
 
-> User Page
+> Página de usuario.
 
 ![](https://i.imgur.com/zaZcpMT.png)
 
-> User Information change
+> Modificación de usuario.
 
 ![](https://i.imgur.com/737MjL4.png)
 
-> Checkout page
+> Página de pago
 
 ![](https://i.imgur.com/TImZ6PQ.png)
 
-> Order Modal
+> Modal Orden
 
 ![](https://i.imgur.com/BclbCcH.png)
 
-> Review Modal
+> Modal Reseña
 
 ![](https://i.imgur.com/hedlDAp.png)
 
-> Authentication
+> Autenticación
