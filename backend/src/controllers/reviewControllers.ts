@@ -52,7 +52,9 @@ export const createRating = async (req: any, res: Response) => {
       { _id: id },
       {
         totalReview: product.totalReview + 1,
-        rating: (product.rating + req.body.stars) / (product.totalReview + 1),
+        totalRating: product.totalRating + req.body.stars,
+        rating:
+          (product.totalRating + req.body.stars) / (product.totalReview + 1),
       }
     );
 

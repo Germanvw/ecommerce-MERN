@@ -60,7 +60,7 @@ export const UsersTable = ({ users }: any) => {
               </td>
               <td
                 className={`align-middle text-center ${
-                  !user.active && "cancelled"
+                  !user.active ? "cancelled" : ""
                 }`}
               >
                 {user.username}

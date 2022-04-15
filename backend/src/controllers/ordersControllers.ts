@@ -1,9 +1,8 @@
 import { Response } from "express";
-import mongoose from "mongoose";
 import { cartTotal } from "../helpers/cartTotal";
 import { validateProducts, handleStock } from "../helpers/validateStock";
-
 import Orders, { OrdersDocument } from "../Models/Orders";
+import mongoose from "mongoose";
 
 export const createOrder = async (req: any, res: Response) => {
   const { user } = req;

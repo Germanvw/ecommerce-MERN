@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "start": "ts-node-dev ./src/index.ts"
+    "start": "node ./build/src/index.js",
+    "build": "tsc",
+    "dev": "ts-node-dev ./src/index.ts"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",

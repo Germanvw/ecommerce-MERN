@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { createJWT } from "../helpers/createJWT";
-import User, { IUser } from "../models/User";
 import { hashPassword, isMatch } from "../helpers/passwords";
+import User, { IUser } from "../Models/User";
 
 export const registerUser = async (req: Request, res: Response) => {
   const { username, email, password, gender } = req.body;

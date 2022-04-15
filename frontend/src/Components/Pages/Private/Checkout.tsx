@@ -97,7 +97,7 @@ export const Checkout = () => {
             </div>
             <div className="col-md-6 text-center">
               <div className="total my-2">Total: ${order.total}</div>
-              <button onClick={handleSubmit}>Completar pedido</button>
+              <button onClick={handleSubmit}>Complete Order</button>
             </div>
           </div>
         </div>

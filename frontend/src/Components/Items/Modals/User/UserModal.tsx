@@ -104,7 +104,7 @@ export const UserModal = () => {
               handleChange={handleChange}
             />
           </div>
-          <button>Modificar</button>
+          <button>Modify</button>
         </form>
       </div>
     </Modal>

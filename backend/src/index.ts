@@ -16,7 +16,16 @@ dbConnection();
 app.use(cors());
 app.use(express.json());
 
+const PORT = process.env.PORT || 4000;
 // Routes
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index,html"));
+  });
+}
 
 //api/auth
 app.use("/api/auth", require("./routes/auth"));
@@ -34,6 +43,4 @@ app.use("/api/review", require("./routes/review"));
 app.use("/api/brands", require("./routes/brands"));
 
 //Listen
-app.listen(process.env.PORT, () =>
-  console.log(`Running on port ${process.env.PORT}`)
-);
+app.listen(PORT, () => console.log(`Running on port ${PORT}`));

@@ -65,7 +65,7 @@ export const CategoryTable = ({ categories }: any) => {
               </td>
               <td
                 className={`align-middle text-center ${
-                  !category.active && "cancelled"
+                  !category.active ? "cancelled" : ""
                 }`}
               >
                 {category.name}

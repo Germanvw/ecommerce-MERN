@@ -86,7 +86,7 @@ export const PasswordModal = () => {
               {...input}
             />
           ))}
-          <button>Modificar</button>
+          <button>Modify</button>
         </form>
       </div>
     </Modal>

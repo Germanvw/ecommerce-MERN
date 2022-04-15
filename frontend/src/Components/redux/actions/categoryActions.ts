@@ -76,7 +76,7 @@ export const startChangeStateCategory = (_id: string) => {
 export const startCatFetchAll = (active: boolean) => {
   return async (dispatch: any) => {
     try {
-      const req = await fetchToken(`categories/${active && "active/"}`, {});
+      const req = await fetchToken(`categories/${active ? "active/" : ""}`, {});
       const answ = await req.json();
       if (answ.status) {
         dispatch(catFetchAll(answ.categories));

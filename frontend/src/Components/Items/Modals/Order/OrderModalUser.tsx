@@ -102,7 +102,7 @@ export const OrderModalUser = () => {
                 </button>
               )
             )}
-            <button onClick={closeModal}>Cerrar</button>
+            <button onClick={closeModal}>Close</button>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ interface IProducts {
   brand: { active: boolean };
   price: number;
   inStock: number;
+  totalRating: number;
   totalSold: number;
   totalReview: number;
   rating: number;
@@ -37,6 +38,10 @@ const ProductsSchema: Schema = new Schema(
       required: true,
     },
     rating: {
+      type: Number,
+      default: 0,
+    },
+    totalRating: {
       type: Number,
       default: 0,
     },

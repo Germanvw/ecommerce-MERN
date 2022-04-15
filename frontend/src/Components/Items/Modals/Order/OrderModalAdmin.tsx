@@ -82,7 +82,7 @@ export const OrderModalAdmin = () => {
             <div className="col-md-6">
               <div className="total">Total: ${active.total}</div>
             </div>
-            <button onClick={closeModal}>Cerrar</button>
+            <button onClick={closeModal}>Close</button>
           </div>
         </div>
       </div>

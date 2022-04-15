@@ -1,8 +1,8 @@
 import { Response } from "express";
-import mongoose from "mongoose";
 import { createJWT } from "../helpers/createJWT";
 import { hashPassword, isMatch } from "../helpers/passwords";
 import { UserDocument } from "../Models/User";
+import mongoose from "mongoose";
 
 const User = mongoose.model<UserDocument>("User");
 

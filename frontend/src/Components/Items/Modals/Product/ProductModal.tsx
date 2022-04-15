@@ -192,7 +192,7 @@ export const ProductModal = () => {
             />
           </div>
           {!modal.productDisplay && (
-            <button>{active ? "Editar" : "Crear"}</button>
+            <button>{active ? "Edit" : "Create"}</button>
           )}
         </form>
       </div>
