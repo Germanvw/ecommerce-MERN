@@ -10,7 +10,7 @@ La idea del mismo era mejorar mis habilidades con redux y typescript (que hasta 
 
 [https://ecommercemern-gw.herokuapp.com/](https://ecommercemern-gw.herokuapp.com/)
 
-> **Admin Login: **
+> Admin Login:
 
 - User: Admin
 - Password: asdasd
@@ -27,11 +27,11 @@ La idea del mismo era mejorar mis habilidades con redux y typescript (que hasta 
   1.  Una vez complata la orden a través del carro decompras, el usuario puede cancelar el pedido o realizar el pago. El pago esta automatizado (la página del Checkout solo pide la direccion de entrega).
   2.  Una vez pagado el estado de la orden se modifica a **"_Pagado y Entregado"_**.
   3.  Cuando una orden es entregada, el usuario puede hacer una review de cada producto comprado eligiendo un rating de 1-5 y un comentario.
-- **Productos: ** Estos pueden ser creados y modificados por el administrador. Poseen stock, precio, descripción, imagen y otros datos:
-  - **Categorias y Marcas: ** Todo producto debe poseer una marca y categoría, además de servir como filtro para la busqueda de productos desde la Sidebar.
-  - **Reviews: ** Compuesta por un comentario y puntuación elegida por el comprador una vez recibido el producto.
-- **Extra: ** Sidebar con filtros de búsqueda (categorias y marcas), cambio de color (tema oscuro y claro) y paginación hecha desde 0 por mi.
-- **Backend: ** MongoDB, Express y NodeJs con typescript. La autenticación esta hecha con JWT.
+- **Productos:** Estos pueden ser creados y modificados por el administrador. Poseen stock, precio, descripción, imagen y otros datos:
+  - **Categorias y Marcas:** Todo producto debe poseer una marca y categoría, además de servir como filtro para la busqueda de productos desde la Sidebar.
+  - **Reviews:** Compuesta por un comentario y puntuación elegida por el comprador una vez recibido el producto.
+- **Extra:** Sidebar con filtros de búsqueda (categorias y marcas), cambio de color (tema oscuro y claro) y paginación hecha desde 0 por mi.
+- **Backend:** MongoDB, Express y NodeJs con typescript. La autenticación esta hecha con JWT.
 
 ## Imagenes
 

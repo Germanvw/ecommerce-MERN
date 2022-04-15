@@ -10,7 +10,7 @@ The idea behind it was to improve my skills with redux and typescript (wich i ha
 
 [https://ecommercemern-gw.herokuapp.com/](https://ecommercemern-gw.herokuapp.com/)
 
-> **Admin Login: **
+> Admin Login:
 
 - User: Admin
 - Password: asdasd
@@ -27,11 +27,11 @@ The idea behind it was to improve my skills with redux and typescript (wich i ha
   1. Once the order is completed through the shopping cart, the user can Cancel or Pay the order. The payment is automated (the Checkout page only asks for the delivery address).
   2. When a order is paid the state of the order is modidied to **"_Paid y Delivered"_**.
   3. When a order is delivered, the user have the option to review every product of the order by choosing a rating between 1-5 and making a comment.
-- **Products: ** These are created and modified by the admin. They have an image, description, price, stock quantity and more data:
-  - **Brands and Categories: ** Every product must have a brand and category, additionaly these serve as a filtering option for products at the Sidebar.
-  - **Reviews: ** Contain a comment and rating choosed by the customer once the product has been recived.
-- **Extra: ** Sidebar with custom filtering search (brand and category), Theme-Color (dark and light) y and custom magination made by my from scratch.
-- **Backend: ** MongoDB, Express y NodeJs with typescript. The autentication was made using JWT.
+- **Products:** These are created and modified by the admin. They have an image, description, price, stock quantity and more data:
+  - **Brands and Categories:** Every product must have a brand and category, additionaly these serve as a filtering option for products at the Sidebar.
+  - **Reviews:** Contain a comment and rating choosed by the customer once the product has been recived.
+- **Extra:** Sidebar with custom filtering search (brand and category), Theme-Color (dark and light) y and custom magination made by my from scratch.
+- **Backend:** MongoDB, Express y NodeJs with typescript. The autentication was made using JWT.
 
 ## Images
 
